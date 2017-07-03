@@ -12,7 +12,7 @@ module.exports = function(deployer, network, accounts) {
     deployer.deploy(FundRequestPreSale,
       "0",
       "250",
-      "4",
+      "0,00032",
       "0xe5a0aca19ca6326aa52ea8cdc795602d0675d5f1f106788e8dddfbdf7cf548d0");
   }
 };

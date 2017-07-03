@@ -1,6 +1,7 @@
 pragma solidity ^0.4.11;
 
 import './math/SafeMath.sol';
+import './zeppelin/Haltable.sol'
 
 contract Presale {
   using SafeMath for uint256;
@@ -20,6 +21,10 @@ contract Presale {
 
   // amount of raised money in wei
   uint256 public weiRaised;
+  
+  mapping(address => uint) public balances;
+  address[] public investors;
+  uint public investorCount;
 
   /**
    * event for token purchase logging
@@ -36,42 +41,33 @@ contract Presale {
     require(_rate > 0);
     require(_wallet != 0x0);
 
-    token = createTokenContract();
     startBlock = _startBlock;
     endBlock = _endBlock;
     rate = _rate;
     wallet = _wallet;
   }
 
-  // creates the token to be sold. 
-  // override this method to have crowdsale of a specific mintable token.
-  function createTokenContract() internal returns (MintableToken) {
-    return new MintableToken();
-  }
-
-
-  // fallback function can be used to buy tokens
-  function () payable {
-    buyTokens(msg.sender);
-  }
-
   // low level token purchase function
-  function buyTokens(address beneficiary) payable {
+  function buyTokens(address investor) payable {
     require(beneficiary != 0x0);
     require(validPurchase());
+
+    bool existing = balances[investor] > 0;
 
     uint256 weiAmount = msg.value;
     uint256 updatedWeiRaised = weiRaised.add(weiAmount);
 
     // calculate token amount to be created
     uint256 tokens = weiAmount.mul(rate);
-
-    // update state
     weiRaised = updatedWeiRaised;
+    balances[investor] = balances[investor].plus(msg.value);
 
-    token.mint(beneficiary, tokens);
+    if(!existing) {
+      investors.push(investor);
+      investorCount++;
+    }
+
     TokenPurchase(msg.sender, beneficiary, weiAmount, tokens);
-
     forwardFunds();
   }
 
@@ -92,5 +88,11 @@ contract Presale {
   // @return true if crowdsale event has ended
   function hasEnded() public constant returns (bool) {
     return block.number > endBlock;
+  }
+
+  
+  // fallback function can be used to buy tokens
+  function () payable {
+    buyTokens(msg.sender);
   }
 }
