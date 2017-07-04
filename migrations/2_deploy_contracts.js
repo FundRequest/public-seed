@@ -1,13 +1,13 @@
 var SafeMath = artifacts.require("./math/SafeMathLib.sol");
 var Ownable = artifacts.require("./zeppelin/Ownable.sol");
-var Haltable = artifacts.require("./zeppelin/Haltable.sol");
+var Pausable = artifacts.require("./zeppelin/Pausable.sol");
 var Presale = artifacts.require("./Presale.sol");
 
 module.exports = function(deployer, network, accounts) {
   deployer.deploy(Ownable);
-  deployer.link(Ownable, Haltable);
-  deployer.deploy(Haltable);
-  deployer.link(Haltable, Presale);  
+  deployer.link(Ownable, Pausable);
+  deployer.deploy(Pausable);
+  deployer.link(Pausable, Presale);  
   deployer.deploy(SafeMath);
   deployer.link(SafeMath, Presale);
   if (network != "live" && network != "ropsten") {

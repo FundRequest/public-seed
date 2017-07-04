@@ -1,9 +1,9 @@
 pragma solidity ^0.4.11;
 
 import './math/SafeMathLib.sol';
-import './zeppelin/Haltable.sol';
+import './zeppelin/Pausable.sol';
 
-contract Presale is Haltable{
+contract Presale is Pausable {
   using SafeMathLib for uint;
 
   // start and end block where investments are allowed (both inclusive)
