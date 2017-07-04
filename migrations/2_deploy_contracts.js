@@ -12,9 +12,7 @@ module.exports = function(deployer, network, accounts) {
   deployer.link(SafeMath, Presale);
   if (network != "live" && network != "ropsten") {
     deployer.deploy(Presale,
-      "100",
-      "200",
-      "1",
+      "3500",
       "0xe5a0aca19ca6326aa52ea8cdc795602d0675d5f1f106788e8dddfbdf7cf548d0");
   }
 };

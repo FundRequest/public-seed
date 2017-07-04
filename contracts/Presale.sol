@@ -96,6 +96,10 @@ contract Presale is Haltable{
   function allow(address beneficiary) onlyOwner {
     allowed[beneficiary] = true;
   }
+
+  function updateRate(uint _rate) onlyOwner {
+    rate = _rate;
+  }
   
   // fallback function can be used to buy tokens
   function () payable {
