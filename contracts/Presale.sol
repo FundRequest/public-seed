@@ -46,7 +46,7 @@ contract Presale is Pausable {
   }
 
   // low level token purchase function
-  function buyTokens(address beneficiary) payable {
+  function buyTokens(address beneficiary) payable whenNotPaused {
     require(validBeneficiary(beneficiary));
     require(validPurchase());
 
@@ -97,7 +97,7 @@ contract Presale is Pausable {
     allowed[beneficiary] = true;
   }
 
-  function updateRate(uint _rate) onlyOwner {
+  function updateRate(uint _rate) onlyOwner whenPaused {
     rate = _rate;
   }
   
