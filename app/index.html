@@ -1,28 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <script src="./app.js"></script>
+  <link href='css/main.css' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="/favicons/favicon.ico">
+  <style type="text/css">
+    .cf-hidden {
+      display: none;
+    }
+
+    .cf-invisible {
+      visibility: hidden;
+    }
+  </style>
+  <style type="text/css">
+    .fancybox-margin {
+      margin-right: 0px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>FundRequest Pre Sale</h1>
-  <h2>Here you can join the FundRequest PreSale</h2>
-  <h4>Contract address: <span class="black" id="ui_contract_address"></span><h4>
-  <h4>Contract owner: <span class="black" id="ui_contract_owner"></span><h4>
-  <h4>Contract balance: <span class="black" id="ui_contract_balance"></span><h4>
-  <br>
-  <h3>Testing</h3>
-  <p>Address to play with
-    <lu>
-      <li>0xc31Eb6E317054A79bb5E442D686CB9b225670c1D</li>
-      <li>0x97026a8157f39101aefc4a81496c161a6b1ce46a</li>
-    </lu>
-  </p>
-  <h4>Change contract owner</h4>
-  <label for="new_owner">Address:</label><input type="text" id="new_owner" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-  <br><br><button id="changeOwner" onclick="App.changeOwner()">Change Owner</button>
-  <br><br>
-  <span id="status"></span>
+  <div id="app">
+    <div class="main-container">
+      <div class="header">
+        <div class="gr-container">
+          <div class="row">
+            <div class="gr-3 gr-12@tablet gr-12@mobile"><a href="#/en/home"><img src="/images/app/header-logo.png" class="header-logo"></a></div>
+            <div class="gr-9 gr-12@tablet gr-12@mobile">
+              <div class="navigation"><a class="nav-item" href="https://fundrequest.io/whitepaper" target="_blank">Whitepaper</a><a class="nav-item"
+                  href="https://docs.fundrequest.io/display/PUB/" target="_blank">Documentation</a><a class="nav-item">Roadmap</a>
+                <a
+                  class="nav-item" href="https://blog.fundrequest.io" target="_blank">Blog</a><a class="nav-item">About Us</a>
+                  <div class="nav-item center@mobile center@tablet"><a class="nav-item" style="margin-right: 0px;"><button class="sign-up-button button primary" tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 28px; line-height: 24px; min-width: 88px; color: rgb(255, 171, 0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: transparent; text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Get Invited</span></div></button></a></div>
+                  <i
+                    class="fa  fa-bars fa-lg toggle-icon" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-spacer"></div>
+      <div class="home">
+        <div class="introduction section">
+          <div class="content-middle">
+            <div class="gr-container">
+              <div class="row">
+                <div class="gr-12 center">
+                  <h1>Funding and rewarding open source development</h1>
+                  <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3><br><button class="crowdsale-button button hot"
+                    tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 38px; line-height: 34px; min-width: 88px; color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: rgb(255, 171, 0); text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Coming Soon !</span></div></button><br><br>
+                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="whatis section">
+          <div class="content">
+            <div class="gr-container">
+              <div class="row">
+                <div class="gr-12 center">
+                  <div class="section-header">
+                    <h2>What is FundRequest?</h2>
+                    <div class="underline"></div>
+                  </div><br><br><br>
+                  <div class="description">
+                    <p>FundRequest is more than a platform to fund projects. We provide the best experience to fund an issue
+                      and incentivise the open source community. FundRequest breaks down barriers traditionally encountered
+                      in open source by providing a support layer between no support and enterprise level support. </p><br>
+                    <p>The ease of use of the FundRequest platform enables users to fund issues without any coding knowledge.
+                      It allows developers to search for funded issues that best match their skill set to solve.</p>
+                  </div><br><br>
+                  <div><a href="https://docs.fundrequest.io/display/PUB" target="_blanc" class="learn-more-hyperlink">Learn more</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="gr-container">
+          <div class="row">
+            <div class="gr-6 gr-12@mobile"><a href="#/en/home"><img src="/images/app/header-logo.png" class="footer-logo"></a>
+              <div class="copyright">
+                <p>© 2017 FundRequest. All rights reserved.</p>
+              </div>
+              <div class="social-container"><a href="https://twitter.com/fundrequest_io" target="_blank"><i class="fa  fa-twitter fa-lg " aria-hidden="true"></i></a>
+                <a
+                  href="https://blog.fundrequest.io" target="_blank"><i class="fa  fa-medium fa-lg " aria-hidden="true"></i></a><a href="https://github.com/fundrequest/" target="_blank"><i class="fa  fa-github fa-lg " aria-hidden="true"></i></a>
+                  <a
+                    href="https://fundrequest.slack.com" target="_blank"><i class="fa  fa-slack fa-lg " aria-hidden="true"></i></a><a href="https://fundrequest.io" target="_blank"><i class="fa  fa-globe fa-lg " aria-hidden="true"></i></a></div>
+            </div>
+            <div class="gr-2 hide@mobile">
+              <div class="footer-section">
+                <div class="title">
+                  <p>Resources</p>
+                </div>
+                <div class="content">
+                  <a href="https://fundrequest.io/whitepaper" target="_blank">
+                    <p>Whitepaper</p>
+                  </a>
+                  <a href="https://docs.fundrequest.io/display/PUB" target="_blank">
+                    <p>Documentation</p>
+                  </a>
+                  <a href="https://blog.fundrequest.io" target="_blank">
+                    <p>Blog</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="gr-2 hide@mobile">
+              <div class="footer-section">
+                <div class="title">
+                  <p>Company</p>
+                </div>
+                <div class="content">
+                  <a>
+                    <p>Team</p>
+                  </a>
+                  <a>
+                    <p>Advisors</p>
+                  </a><br></div>
+              </div>
+            </div>
+            <div class="gr-2 hide@mobile">
+              <div class="footer-section">
+                <div class="title">
+                  <p>Legal</p>
+                </div>
+                <div class="content">
+                  <a href="https://fundrequest.io/disclaimer.pdf" target="_blank">
+                    <p>Disclaimer</p>
+                  </a><br></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

@@ -6,10 +6,6 @@ import './zeppelin/Pausable.sol';
 contract Presale is Pausable {
   using SafeMathLib for uint;
 
-  // start and end block where investments are allowed (both inclusive)
-  uint public startBlock;
-  uint public endBlock;
-
   // address where funds are collected
   address public wallet;
 
@@ -39,8 +35,6 @@ contract Presale is Pausable {
     require(_rate > 0);
     require(_wallet != 0x0);
 
-    startBlock = _startBlock;
-    endBlock = _endBlock;
     rate = _rate;
     wallet = _wallet;
   }
