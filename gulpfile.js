@@ -21,12 +21,6 @@ gulp.task('images', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('fonts', function () {
-  return gulp.src(paths.fonts)
-    // Pass in options to the task
-    .pipe(gulp.dest('dist'));
-});
-
 gulp.task('css', function () {
   return gulp.src(paths.css)
     // Pass in options to the task
@@ -55,6 +49,6 @@ gulp.task('watch', function () {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'pages', 'css', 'fonts', 'scripts', 'images']);
+gulp.task('default', ['watch', 'pages', 'css', 'scripts', 'images']);
 
-gulp.task('build', ['pages', 'css', 'fonts', 'scripts', 'images']);
+gulp.task('build', ['pages', 'css', 'scripts', 'images']);

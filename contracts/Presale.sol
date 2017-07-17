@@ -1,10 +1,8 @@
 pragma solidity ^0.4.11;
 
-import './math/SafeMathLib.sol';
 import './zeppelin/Pausable.sol';
 
 contract Presale is Pausable {
-  using SafeMathLib for uint;
 
   // address where funds are collected
   address public wallet;
@@ -32,8 +30,8 @@ contract Presale is Pausable {
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
 
   function Presale(uint _rate, address _wallet) {
-    require(_rate > 0);
-    require(_wallet != 0x0);
+    //require(_rate > 0);
+    //require(_wallet != 0x0);
 
     rate = _rate;
     wallet = _wallet;
@@ -47,13 +45,13 @@ contract Presale is Pausable {
     bool existing = deposits[beneficiary] > 0;
 
     uint weiAmount = msg.value;
-    uint updatedWeiRaised = weiRaised.plus(weiAmount);
+    uint updatedWeiRaised = plus(weiRaised, weiAmount);
 
     // calculate token amount to be created
-    uint tokens = weiAmount.times(rate);
+    uint tokens = times(weiAmount, rate);
     weiRaised = updatedWeiRaised;
-    deposits[beneficiary] = deposits[beneficiary].plus(msg.value);
-    balances[beneficiary] = balances[beneficiary].plus(tokens);
+    deposits[beneficiary] = plus(deposits[beneficiary], weiAmount);
+    balances[beneficiary] = plus(balances[beneficiary], tokens);
 
     if(!existing) {
       investors.push(beneficiary);
@@ -93,6 +91,19 @@ contract Presale is Pausable {
 
   function updateRate(uint _rate) onlyOwner whenPaused {
     rate = _rate;
+  }
+
+
+  function plus(uint a, uint b) returns (uint) {
+    uint c = a + b;
+    assert(c>=a);
+    return c;
+  }
+
+  function times(uint a, uint b) returns (uint) {
+    uint c = a * b;
+    assert(a == 0 || c / a == b);
+    return c;
   }
   
   // fallback function can be used to buy tokens

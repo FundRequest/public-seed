@@ -1,0 +1,253 @@
+{
+  "0x7662fc94b99f9f004e47cd543f18eb29e13b5d52c23f2697942677d204349a34": {
+    "contracts": {
+      "0x4afe18f2f76d9c1785096795170b8891a9756aceb2dc6e75f9d16e52b0584065": {
+        "name": "Presale",
+        "address": "0x62a16b2efb3cffed5c6c37cecb6a7100ea731e17"
+      },
+      "0xb40e36122ca08ee2b4cf5a26e6370a23d23b540168c8c16352edcdaac9783dc1": {
+        "name": "SafeMathLib",
+        "address": "0x3864d2f82abe18b6cad882c052bcf3cf7445c153"
+      },
+      "0x6ff232a7caa69a979e5076cc4e50da0babb5e9ba50534bf6f40b9228ee388f91": {
+        "name": "Ownable",
+        "address": "0x164be6e76cae2215ed214f810bb3503b3d899656"
+      },
+      "0xf390b823f853cb718feccc8edd39517b47f2d4ce1fb8d0ed4b9752fbce68abbd": {
+        "name": "Pausable",
+        "address": "0xfd2cf60028f996ee2d0f705be56b9a5208d1e8f6"
+      }
+    },
+    "name": "development"
+  },
+  "0x83eba73854fd5a5d15704b020e22eb2c741bfaab7f61dbdaefe13d3d4667e68f": {
+    "contracts": {
+      "0x4afe18f2f76d9c1785096795170b8891a9756aceb2dc6e75f9d16e52b0584065": {
+        "name": "Presale",
+        "address": "0x36418a1a5793c6cf23c70958038be77f0df0ca85"
+      },
+      "0xb40e36122ca08ee2b4cf5a26e6370a23d23b540168c8c16352edcdaac9783dc1": {
+        "name": "SafeMathLib",
+        "address": "0x0fb3c6af6b96e36ca620c751189877d44145a17e"
+      },
+      "0x6ff232a7caa69a979e5076cc4e50da0babb5e9ba50534bf6f40b9228ee388f91": {
+        "name": "Ownable",
+        "address": "0x21ef8130517590aa8325a50873bfac22e218c815"
+      },
+      "0xf390b823f853cb718feccc8edd39517b47f2d4ce1fb8d0ed4b9752fbce68abbd": {
+        "name": "Pausable",
+        "address": "0x303afe9793511ef143bbae702484f45a2d66fddd"
+      }
+    },
+    "name": "development"
+  },
+  "0xb6cfeab83614da04c03db0fb8a6787a45d0be8d576fcc6f8f457a5a816d22ab3": {
+    "contracts": {
+      "0xd5ca4923041ff3f3bcb5cd9515ea602a68b862f04f81f075c77f1919f4c364e6": {
+        "name": "SimpleStorage",
+        "address": "0xdd87fa8ea945e092ec0768198e384c3467953c37"
+      },
+      "0x6d1bd219bd6be1db8a0ed8f3aea8ab8256e8843cbb484118bcda50970f38552a": {
+        "name": "SimpleStorage",
+        "address": "0xfe96002b2fbb1ee75bfc9016f2eb2feeba06471e"
+      },
+      "0xa89105411ea3984e46d6cefeb23a5fb4715fd971ec0d7aea44f3539db8703b2d": {
+        "name": "SimpleStorage",
+        "address": "0x3788cd693efacc7a932b4dcc57a33cd3b06b8826"
+      },
+      "0x1da4ab55f559bd5d4e33f78ab997be2e3f2d03b17d43990f3e9f66bdec298e02": {
+        "name": "SafeMathLib",
+        "address": "0x88b3e130255ed013c730dc65137b535d0fe2b0a3"
+      },
+      "0x0ce6340a0cff9404a09c1fa78fd0500d7cbb389187e2299763060abf872f1e4e": {
+        "name": "SimpleStorage",
+        "address": "0x0c923e2a06b5f569ce27ef83bcabb2ae2ff3bb9b"
+      },
+      "0xfc7155873c5e92ca9b2d1aeff59edcffa965ce0e2b7cad53e1283395f2de5944": {
+        "name": "SafeMathLib",
+        "address": "0x5264e1a7babcfd60af3b3ba80a9c4566645e7712"
+      },
+      "0xdd8d7fb85d57dad49c8e040200d42960757ac53b2b27f6ca92f4d9c46e511919": {
+        "name": "Ownable",
+        "address": "0xd9a90a186bfc696a9872aa8307483ebb924893ac"
+      },
+      "0xfec86ac71dc8c1a2fac93ec9b6af9e9d870590aa3821bb79669b260669019a39": {
+        "name": "Pausable",
+        "address": "0xb0390d76fadd845198e675b95d17815151150ba4"
+      },
+      "0x8ca117bfbd6b4054631a66e748100b42881512583b1da7ce1756d4d532e0010c": {
+        "name": "SimpleStorage",
+        "address": "0xe0a1983367fac73ffb0adc5a592fdb0d4f88337d"
+      },
+      "0x4fbbfe1472623c5148bf9c7b1c16154259f75d21bee5bf62908d52a12922686f": {
+        "name": "SafeMathLib",
+        "address": "0x0212640e6cc430a6ef1638a03831c72be3104731"
+      },
+      "0x57c0ebc60e9a6279686688c759ca470c364385987ce356a9f04f63f24492493c": {
+        "name": "Ownable",
+        "address": "0x1e0d37f59607bd7941c334be2a3f7a6a465732a1"
+      },
+      "0xb7747441c80179d3091c4f4ba133f9d63eb7c1f0d1758fa67b07ddb997841adf": {
+        "name": "Pausable",
+        "address": "0x534fee0d3a2f02140ae1293b95807d118e4c6037"
+      },
+      "0xdfb3cb0c910304fd42f15388a4eb3d32ac508fe078d95f00bb2cca5adaa2399b": {
+        "name": "SimpleStorage",
+        "address": "0x688f4286146d76b950e10be76ba496f2c32704ab"
+      },
+      "0x0e98e48a015801c77f5a7eb8e33b965bfb73c3ee1a75c0c29c6062cc6514814f": {
+        "name": "SafeMathLib",
+        "address": "0x53e24c190a6c8222f9fc276fe37f78c8fe6ec4b5"
+      },
+      "0xeebdaf99027471ff70385c724a159be907821a7bc3d465a0c0f17201b032f83c": {
+        "name": "Ownable",
+        "address": "0x0efd32a14ba7074bcfc626ff26bdce53eb4f551f"
+      },
+      "0x42b57f47a4c8f3bc00e46ecd2d835fbc9c12b9bdca727d5545e3ef65eacd9eae": {
+        "name": "Pausable",
+        "address": "0x6eea7cc231aebcfb70213d149256200c5736eccc"
+      },
+      "0xa47f4e87f75ab4cc172d8be254e985367a0e3b0079b655e74e648683a4f5059e": {
+        "name": "SimpleStorage",
+        "address": "0x79a2cbc85e6201ac99ebe4e170aec297e48e4dc6"
+      },
+      "0x4dc5e2d08a2b1cb0fb66a24e8d8ab2f3abbb057d712ccf28e12ef57c95183130": {
+        "name": "SafeMathLib",
+        "address": "0x4b472344c10fc9b27df6efd57ef39725cec72248"
+      },
+      "0x2c36b31c22bd46a849aa41b3cefb5299ad97e12a27acb8adbdfbee4f5cb6d7bc": {
+        "name": "Ownable",
+        "address": "0xe80360495a42e85eef541031cb14087ca904b244"
+      },
+      "0x3d23abdc1079be4a3944b800a9c98727bcd27e83b4e7311199c2fb3e2d4b7fd0": {
+        "name": "Pausable",
+        "address": "0x676cadbc20fb81ab0c5af2f8b37418b46e5dc0b5"
+      },
+      "0x672519a630f3a61720807605af5bb69297f6d9d6e57c42b36c87f979093515bb": {
+        "name": "SimpleStorage",
+        "address": "0x92de7b52bc8db9e9393e9620369426bd94777016"
+      },
+      "0xae8359c251028adbaa75aa95a93161633d0e8f1c757fccdfdf744286c223b4a2": {
+        "name": "SimpleStorage",
+        "address": "0x333c3b88a5d22fcb61b6664b8ad9ea64e780cbf1"
+      },
+      "0x7e64e3f5630628a42ca75e7f3a7d0d832fe2964cba9d0f42fb4c6f29d9bc35b1": {
+        "name": "SafeMathLib",
+        "address": "0xd67eeb87bdf7b11ea5e4431d61c923b2f4004ae5"
+      },
+      "0xdb0c05e3d7ed6a7d7c978d60cdc09b3f6d278b5aaf221369f14257ee459fa19f": {
+        "name": "Ownable",
+        "address": "0x07211685f999361fb54dbec613775d12d398b629"
+      },
+      "0x1dfb6ad82fa881dd6972c23bd6e84abd6f1411dad7ac822545bdc14621e3a062": {
+        "name": "Pausable",
+        "address": "0xd4e9322d431d1a937a9771a07810e7f4677b231a"
+      },
+      "0xea74135a370d413f9ec0a757c1169e4a0c78500ecb843dd3b2dfab79ed644306": {
+        "name": "SimpleStorage",
+        "address": "0xb387860c752a436fe20bea60f65f5baaff7be39c"
+      },
+      "0xe63f73934b93d0be4026d86162402364939fa4383c93e2f1db578357087056aa": {
+        "name": "SafeMathLib",
+        "address": "0x4eb7035e2c18156773c0d5e38f3c413f961f9bd0"
+      },
+      "0x203d9b10e0193081c99866a67297551f0a4335efbc2add6419f03f50c04e26cc": {
+        "name": "Ownable",
+        "address": "0xeabe0fc4166ef5c10c91b23f3ac9af0df59e594a"
+      },
+      "0xe19ba78a2e1156434ac100c1d3a7b8fd638840244baab61d50b9edfb90f1298c": {
+        "name": "Pausable",
+        "address": "0xed311c1ed443c1ffef3bd226d511e2d8ee57bc9a"
+      },
+      "0x28b7330b94fe707b1ff4675b274d9a7fda9ed9b3c65168fb98a86e2e836728e3": {
+        "name": "SimpleStorage",
+        "address": "0xefac96b86f79c97298131d46d54ed2108bde76e0"
+      },
+      "0x093e4ac8651472fdb555aab4cac08e62a25ef242ea8cd8ee65366544de111ae8": {
+        "name": "SafeMathLib",
+        "address": "0x1565c6971cbb979b3904ac826b1a2d04a0919c40"
+      },
+      "0x9623b410d0c5b4b89ecc93c657d22122f71b2bc68f5c597553de1d23708da94e": {
+        "name": "Ownable",
+        "address": "0xa0641c1d1f8639fcae06db6c1e387080867cfaa1"
+      },
+      "0x64e4cdb13c152d32984dda465d5586abb8e6827ac80e311be93b47ae95b8f30b": {
+        "name": "Pausable",
+        "address": "0x846e1e1e47c2c172f4611cb91241e5efa72c7b6c"
+      },
+      "0x2cc3038b373a73edae6e038df00a24e41780d581057e18eade436195aa264c80": {
+        "name": "SimpleStorage",
+        "address": "0x7e2cd1f6b09874aead5dbec7e258e9f03bc6ed29"
+      },
+      "0x75a36b66b885a9455213843931a42a2b4931dcf169a0690934ab1913f5f504c3": {
+        "name": "SafeMathLib",
+        "address": "0xdc1cfd280496cbaacfcdd43698787c9f2c1af7fa"
+      },
+      "0xbd6d7f864cc0e78de35ec029eea6f2945871b56a416efae0955989a2ff4ccdc2": {
+        "name": "Ownable",
+        "address": "0x7a7874bdf3c81f883cfd5b66c15fe9c95379ab39"
+      },
+      "0x07915cca000e4546c69863d23bb241b798f2ce88ed2b9241871c55e18a63d05c": {
+        "name": "Pausable",
+        "address": "0xcf4d57c45ca27c1f8cf8678275989994f4a00c15"
+      },
+      "0xf20620dcdf92e1dbf809e72b1c5032401ebc31f2d65405ddf5b5ba0c87881d21": {
+        "name": "SimpleStorage",
+        "address": "0x568edd6c85f4f3581d1e978075a9913fe28eac8f"
+      },
+      "0xe3c52331bc04f2f797af9e3ebd0d264f4cbf7cf6134a2053f16af64b82cc2191": {
+        "name": "SafeMathLib",
+        "address": "0x9e805c563dbdd9aaa083c8c0d2c6e70fc4f3e1d5"
+      },
+      "0x42354da22bed148985f1fdd200ab225b193108afbc5fc699a99466dc43452ece": {
+        "name": "Ownable",
+        "address": "0x7659d26d1a9c73663c6ff328c78d8a8d11ea68b0"
+      },
+      "0xba4dd22b7ae513fde6d2c61120eb97237f5dbd8d96ea275ff3ee4623f282383c": {
+        "name": "Pausable",
+        "address": "0xbe60979ad16e6f5605fec14704c6633b9cccb2e0"
+      },
+      "0x8b93d9ed6e8bce7f1d6dc7a167a887d8ab62e34ddcb6008ae3362f5bf9cbc7f1": {
+        "name": "SimpleStorage",
+        "address": "0xcb0304136722ce87c5cf65742ee3076e6a45c634"
+      },
+      "0x6d0eab1c138d0f81ed819c044bfa45269d2e61ff9139dbc02bc7d05b442a5e58": {
+        "name": "SafeMathLib",
+        "address": "0xcf508c2e876d224b15d1eee5e134a7b1105f77e9"
+      },
+      "0x8ba2ac79ab044db5b202441f09f6eee1f3a914916f8fcedc21b60eaf1ba4f04e": {
+        "name": "Ownable",
+        "address": "0xc7d5fe95b3ec1900ae170f7f9ef66593dab113d2"
+      },
+      "0xca9efcaee73fcdacfd9c580f50a3349f16c345aad6202b99e6458776b95678f6": {
+        "name": "Pausable",
+        "address": "0xbdc498ebe0699666054c8046b7f69d93242b73a9"
+      },
+      "0x6611c010b984980cb02ccb654f3af6b9bbc44708eff199d1aaa2c99ef2b56e25": {
+        "name": "Presale",
+        "address": "0x59380d6c8dff8570665ff47c8d1719f7bd04d105"
+      },
+      "0x3dcb5d102b923beb4b6f0906357812c7cb6e3eb06e738629873903026f35147a": {
+        "name": "Ownable",
+        "address": "0x9271603f886825122183f02f5e793d16fefdcac2"
+      },
+      "0x3c85b7299e9fc4018734a9545662097e506ed8b6efb2bfad90ee8bb31e89106d": {
+        "name": "Pausable",
+        "address": "0x7e13c1a6b27c6714942d9a28d0d86b1ce67a1176"
+      },
+      "0x02cae7fc2bbbf886f06e0ad75024932294b4d0e931c368e23ba04931869c5212": {
+        "name": "Presale",
+        "address": "0xf2b80d37569d986bbd47424825e2e521844ed6d1"
+      },
+      "0x504b23c15eb8900f144653aaa9d7faddfb0cd9aa87fbdc9654d87a3f49f8dec3": {
+        "name": "Ownable",
+        "address": "0x687d06315d74d68a1fa467688f1e6def42921cf9"
+      },
+      "0xef6e752a6b7fdf0efcc2af7956fc013529c53803d75e03b7dcb5086ef951e9dc": {
+        "name": "Pausable",
+        "address": "0x0e93e522b12a718fbe486bbddfba303a1c5b95be"
+      }
+    },
+    "name": "development"
+  }
+}
