@@ -2,8 +2,9 @@ var gulp = require('gulp');
 var del = require('del');
 
 var paths = {
-  images: ['app/images/**.png', 'app/favicons/favicon.ico'],
+  images: ['app/**/*.png', 'app/**/*.jpg', 'app/**/*.ico'],
   scripts: ['app/**/**.js'],
+  fonts: [ 'app/**/*.eot', 'app/**/*.svg', 'app/**/*.woff', 'app/**/*.woff2', 'app/**/*.ttf', 'app/**/*.otf'],
   css: ['app/**/**.css'],
   pages: ['app/**/**.html']
 };
@@ -17,6 +18,12 @@ gulp.task('clean', function () {
 
 gulp.task('images', function () {
   return gulp.src(paths.images)
+    // Pass in options to the task
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('fonts', function () {
+  return gulp.src(paths.fonts)
     // Pass in options to the task
     .pipe(gulp.dest('dist'));
 });
