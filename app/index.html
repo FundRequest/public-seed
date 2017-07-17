@@ -7,6 +7,7 @@
   <link href='css/main.css' rel='stylesheet' type='text/css'>
   <link href='css/font-awesome.min.css' rel="stylesheet" type="text/css" />
   <link rel="shortcut icon" href="/favicons/favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
   <style type="text/css">
     .cf-hidden {
       display: none;
@@ -33,11 +34,9 @@
             <div class="gr-9 gr-12@tablet gr-12@mobile">
               <div class="navigation"><a class="nav-item" href="https://fundrequest.io/whitepaper" target="_blank">Whitepaper</a><a class="nav-item"
                   href="https://docs.fundrequest.io/display/PUB/" target="_blank">Documentation</a><a class="nav-item">Roadmap</a>
-                <a
-                  class="nav-item" href="https://blog.fundrequest.io" target="_blank">Blog</a><a class="nav-item">About Us</a>
-                  <div class="nav-item center@mobile center@tablet"><a class="nav-item" style="margin-right: 0px;"><button class="sign-up-button button primary" tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 28px; line-height: 24px; min-width: 88px; color: rgb(255, 171, 0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: transparent; text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Get Invited</span></div></button></a></div>
-                  <i
-                    class="fa  fa-bars fa-lg toggle-icon" aria-hidden="true"></i>
+                <a class="nav-item" href="https://blog.fundrequest.io" target="_blank">Blog</a><a class="nav-item">About Us</a>
+                <div class="nav-item center@mobile center@tablet"><a class="nav-item" style="margin-right: 0px;"><button class="sign-up-button button primary" tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 28px; line-height: 24px; min-width: 88px; color: rgb(255, 171, 0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: transparent; text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Get Invited</span></div></button></a></div>
+                <i class="fa  fa-bars fa-lg toggle-icon" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -69,11 +68,13 @@
                     <div class="underline"></div>
                   </div><br><br><br>
                   <div class="description">
-                    <p>FundRequest is more than a platform to fund projects. We provide the best experience to fund an issue
-                      and incentivise the open source community. FundRequest breaks down barriers traditionally encountered
-                      in open source by providing a support layer between no support and enterprise level support. </p><br>
-                    <p>The ease of use of the FundRequest platform enables users to fund issues without any coding knowledge.
-                      It allows developers to search for funded issues that best match their skill set to solve.</p>
+                    <label class="mdc-textfield">
+  <input type="text" class="mdc-textfield__input">
+  <span class="mdc-textfield__label">Hint Text</span>
+</label>
+                    <button type="button" class="mdc-button mdc-button--raised mdc-button--primary">
+                      Press Me
+                    </button>
                   </div><br><br>
                   <div><a href="https://docs.fundrequest.io/display/PUB" target="_blanc" class="learn-more-hyperlink">Learn more</a></div>
                 </div>
@@ -90,10 +91,11 @@
                 <p>© 2017 FundRequest. All rights reserved.</p>
               </div>
               <div class="social-container"><a href="https://twitter.com/fundrequest_io" target="_blank"><i class="fa  fa-twitter fa-lg " aria-hidden="true"></i></a>
-                <a
-                  href="https://blog.fundrequest.io" target="_blank"><i class="fa  fa-medium fa-lg " aria-hidden="true"></i></a><a href="https://github.com/fundrequest/" target="_blank"><i class="fa  fa-github fa-lg " aria-hidden="true"></i></a>
-                  <a
-                    href="https://fundrequest.slack.com" target="_blank"><i class="fa  fa-slack fa-lg " aria-hidden="true"></i></a><a href="https://fundrequest.io" target="_blank"><i class="fa  fa-globe fa-lg " aria-hidden="true"></i></a></div>
+                <a href="https://blog.fundrequest.io" target="_blank"><i class="fa  fa-medium fa-lg " aria-hidden="true"></i></a>
+                <a href="https://github.com/fundrequest/" target="_blank"><i class="fa  fa-github fa-lg " aria-hidden="true"></i></a>
+                <a href="https://fundrequest.slack.com" target="_blank"><i class="fa  fa-slack fa-lg " aria-hidden="true"></i></a>
+                <a href="https://fundrequest.io" target="_blank"><i class="fa  fa-globe fa-lg " aria-hidden="true"></i></a>
+              </div>
             </div>
             <div class="gr-2 hide@mobile">
               <div class="footer-section">
@@ -143,6 +145,9 @@
       </div>
     </div>
   </div>
+
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script>window.mdc.autoInit();</script>
 </body>
 
 </html>
