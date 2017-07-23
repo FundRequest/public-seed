@@ -11,8 +11,10 @@
   "devDependencies": {
     "copy": "^0.3.0",
     "del": "^3.0.0",
-    "embark": "^2.5.1",
     "gulp": "^3.9.1",
-    "mocha": "^2.2.5"
+    "ethereumjs-testrpc": "^4.0.1",
+    "mocha": "^2.2.5",
+    "truffle": "^3.4.5",
+    "truffle-hdwallet-provider": "0.0.3"
   }
 }
