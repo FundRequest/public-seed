@@ -21,7 +21,6 @@ window.App = {
         return;
       }
       accounts = accs;
-      console.log("Full load...");
       self.refreshContractInformation();
     });
   },
@@ -29,7 +28,6 @@ window.App = {
   refreshContractInformation: function(){
     var self = this;
     Presale.deployed().then(function(instance){
-      console.log("contract address : " + instance.address);
       return instance.rate.call();
     }).then(function(_rate) {
         console.log(_rate.toNumber());
