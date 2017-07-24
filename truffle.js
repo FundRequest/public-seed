@@ -4,13 +4,16 @@ var HDWalletProvider = require("truffle-hdwallet-provider");
 
 var getMnemonic = function (env) {
   try {
-    fs.readFileSync('./config/' + env + '/mnemonic').toString()
+    var mnemonic = fs.readFileSync('./config/' + env + '/mnemonic').toString()
+    console.log("using predefined mnemonic" + mnemonic);
+    return mnemonic;
   } catch (exception) {
     return "diplr"
   }
 }
 
 module.exports = {
+
   networks: {
     development: {
       host: "localhost",
