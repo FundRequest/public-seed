@@ -5,9 +5,7 @@ import '../zeppelin/Pausable.sol';
 
 contract Presale is Pausable {
   using SafeMathLib for uint;
-  // start and end block where investments are allowed (both inclusive)
-  uint public startBlock;
-  uint public endBlock;
+  
   // address where funds are collected
   address public wallet;
   // how many token units a buyer gets per wei

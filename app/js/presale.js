@@ -1,17 +1,17 @@
 var Presale;
 
 window.App = {
-  loadContract: function() {
-     $.getJSON("./contracts/Presale.json", function(Presale_json) {
-         console.log(Presale_json);
-        Presale = TruffleContract( Presale_json );
-        Presale.setProvider(window.web3.currentProvider);        
-      });
+  loadContract: function () {
+    $.getJSON("./contracts/Presale.json", function (Presale_json) {
+      console.log(Presale_json);
+      Presale = TruffleContract(Presale_json);
+      Presale.setProvider(window.web3.currentProvider);
+    });
   },
-  start: function() {
+  start: function () {
     var self = this;
     self.loadContract();
-    web3.eth.getAccounts(function(err, accs) {
+    web3.eth.getAccounts(function (err, accs) {
       if (err != null) {
         alert("There was an error fetching your accounts.");
         return;
@@ -21,24 +21,43 @@ window.App = {
         return;
       }
       accounts = accs;
+
+      var x = document.getElementById("accountSelect");
+
+      var l = accounts.length;
+      for (i = 0; i < l; i++) {
+        var option = document.createElement("option");
+        option.text = accounts[i];
+        console.log(accounts[i]);
+        x.add(option);
+      }
+      $('#accountSelect').material_select();
+      $("#accountSelect").change(function(e){
+        var selectedAccount = ($( "#accountSelect option:selected" ).first().text());
+      });
       self.refreshContractInformation();
     });
   },
-
-  refreshContractInformation: function(){
+  refreshContractInformation: function () {
     var self = this;
-    Presale.deployed().then(function(instance){
-      return instance.rate.call();
-    }).then(function(_rate) {
-        console.log(_rate.toNumber());
-    }).catch(function(e) {
-      console.log(e);
+    var presale;
+    Presale.deployed().then(function (instance) {
+      presale = instance;
+      return presale.rate.call();
+    }).then(function (_rate) {
+      $("#fndCurrentRate").html(_rate.toNumber());
+      return presale.weiRaised.call();
+    }).then(function (_wei) {
+      $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ether");
+      return presale.investorCount.call();
+    }).then(function (_investorCount) {
+      $("#fndTotalBackers").html(_investorCount.toNumber());
     });
   },
 };
 
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")

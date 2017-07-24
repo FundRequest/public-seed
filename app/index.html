@@ -7,7 +7,9 @@
   <link href='css/main.css' rel='stylesheet' type='text/css'>
   <link href='css/font-awesome.min.css' rel="stylesheet" type="text/css" />
   <link rel="shortcut icon" href="/favicons/favicon.ico">
-  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+
   <style type="text/css">
     .cf-hidden {
       display: none;
@@ -20,6 +22,25 @@
   <style type="text/css">
     .fancybox-margin {
       margin-right: 0px;
+    }
+  </style>
+  <style>
+    .mdl-card {
+      width: 230px;
+      height: 200px;
+    }
+
+    .mdl-card__title {
+      color: #fff;
+      background-color: #46B6AC;
+    }
+
+    .snippet-group .snippet-demo {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0;
+      padding: 0 40px 40px;
     }
   </style>
 </head>
@@ -64,47 +85,55 @@
               <div class="row">
                 <div class="gr-12 center">
                   <div class="section-header">
-                    <h2>Fundrequest Private Presale?</h2>
+
+
+                    <h2>Fundrequest Private Presale</h2>
                     <div class="underline"></div>
-                  </div><br><br><br>
-                  <div class="mdc-select" role="listbox" tabindex="0">
-                    <span class="mdc-select__selected-text">Pick a food group</span>
-                    <div class="mdc-simple-menu mdc-select__menu">
-                      <ul class="mdc-list mdc-simple-menu__items">
-                        <li class="mdc-list-item" role="option" id="grains" aria-disabled="true">
-                          Pick a food group
-                        </li>
-                        <li class="mdc-list-item" role="option" id="grains" tabindex="0">
-                          Bread, Cereal, Rice, and Pasta
-                        </li>
-                        <li class="mdc-list-item" role="option" id="vegetables" tabindex="0">
-                          Vegetables
-                        </li>
-                        <li class="mdc-list-item" role="option" id="fruit" tabindex="0">
-                          Fruit
-                        </li>
-                        <li class="mdc-list-item" role="option" id="dairy" tabindex="0">
-                          Milk, Yogurt, and Cheese
-                        </li>
-                        <li class="mdc-list-item" role="option" id="meat" tabindex="0">
-                          Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
-                        </li>
-                        <li class="mdc-list-item" role="option" id="fats" tabindex="0">
-                          Fats, Oils, and Sweets
-                        </li>
-                      </ul>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 offset-m1">
+                      <div class="card teal ">
+                        <div class="card-content white-text">
+                          <span class="card-title">Rate</span>
+                          <p>Current rate of tokens per eth</p>
+                        </div>
+                        <div class="card-action">
+                          <span id="fndCurrentRate" class="white-text"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m3 offset-m1">
+                      <div class="card teal ">
+                        <div class="card-content white-text">
+                          <span class="card-title">Raised</span>
+                          <p>Total amount of ether raised</p>
+                        </div>
+                        <div class="card-action">
+                          <span id="fndTotalRaised" class="white-text"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m3 offset-m1">
+                      <div class="card teal">
+                        <div class="card-content white-text">
+                          <span class="card-title">Backers</span>
+                          <p>Total amount of backers</p>
+                        </div>
+                        <div class="card-action">
+                          <span id="fndTotalBackers" class="white-text"></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="description">
-                    <label class="mdc-textfield">
-  <input type="text" class="mdc-textfield__input">
-  <span class="mdc-textfield__label">Hint Text</span>
-</label>
-                    <button type="button" class="mdc-button mdc-button--raised mdc-button--primary">
-                      Press Me
-                    </button>
-                  </div><br><br>
-                  <div><a href="https://docs.fundrequest.io/display/PUB" target="_blanc" class="learn-more-hyperlink">Learn more</a></div>
+                  <div class="input-field col s12">
+                    <select id="accountSelect">
+                      <option value="" disabled selected>Choose your account</option>
+                    </select>
+                    <label>Select your account</label>
+                  </div>
+
+                  <a class="waves-effect waves-light btn-large ">Buy</a>
+                  <a class="waves-effect waves-light btn-large light-green lighten-1">Proxy Buy</a>
                 </div>
               </div>
             </div>
@@ -174,11 +203,12 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
   <script>
     $(document).ready(function () {
-      window.mdc.autoInit();
+
     });
   </script>
   <script src="js/truffle-contract.js"></script>
