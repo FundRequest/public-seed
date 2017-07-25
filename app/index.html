@@ -79,7 +79,7 @@
             </div>
           </div>
         </div>
-        <div class="whatis section">
+        <div class="whatis section" id="presaleSection" style="display: none;">
           <div class="content">
             <div class="gr-container">
               <div class="row">
@@ -98,7 +98,7 @@
                           <p>Current rate of tokens per eth</p>
                         </div>
                         <div class="card-action">
-                          <span id="fndCurrentRate" class="white-text"></span>
+                          <b><span id="fndCurrentRate" class="white-text"></span></b><span class="white-text"> tokens/eth</span>
                         </div>
                       </div>
                     </div>
@@ -125,15 +125,26 @@
                       </div>
                     </div>
                   </div>
-                  <div class="input-field col s12">
+                 
+                  <div class="input-field col s4">
                     <select id="accountSelect">
                       <option value="" disabled selected>Choose your account</option>
                     </select>
                     <label>Select your account</label>
                   </div>
-
-                  <a id="btnBuy" class="waves-effect waves-light btn-large ">Buy</a>
-                  <a id="btnProxyBuy" class="waves-effect waves-light btn-large light-green lighten-1">Proxy Buy</a>
+                  <div class="input-field col s4 offset-s1">
+                    <input id="targetAddress" placeholder="0x0" type="text" class="validate">
+                    <label for="targetAddress">target address</label>
+                  </div>
+                  <div class="input-field col s2 offset-s1">
+                    <input id="amount" placeholder="1" type="number">
+                    <label for="amount">amount</label>
+                  </div>
+                  <div class="row">
+                    <a id="btnBuy" class="waves-effect waves-light btn-large ">Buy</a>
+                    <a id="btnProxyBuy" class="waves-effect waves-light btn-large light-green lighten-1">Proxy Buy</a>
+                    <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +213,7 @@
       </div>
     </div>
   </div>
-  <script type="application/javascript" src="js/web3.js"></script>  
+  <script type="application/javascript" src="js/web3.js"></script>
   <script type="application/javascript" src="js/truffle-contract.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
