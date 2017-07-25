@@ -30,7 +30,7 @@ module.exports = {
     },
     ropsten: {
       network_id: '3',
-      provider: new HDWalletProvider(getMnemonic('ropsten'), "https://kovan.infura.io/")
+      provider: new HDWalletProvider(getMnemonic('ropsten'), "https://ropsten.infura.io/")
     }
   },
 };

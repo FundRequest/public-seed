@@ -87,7 +87,7 @@ contract('Presale', function (accounts) {
             });
     });
 
-       it("deposits are correct after buying", function () {
+    it("deposits are correct after buying", function () {
         var presale;
         var rate = 3575;
         var buyin = 2;
