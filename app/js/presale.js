@@ -23,9 +23,11 @@ window.App = {
   },
   allow: function () {
     App.ex.Presale.deployed().then(function (instance) {
-        console.log("allowing " + $("#targetAddress").val() + " from " + App.ex.selectedAccount);
-        return instance.allow($("#targetAddress").val(), {
-          from: App.ex.selectedAccount
+        var _target = $("#targetAddress").val();
+        var _from = App.ex.selectedAccount;
+        console.log("allowing " + _target + " from account " + _from);
+        return instance.allow(_target, {
+          from: _from
         });
       }).then(function (result) {
         console.log(result);

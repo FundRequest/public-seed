@@ -3,3 +3,4 @@ dist/
 package-lock.json
 config/ropsten/mnemonic
 config/kovan/mnemonic
+config/rinkeby/mnemonic
