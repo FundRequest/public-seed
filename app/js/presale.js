@@ -6,7 +6,7 @@ window.App = {
     owner: null
   },
   loadContract: function (_callback) {
-    $.getJSON("./contracts/Presale.json", function (Presale_json) {
+    $.getJSON("./contracts/FundRequestPrivateSeed.json", function (Presale_json) {
       console.log(Presale_json);
       App.ex.Presale = TruffleContract(Presale_json);
       App.ex.Presale.setProvider(window.web3.currentProvider);

@@ -3,7 +3,7 @@ pragma solidity ^0.4.11;
 import '../math/SafeMathLib.sol';
 import '../zeppelin/Pausable.sol';
 
-contract Presale is Pausable {
+contract FundRequestPrivateSeed is Pausable {
   using SafeMathLib for uint;
   
   // address where funds are collected
@@ -76,6 +76,11 @@ contract Presale is Pausable {
   }
   function updateRate(uint _rate) onlyOwner whenPaused {
     rate = _rate;
+  }
+
+  function updateWallet(address _wallet) onlyOwner whenPaused {
+    require(_wallet != 0x0);
+    wallet = _wallet;
   }
   
   // fallback function can be used to buy tokens

@@ -1,6 +1,6 @@
-var Presale = artifacts.require("./presale/Presale.sol");
+var Presale = artifacts.require("./presale/FundRequestPrivateSeed.sol");
 
-contract('Presale', function (accounts) {
+contract('FundRequestPrivateSeed', function (accounts) {
     it("it should not be possible to buy without allowing first", function () {
         var presale;
         return Presale.deployed().then(function (instance) {

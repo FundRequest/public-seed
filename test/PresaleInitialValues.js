@@ -1,6 +1,6 @@
-var Presale = artifacts.require("./presale/Presale.sol");
+var Presale = artifacts.require("./presale/FundRequestPrivateSeed.sol");
 
-contract('Presale', function (accounts) {
+contract('FundRequestPrivateSeed', function (accounts) {
   it("it should have the correct rate", function () {
     return Presale.deployed().then(function (instance) {
       return instance.rate.call();
