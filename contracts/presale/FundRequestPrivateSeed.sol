@@ -27,7 +27,7 @@ contract FundRequestPrivateSeed is Pausable {
    */ 
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
   
-  function Presale(uint _rate, address _wallet) {
+  function FundRequestPrivateSeed(uint _rate, address _wallet) {
     require(_rate > 0);
     require(_wallet != 0x0);
 
