@@ -15,9 +15,6 @@ window.App = {
   },
   init: function () {
     $("#btnBuy").click(App.buy);
-    $("#btnProxyBuy").click(function () {
-
-    });
     $("#btnAllow").click(App.allow);
     this.loadContract(this.start);
   },
@@ -25,34 +22,45 @@ window.App = {
     App.ex.Presale.deployed().then(function (instance) {
         var _target = $("#targetAddress").val();
         var _from = App.ex.selectedAccount;
-        console.log("allowing " + _target + " from account " + _from);
+        $("#busy").show();
         return instance.allow(_target, {
           from: _from
         });
       }).then(function (result) {
-        console.log(result);
+        Materialize.toast("Successfully whitelisted user.", 4000);
+        $("#busy").hide();
       })
       .catch(function (err) {
+        Materialize.toast("Whitelisting failed.", 4000);
         console.log(err);
+        $("#busy").hide();
       });
   },
   buy: function () {
+    var chosenAmount = $("#amount").val();
+    var targetAddress = $("#targetAddress").val();
+    if (chosenAmount == "") {
+      Materialize.toast("Please select an amount first.", 4000);
+      return;
+    }
+    if (targetAddress == "") {
+      Materialize.toast("Please select an account first", 4000);
+      return;
+    }
     App.ex.Presale.deployed().then(function (instance) {
-      return instance.buyTokens($("#targetAddress").val(), {
+      $("#busy").show();
+      return instance.buyTokens(targetAddress, {
         from: App.ex.selectedAccount,
-        value: web3.toWei($("#amount").val()),
+        value: web3.toWei(chosenAmount),
         gas: 2100000
       });
     }).then(function (result) {
-      console.log(result);
+      Materialize.toast("Tokens acquired.", 4000);
+      $("#busy").hide();
     }).catch(function (err) {
-      console.log("error");
-      console.log(err);
+      Materialize.toast("Something went wrong while trying to buy tokens. Please check if you're whitelisted.", 4000);
+      $("#busy").hide();
     });
-  },
-  onBuy: function (result) {},
-  requestProxyBuy: function () {
-
   },
   accountsAreInvalid: function (err, accs) {
     if (err != null) {
@@ -75,11 +83,12 @@ window.App = {
       option.text = App.ex.accounts[i];
       x.add(option);
     }
+    App.updateTokens(App.ex.accounts[0]);
     $('#accountSelect').material_select();
     $("#accountSelect").change(function (e) {
       App.ex.selectedAccount = ($("#accountSelect option:selected").first().text());
       $("#targetAddress").val(App.ex.selectedAccount);
-
+      App.updateTokens(App.ex.selectedAccount);
       if (App.ex.selectedAccount == App.ex.owner) {
         $("#btnAllow").show();
       }
@@ -95,6 +104,19 @@ window.App = {
 
       App.fillAccounts(accs);
       App.refreshContractInformation();
+    });
+  },
+  updateTokens: function (address) {
+    var self = this;
+    var presale;
+    App.ex.Presale.deployed().then(function (instance) {
+      presale = instance;
+      return presale.balanceOf.call(address).then(function (_tokens) {
+        $("#fndYourTokens").html(web3.fromWei(_tokens.toNumber()));
+      });
+    }).catch(function (err) {
+      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
+      $("#presaleSection").hide();
     });
   },
   refreshContractInformation: function () {
