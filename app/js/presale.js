@@ -7,7 +7,6 @@ window.App = {
   },
   loadContract: function (_callback) {
     $.getJSON("./contracts/FundRequestPrivateSeed.json", function (Presale_json) {
-      console.log(Presale_json);
       App.ex.Presale = TruffleContract(Presale_json);
       App.ex.Presale.setProvider(window.web3.currentProvider);
       _callback();
@@ -123,7 +122,6 @@ window.App = {
     var self = this;
     var presale;
     App.ex.Presale.deployed().then(function (instance) {
-      console.log("!!!");
       presale = instance;
       return presale.rate.call().then(function (_rate) {
         $("#fndCurrentRate").html(_rate.toNumber());
@@ -141,20 +139,15 @@ window.App = {
       Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
       $("#presaleSection").hide();
     });
+    setTimeout(App.refreshContractInformation, 20000);
   }
 };
 
 $(document).ready(function () {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
-    console.log("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
-    // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
     $("#presaleSection").show();
-  } else {
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    $("#presaleSection").show();
-    Materialize.toast("It would appear you either don't have metamask, or are not running in a web3 compatible browser.", 4000)
   }
   App.init();
 });
