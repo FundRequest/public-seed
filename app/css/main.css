@@ -14423,15 +14423,15 @@ body {
 /* Partials */
 @font-face {
   font-family: 'Montserrat';
-  src: url(/./fonts/df3e10316f2ae8e548a13e195a8265a0.eot);
-  src: url(/./fonts/df3e10316f2ae8e548a13e195a8265a0.eot?#iefix) format("embedded-opentype"), url(/./fonts/fontawesome-webfont.woff2) format("woff2"), url(/./fonts/fontawesome-webfont.woff) format("woff"), url(/./fonts/0f409f15d3a6f4c0734a11da10c10549.ttf) format("truetype"), url(/_/sass/fonts/Montserrat/Montserrat-Regular.svg#Montserrat-Regular) format("svg");
+  src: url(../fonts/df3e10316f2ae8e548a13e195a8265a0.eot);
+  src: url(../fonts/df3e10316f2ae8e548a13e195a8265a0.eot?#iefix) format("embedded-opentype"), url(../fonts/11fde73ad9c6a830098a7c42f9dd07ec.woff2) format("woff2"), url(../fonts/cc1f80d2045858a6fd40b6aa624df678.woff) format("woff"), url(../fonts/0f409f15d3a6f4c0734a11da10c10549.ttf) format("truetype"), url(../fonts/Montserrat/Montserrat-Regular.svg#Montserrat-Regular) format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url(/./fonts/c8e380acbd3d7b4942ccd342787e0522.eot);
-  src: url(/./fonts/c8e380acbd3d7b4942ccd342787e0522.eot?#iefix) format("embedded-opentype"), url(/./fonts/fontawesome-webfont.woff2) format("woff2"), url(/./fonts/fontawesome-webfont.woff) format("woff"), url(/./fonts/260595ee24b8de4ea7c7ab968d3c367a.ttf) format("truetype"), url(/_/sass/fonts/Montserrat/Montserrat-Bold.svg#Montserrat-Bold) format("svg");
+  src: url(../fonts/c8e380acbd3d7b4942ccd342787e0522.eot);
+  src: url(../fonts/c8e380acbd3d7b4942ccd342787e0522.eot?#iefix) format("embedded-opentype"), url(../fonts/ccafbbafde222fbbd4fcce9c0d52399c.woff2) format("woff2"), url(../fonts/17ba62a2566eba556713c2572d7dc551.woff) format("woff"), url(../fonts/260595ee24b8de4ea7c7ab968d3c367a.ttf) format("truetype"), url(../fonts/Montserrat/Montserrat-Bold.svg#Montserrat-Bold) format("svg");
   font-weight: bold;
   font-style: normal; }
 
