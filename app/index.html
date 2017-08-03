@@ -41,7 +41,6 @@
 
     .custom_teal_dark {
       background-color: rgba(152, 201, 230, 0.8) !important;
-
     }
 
     .card_transparent {
@@ -87,17 +86,20 @@
                   <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3>
                   <br>
                   <h1>Private Seed</h1>
-                  Account <span id="targetAddressLabel">0x0</span> currently has  <span id="fndYourTokens">0</span> FND Tokens.
-                  <br><br>
+                  <div id="personalStash" style="display: none;">
+                    Account <span id="targetAddressLabel">0x0</span> currently has <span id="fndYourTokens">0</span> FND
+                    Tokens.
                   </div>
+                  <br><br>
                 </div>
+              </div>
 
 
 
               <div class="row">
                 <div class="gr-12 center">
                   <div class="gr-4 center">
-                     <div class="card card_transparent">
+                    <div class="card card_transparent">
                       <div class="card-content custom_teal white-text">
                         <span class="card-title">Rate</span>
                         <p>Tokens per ETH</p>
@@ -105,32 +107,32 @@
                       <div class="card-action custom_teal_dark">
                         <b><span id="fndCurrentRate" class="white-text"></span></b><span class="white-text"> FND/ETH</span>
                       </div>
-                     </div>
-                 </div>
+                    </div>
+                  </div>
 
                   <div class="gr-4 center">
-                     <div class="card card_transparent">
-                          <div class="card-content custom_teal white-text">
-                            <span class="card-title custom_teal">Raised</span>
-                            <p>Total ETH raised</p>
-                          </div>
-                          <div class="card-action custom_teal_dark">
-                            <span id="fndTotalRaised" class="white-text"></span>
-                          </div>
-                        </div>
-                 </div>
+                    <div class="card card_transparent">
+                      <div class="card-content custom_teal white-text">
+                        <span class="card-title custom_teal">Raised</span>
+                        <p>Total ETH raised</p>
+                      </div>
+                      <div class="card-action custom_teal_dark">
+                        <span id="fndTotalRaised" class="white-text"></span>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="gr-4 center">
-                     <div class="card card_transparent">
-                          <div class="card-content custom_teal white-text">
-                            <span class="card-title">Backers</span>
-                            <p>Total number</p>
-                          </div>
-                          <div class="card-action custom_teal_dark">
-                            <span id="fndTotalBackers" class="white-text"></span>
-                          </div>
-                        </div>
-                 </div>
+                    <div class="card card_transparent">
+                      <div class="card-content custom_teal white-text">
+                        <span class="card-title">Backers</span>
+                        <p>Total number</p>
+                      </div>
+                      <div class="card-action custom_teal_dark">
+                        <span id="fndTotalBackers" class="white-text"></span>
+                      </div>
+                    </div>
+                  </div>
 
 
                 </div>
@@ -140,107 +142,107 @@
 
 
 
-                  <div class="row">
-                    <div class="gr-12 center">
-                      <div class="input-field col s4">
-                        <select id="accountSelect">
+              <div class="row">
+                <div class="gr-12 center">
+                  <div class="input-field col s4">
+                    <select id="accountSelect">
                           <option value="" disabled selected>Choose your account</option>
                         </select>
-                        <label>Select your account</label>
-                      </div>
-                      <div class="input-field col s4 offset-s1">
-                        <input id="targetAddress" placeholder="0x0" type="text" class="validate">
-                        <label for="targetAddress">target address </label>
-                      </div>
-                      <div class="input-field col s2 offset-s1">
-                        <input id="amount" placeholder="1" type="number">
-                        <label for="amount">amount</label>
-                      </div>
-                    </div>
+                    <label>Select your account</label>
                   </div>
-                  <div class="row">
-                    <a id="btnBuy" class="waves-effect waves-light btn-large custom_teal">Buy </a>
-                    <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                  <div class="input-field col s4 offset-s1">
+                    <input id="targetAddress" placeholder="0x0" type="text" class="validate">
+                    <label for="targetAddress">target address </label>
                   </div>
-                  <div class="row">
-                    <div class="gr-12 center"><br><br>
-                    <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                  <div class="input-field col s2 offset-s1">
+                    <input id="amount" placeholder="1" type="number">
+                    <label for="amount">amount</label>
                   </div>
+                </div>
+              </div>
+              <div class="row">
+                <a id="btnBuy" class="waves-effect waves-light btn-large custom_teal">Buy </a>
+                <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+              </div>
+              <div class="row">
+                <div class="gr-12 center"><br><br>
+                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                </div>
 
-                  </div>
-                  <div class="row">
-                    <div id="busy" class="progress" style="display: none;">
-                      <div class="indeterminate"></div>
-                    </div>
-                  </div>
+              </div>
+              <div class="row">
+                <div id="busy" class="progress" style="display: none;">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer">
-        <div class="gr-container">
-          <div class="row">
-            <div class="gr-6 gr-12@mobile"><a href="#/en/home"><img src="/images/app/header-logo.png" class="footer-logo"></a>
-              <div class="copyright">
-                <p>© 2017 FundRequest. All rights reserved.</p>
-              </div>
-              <div class="social-container"><a href="https://twitter.com/fundrequest_io" target="_blank"><i class="fa  fa-twitter fa-lg " aria-hidden="true"></i></a>
-                <a href="https://blog.fundrequest.io" target="_blank"><i class="fa  fa-medium fa-lg " aria-hidden="true"></i></a>
-                <a href="https://github.com/fundrequest/" target="_blank"><i class="fa  fa-github fa-lg " aria-hidden="true"></i></a>
-                <a href="https://fundrequest.slack.com" target="_blank"><i class="fa  fa-slack fa-lg " aria-hidden="true"></i></a>
-                <a href="https://fundrequest.io" target="_blank"><i class="fa  fa-globe fa-lg " aria-hidden="true"></i></a>
-              </div>
-            </div>
-            <div class="gr-2 hide@mobile">
-              <div class="footer-section">
-                <div class="title">
-                  <p>Resources</p>
-                </div>
-                <div class="content">
-                  <a href="https://fundrequest.io/whitepaper" target="_blank">
-                    <p>Whitepaper</p>
-                  </a>
-                  <a href="https://docs.fundrequest.io/display/PUB" target="_blank">
-                    <p>Documentation</p>
-                  </a>
-                  <a href="https://blog.fundrequest.io" target="_blank">
-                    <p>Blog</p>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="gr-2 hide@mobile">
-              <div class="footer-section">
-                <div class="title">
-                  <p>Company</p>
-                </div>
-                <div class="content">
-                  <a href="https://fundrequest.io">
-                    <p>Team</p>
-                  </a>
-                  <a href="https://fundrequest.io">
-                    <p>Advisors</p>
-                  </a><br></div>
-              </div>
-            </div>
-            <div class="gr-2 hide@mobile">
-              <div class="footer-section">
-                <div class="title">
-                  <p>Legal</p>
-                </div>
-                <div class="content">
-                  <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blank">
-                    <p>Disclaimer</p>
-                  </a><br></div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="footer">
+    <div class="gr-container">
+      <div class="row">
+        <div class="gr-6 gr-12@mobile"><a href="#/en/home"><img src="/images/app/header-logo.png" class="footer-logo"></a>
+          <div class="copyright">
+            <p>© 2017 FundRequest. All rights reserved.</p>
+          </div>
+          <div class="social-container"><a href="https://twitter.com/fundrequest_io" target="_blank"><i class="fa  fa-twitter fa-lg " aria-hidden="true"></i></a>
+            <a href="https://blog.fundrequest.io" target="_blank"><i class="fa  fa-medium fa-lg " aria-hidden="true"></i></a>
+            <a href="https://github.com/fundrequest/" target="_blank"><i class="fa  fa-github fa-lg " aria-hidden="true"></i></a>
+            <a href="https://fundrequest.slack.com" target="_blank"><i class="fa  fa-slack fa-lg " aria-hidden="true"></i></a>
+            <a href="https://fundrequest.io" target="_blank"><i class="fa  fa-globe fa-lg " aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="gr-2 hide@mobile">
+          <div class="footer-section">
+            <div class="title">
+              <p>Resources</p>
+            </div>
+            <div class="content">
+              <a href="https://fundrequest.io/whitepaper" target="_blank">
+                <p>Whitepaper</p>
+              </a>
+              <a href="https://docs.fundrequest.io/display/PUB" target="_blank">
+                <p>Documentation</p>
+              </a>
+              <a href="https://blog.fundrequest.io" target="_blank">
+                <p>Blog</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="gr-2 hide@mobile">
+          <div class="footer-section">
+            <div class="title">
+              <p>Company</p>
+            </div>
+            <div class="content">
+              <a href="https://fundrequest.io">
+                <p>Team</p>
+              </a>
+              <a href="https://fundrequest.io">
+                <p>Advisors</p>
+              </a><br></div>
+          </div>
+        </div>
+        <div class="gr-2 hide@mobile">
+          <div class="footer-section">
+            <div class="title">
+              <p>Legal</p>
+            </div>
+            <div class="content">
+              <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blank">
+                <p>Disclaimer</p>
+              </a><br></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   </div>
   <script type="application/javascript" src="js/web3.js"></script>
   <script type="application/javascript" src="js/truffle-contract.js"></script>

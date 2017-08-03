@@ -50,8 +50,7 @@ window.App = {
       $("#busy").show();
       return instance.buyTokens(targetAddress, {
         from: App.ex.selectedAccount,
-        value: web3.toWei(chosenAmount),
-        gas: 210000
+        value: web3.toWei(chosenAmount)
       });
     }).then(function (result) {
       Materialize.toast("Tokens acquired.", 4000);
@@ -82,7 +81,7 @@ window.App = {
       option.text = App.ex.accounts[i];
       x.add(option);
     }
-    App.updateTokens(App.ex.accounts[0]);
+
     $('#accountSelect').material_select();
     $("#accountSelect").change(function (e) {
       App.ex.selectedAccount = ($("#accountSelect option:selected").first().text());
@@ -112,6 +111,7 @@ window.App = {
     App.ex.Presale.deployed().then(function (instance) {
       presale = instance;
       return presale.balanceOf.call(address).then(function (_tokens) {
+        $("#personalStash").show();
         $("#fndYourTokens").html(web3.fromWei(_tokens.toNumber()));
       });
     }).catch(function (err) {
