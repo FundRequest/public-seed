@@ -14435,7 +14435,7 @@ body {
   font-weight: bold;
   font-style: normal; }
 
-.montserrat, body, .montserrat.regular, body.regular {
+.montserrat, span, body, .montserrat.regular, body.regular {
   font-family: 'Montserrat', serif;
   font-weight: normal;
   font-style: normal; }

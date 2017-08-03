@@ -51,7 +51,7 @@ window.App = {
       return instance.buyTokens(targetAddress, {
         from: App.ex.selectedAccount,
         value: web3.toWei(chosenAmount),
-        gas: 2100000
+        gas: 210000
       });
     }).then(function (result) {
       Materialize.toast("Tokens acquired.", 4000);
@@ -87,6 +87,7 @@ window.App = {
     $("#accountSelect").change(function (e) {
       App.ex.selectedAccount = ($("#accountSelect option:selected").first().text());
       $("#targetAddress").val(App.ex.selectedAccount);
+      $("#targetAddressLabel").html(App.ex.selectedAccount);
       App.updateTokens(App.ex.selectedAccount);
       if (App.ex.selectedAccount == App.ex.owner) {
         $("#btnAllow").show();
