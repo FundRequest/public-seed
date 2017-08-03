@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
+  <title>FundRequest.io Private Seed</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='css/main.css' rel='stylesheet' type='text/css'>
   <link href='css/font-awesome.min.css' rel="stylesheet" type="text/css" />
@@ -54,9 +54,9 @@
             <div class="gr-3 gr-12@tablet gr-12@mobile"><a href="#/en/home"><img src="/images/app/header-logo.png" class="header-logo"></a></div>
             <div class="gr-9 gr-12@tablet gr-12@mobile">
               <div class="navigation"><a class="nav-item" href="https://fundrequest.io/whitepaper" target="_blank">Whitepaper</a><a class="nav-item"
-                  href="https://docs.fundrequest.io/display/PUB/" target="_blank">Documentation</a><a class="nav-item">Roadmap</a>
-                <a class="nav-item" href="https://blog.fundrequest.io" target="_blank">Blog</a><a class="nav-item">About Us</a>
-                <div class="nav-item center@mobile center@tablet"><a class="nav-item" style="margin-right: 0px;"><button class="sign-up-button button primary" tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 28px; line-height: 24px; min-width: 88px; color: rgb(255, 171, 0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: transparent; text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Get Invited</span></div></button></a></div>
+                  href="https://docs.fundrequest.io/display/PUB/" target="_blank">Documentation</a>
+                <a class="nav-item" href="https://blog.fundrequest.io" target="_blank">Blog</a>
+                <div class="nav-item center@mobile center@tablet"><a class="nav-item" href="https://slack.fundrequest.io" target="_blank" style="margin-right: 0px;"><button class="sign-up-button button primary" tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 28px; line-height: 24px; min-width: 88px; color: rgb(255, 171, 0); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: transparent; text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Get Invited</span></div></button></a></div>
                 <i class="fa  fa-bars fa-lg toggle-icon" aria-hidden="true"></i>
               </div>
             </div>
@@ -71,91 +71,88 @@
               <div class="row">
                 <div class="gr-12 center">
                   <h1>Funding and rewarding open source development</h1>
-                  <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3><br><button class="crowdsale-button button hot"
-                    tabindex="0" type="button" style="border: 1px solid rgb(255, 171, 0); box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px 10px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; z-index: 1; height: 38px; line-height: 34px; min-width: 88px; color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 3px; user-select: none; overflow: hidden; background-color: rgb(255, 171, 0); text-align: center; text-transform: none;"><div><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: inherit; font-weight: 500; font-size: 14px;">Coming Soon !</span></div></button><br><br>
-                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                  <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3>
+                  <br>
+                  <h1>Private Seed</h1>
+                  Account <span id="targetAddressLabel">0x0</span> currently has  <span id="fndYourTokens">0</span> FND Tokens.
+                  <br><br>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="whatis section" id="presaleSection" style="display: none;">
-          <div class="content">
-            <div class="gr-container">
+
+
+
               <div class="row">
                 <div class="gr-12 center">
-                  <div class="section-header">
+                  <div class="gr-4 center">
+                     <div class="card teal ">
+                      <div class="card-content white-text">
+                        <span class="card-title">Rate</span>
+                        <p>Tokens per ETH</p>
+                      </div>
+                      <div class="card-action">
+                        <b><span id="fndCurrentRate" class="white-text"></span></b><span class="white-text"> FND/ETH</span>
+                      </div>
+                     </div>
+                 </div>
+
+                  <div class="gr-4 center">
+                     <div class="card teal ">
+                          <div class="card-content white-text">
+                            <span class="card-title">Raised</span>
+                            <p>Total ETH raised</p>
+                          </div>
+                          <div class="card-action">
+                            <span id="fndTotalRaised" class="white-text"></span>
+                          </div>
+                        </div>
+                 </div>
+
+                  <div class="gr-4 center">
+                     <div class="card teal">
+                          <div class="card-content white-text">
+                            <span class="card-title">Backers</span>
+                            <p>Total number</p>
+                          </div>
+                          <div class="card-action">
+                            <span id="fndTotalBackers" class="white-text"></span>
+                          </div>
+                        </div>
+                 </div>
 
 
-                    <h2>Fundrequest Private Presale</h2>
-                    <div class="underline"></div>
-                  </div>
+                </div>
+              </div>
+
+
+
+
+
                   <div class="row">
-                    <div class="col s12 m2 offset-m1">
-                      <div class="card teal ">
-                        <div class="card-content white-text">
-                          <span class="card-title">Rate</span>
-                          <p>Current rate of tokens per eth</p>
-                        </div>
-                        <div class="card-action">
-                          <b><span id="fndCurrentRate" class="white-text"></span></b><span class="white-text"> tokens/eth</span>
-                        </div>
+                    <div class="gr-12 center">
+                      <div class="input-field col s4">
+                        <select id="accountSelect">
+                          <option value="" disabled selected>Choose your account</option>
+                        </select>
+                        <label>Select your account</label>
+                      </div>
+                      <div class="input-field col s4 offset-s1">
+                        <input id="targetAddress" placeholder="0x0" type="text" class="validate">
+                        <label for="targetAddress">target address </label>
+                      </div>
+                      <div class="input-field col s2 offset-s1">
+                        <input id="amount" placeholder="1" type="number">
+                        <label for="amount">amount</label>
                       </div>
                     </div>
-                    <div class="col s12 m2 offset-m1">
-                      <div class="card teal ">
-                        <div class="card-content white-text">
-                          <span class="card-title">Raised</span>
-                          <p>Total amount of ether raised</p>
-                        </div>
-                        <div class="card-action">
-                          <span id="fndTotalRaised" class="white-text"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s12 m2 offset-m1">
-                      <div class="card teal">
-                        <div class="card-content white-text">
-                          <span class="card-title">Backers</span>
-                          <p>Total amount of backers</p>
-                        </div>
-                        <div class="card-action">
-                          <span id="fndTotalBackers" class="white-text"></span>
-                        </div>
-                      </div>
-                    </div>
-                     <div class="col s12 m2 offset-m1">
-                      <div class="card teal">
-                        <div class="card-content white-text">
-                          <span class="card-title">FND</span>
-                          <p>tokens of selected account</p>
-                        </div>
-                        <div class="card-action">
-                          <span id="fndYourTokens" class="white-text"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="input-field col s4">
-                    <select id="accountSelect">
-                      <option value="" disabled selected>Choose your account</option>
-                    </select>
-                    <label>Select your account</label>
-                  </div>
-                  <div class="input-field col s4 offset-s1">
-                    <input id="targetAddress" placeholder="0x0" type="text" class="validate">
-                    <label for="targetAddress">target address </label>
-                  </div>
-                  <div class="input-field col s2 offset-s1">
-                    <input id="amount" placeholder="1" type="number">
-                    <label for="amount">amount</label>
                   </div>
                   <div class="row">
                     <a id="btnBuy" class="waves-effect waves-light btn-large ">Buy </a>
                     <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
                   </div>
                   <div class="row">
+                    <div class="gr-12 center"><br><br>
+                    <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                  </div>
 
                   </div>
                   <div class="row">
@@ -208,10 +205,10 @@
                   <p>Company</p>
                 </div>
                 <div class="content">
-                  <a>
+                  <a href="https://fundrequest.io">
                     <p>Team</p>
                   </a>
-                  <a>
+                  <a href="https://fundrequest.io">
                     <p>Advisors</p>
                   </a><br></div>
               </div>
@@ -222,7 +219,7 @@
                   <p>Legal</p>
                 </div>
                 <div class="content">
-                  <a href="https://fundrequest.io/disclaimer.pdf" target="_blank">
+                  <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blank">
                     <p>Disclaimer</p>
                   </a><br></div>
               </div>
