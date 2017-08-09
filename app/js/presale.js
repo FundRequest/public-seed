@@ -26,7 +26,7 @@ window.App = {
           from: _from
         });
       }).then(function (result) {
-        Materialize.toast("Successfully whitelisted user.", 4000);
+        Materialize.toast("Successfully whitelisted user.", 4000, "blue");
         $("#busy").hide();
       })
       .catch(function (err) {
@@ -39,22 +39,25 @@ window.App = {
     var chosenAmount = $("#amount").val();
     var targetAddress = $("#targetAddress").val();
     if (chosenAmount == "") {
-      Materialize.toast("Please select an amount first.", 4000);
+      Materialize.toast("Please select an amount first.", 4000, "blue");
       return;
     }
     if (targetAddress == "") {
-      Materialize.toast("Please select an account first", 4000);
+      Materialize.toast("Please select an account first", 4000, "blue");
       return;
     }
     App.ex.Presale.deployed().then(function (instance) {
       $("#busy").show();
+      Materialize.toast("Please wait while the transaction is being validated...", 2000, "blue");      
       return instance.buyTokens(targetAddress, {
         from: App.ex.selectedAccount,
-        value: web3.toWei(chosenAmount)
+        value: web3.toWei(chosenAmount),
+        gas: 210000
       });
     }).then(function (result) {
-      Materialize.toast("Tokens acquired.", 4000);
+      Materialize.toast("Tokens acquired.", 4000, "green");
       $("#busy").hide();
+      $("#personalStash").show();
     }).catch(function (err) {
       Materialize.toast("Something went wrong while trying to buy tokens. Please check if you're whitelisted.", 4000);
       $("#busy").hide();
@@ -66,7 +69,7 @@ window.App = {
       return true;
     }
     if (accs.length == 0) {
-      Materialize.toast("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.", 4000)
+      Materialize.toast("Couldn't get any accounts! Please check our your Ethereum client.", 4000, "blue")
       return true;
     }
     return false;
@@ -79,9 +82,10 @@ window.App = {
     for (i = 0; i < l; i++) {
       var option = document.createElement("option");
       option.text = App.ex.accounts[i];
+      option.className = "dropdown-content";
       x.add(option);
     }
-
+    App.updateTokens(App.ex.accounts[0]);
     $('#accountSelect').material_select();
     $("#accountSelect").change(function (e) {
       App.ex.selectedAccount = ($("#accountSelect option:selected").first().text());
@@ -111,7 +115,6 @@ window.App = {
     App.ex.Presale.deployed().then(function (instance) {
       presale = instance;
       return presale.balanceOf.call(address).then(function (_tokens) {
-        $("#personalStash").show();
         $("#fndYourTokens").html(web3.fromWei(_tokens.toNumber()));
       });
     }).catch(function (err) {
@@ -128,7 +131,7 @@ window.App = {
         $("#fndCurrentRate").html(_rate.toNumber());
         return presale.weiRaised.call();
       }).then(function (_wei) {
-        $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ether");
+        $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ETH");
         return presale.investorCount.call();
       }).then(function (_investorCount) {
         $("#fndTotalBackers").html(_investorCount.toNumber());
@@ -137,7 +140,7 @@ window.App = {
         App.ex.owner = _owner;
       });
     }).catch(function (err) {
-      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
+      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000, blue);
       $("#presaleSection").hide();
     });
     setTimeout(App.refreshContractInformation, 20000);

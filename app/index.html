@@ -39,6 +39,14 @@
       background-color: #d0e4ed !important;
     }
 
+    .custom_dropdown {
+      color: #a8d1e8 !important;
+    }
+
+    .dropdown-content {
+      color: #a8d1e8 !important;
+    }
+
     .custom_teal_dark {
       background-color: rgba(152, 201, 230, 0.8) !important;
     }
@@ -53,6 +61,13 @@
       vertical-align: middle;
       margin: 0;
       padding: 0 40px 40px;
+    }
+
+    #toast-container {
+      top: 80px;
+      right: 1%;
+      bottom: auto !important;
+      left:auto !important; 
     }
   </style>
 </head>
@@ -86,6 +101,8 @@
                   <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3>
                   <br>
                   <h1>Private Seed</h1>
+                  <h3>In order to partake in our private seed your address must be whitelisted.</h3>
+                  <h3>To get whitelisted <a href="https://slack.fundrequest.io" target="_blanc">join</a> us on Slack and fill in the <a href="https://goo.gl/Sp1FuT" target="_blanc">Google form</a></h3>
                   <div id="personalStash" style="display: none;">
                     Account <span id="targetAddressLabel">0x0</span> currently has <span id="fndYourTokens">0</span> FND
                     Tokens.
@@ -117,7 +134,7 @@
                         <p>Total ETH raised</p>
                       </div>
                       <div class="card-action custom_teal_dark">
-                        <span id="fndTotalRaised" class="white-text"></span>
+                        <span id="fndTotalRaised" class="white-text">0 ETH</span>
                       </div>
                     </div>
                   </div>
@@ -129,7 +146,7 @@
                         <p>Total number</p>
                       </div>
                       <div class="card-action custom_teal_dark">
-                        <span id="fndTotalBackers" class="white-text"></span>
+                        <span id="fndTotalBackers" class="white-text">0</span>
                       </div>
                     </div>
                   </div>
@@ -162,20 +179,20 @@
               </div>
               <div class="row">
                 <a id="btnBuy" class="waves-effect waves-light btn-large custom_teal">Buy </a>
+                
+                <span class="disclaimer">&nbsp;&nbsp;&nbsp;* By participating in this private seed you acknowledge and accept the FundRequest <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blanc" class="disclaimer-hyperlink">disclaimer</a></span>
                 <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
-              </div>
-              <div class="row">
-                <div class="gr-12 center"><br><br>
-                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel?</span></span><a class="sign-in-hyperlink"><span>Get invited</span></a></div>
-                </div>
-
               </div>
               <div class="row">
                 <div id="busy" class="progress" style="display: none;">
                   <div class="indeterminate"></div>
                 </div>
               </div>
-
+              <div class="row">
+                <div class="gr-12 center"><br><br>
+                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel? </span></span><a href="https://slack.fundrequest.io" target="_blanc" class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
