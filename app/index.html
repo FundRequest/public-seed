@@ -36,7 +36,16 @@
     }
 
     .custom_teal {
-      background-color: #d0e4ed !important;
+      background-color: #00a79b !important;
+    }
+
+    .font-large{
+      font-size: 16px;
+    }
+
+    .custom_btn {
+      background-color: #829299 !important;
+       opacity: 0.4;
     }
 
     .custom_dropdown {
@@ -48,7 +57,7 @@
     }
 
     .custom_teal_dark {
-      background-color: rgba(152, 201, 230, 0.8) !important;
+      background-color: rgba(119, 167, 196, 0.8) !important;
     }
 
     .card_transparent {
@@ -102,7 +111,7 @@
                   <br>
                   <h1>Private Seed</h1>
                   <h3>In order to partake in our private seed your address must be whitelisted.</h3>
-                  <h3>To get whitelisted <a href="https://slack.fundrequest.io" target="_blanc">join</a> us on Slack and fill in the <a href="https://goo.gl/Sp1FuT" target="_blanc">Google form</a></h3>
+                  <h3>To get whitelisted <a href="https://slack.fundrequest.io" target="_blanc">join</a> us on Slack and contact @karel or @Gerbert</h3>
                   <div id="personalStash" style="display: none;">
                     Account <span id="targetAddressLabel">0x0</span> currently has <span id="fndYourTokens">0</span> FND
                     Tokens.
@@ -122,7 +131,7 @@
                         <p>Tokens per ETH</p>
                       </div>
                       <div class="card-action custom_teal_dark">
-                        <b><span id="fndCurrentRate" class="white-text"></span></b><span class="white-text"> FND/ETH</span>
+                        <b><span id="fndCurrentRate" class="white-text font-large"></span></b><span class="white-text font-large"> FND/ETH</span>
                       </div>
                     </div>
                   </div>
@@ -134,7 +143,7 @@
                         <p>Total ETH raised</p>
                       </div>
                       <div class="card-action custom_teal_dark">
-                        <span id="fndTotalRaised" class="white-text">0 ETH</span>
+                        <span id="fndTotalRaised" class="white-text font-large">0 ETH</span>
                       </div>
                     </div>
                   </div>
@@ -146,7 +155,7 @@
                         <p>Total number</p>
                       </div>
                       <div class="card-action custom_teal_dark">
-                        <span id="fndTotalBackers" class="white-text">0</span>
+                        <span id="fndTotalBackers" class="white-text font-large">0</span>
                       </div>
                     </div>
                   </div>
@@ -161,28 +170,40 @@
 
               <div class="row">
                 <div class="gr-12 center">
-                  <div class="input-field col s4">
+                  <div class="input-field col s7  offset-s1">
                     <select id="accountSelect">
                           <option value="" disabled selected>Choose your account</option>
                         </select>
                     <label>Select your account</label>
                   </div>
-                  <div class="input-field col s4 offset-s1">
-                    <input id="targetAddress" placeholder="0x0" type="text" class="validate">
-                    <label for="targetAddress">target address </label>
-                  </div>
-                  <div class="input-field col s2 offset-s1">
-                    <input id="amount" placeholder="1" type="number">
-                    <label for="amount">amount</label>
+                  <div class="input-field inline col s2 offset-s1">
+                    <input id="amount"  placeholder="Amount" type="number">
+                    <label for="amount">Amount</label>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <a id="btnBuy" class="waves-effect waves-light btn-large custom_teal">Buy </a>
+              <div class="gr-12 center">
+                <a id="btnBuy" class="waves-effect waves-light btn-large custom_btn">Fund </a>
+                 &nbsp;&nbsp;&nbsp;<input type="checkbox" class="filled-in custom_teal" id="filled-in-box"/>
+                 <label for="filled-in-box"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Private+Seed+Disclaimer" target="_blanc" class="disclaimer-hyperlink">Terms and Conditions</a> for the private seed.</label>
                 
-                <span class="disclaimer">&nbsp;&nbsp;&nbsp;* By participating in this private seed you acknowledge and accept the FundRequest <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blanc" class="disclaimer-hyperlink">disclaimer</a></span>
-                <a id="btnAllow" style="display: none;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                
               </div>
+
+
+              <div class="row" id="whitelistarea" style="display:none">
+                <div class="gr-12 center">
+                  <br>
+                  <div class="input-field inline col s12 offset-s1">
+                    <input id="targetAddress" placeholder="Address to whitelist" type="text" class="validate">
+                    <label for="targetAddress">Address to whitelist </label>
+                  </div>
+                  <a id="btnAllow" style="display: block;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                </div>
+              </div>
+
+
+
               <div class="row">
                 <div id="busy" class="progress" style="display: none;">
                   <div class="indeterminate"></div>
@@ -251,7 +272,7 @@
               <p>Legal</p>
             </div>
             <div class="content">
-              <a href="https://docs.fundrequest.io/display/PUB/Whitepaper#Whitepaper-_Toc34Disclaimer" target="_blank">
+              <a href="https://docs.fundrequest.io/display/PUB/Private+Seed+Disclaimer" target="_blank">
                 <p>Disclaimer</p>
               </a><br></div>
           </div>
