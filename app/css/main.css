@@ -14471,7 +14471,7 @@ body,
   height: 75px;
   line-height: 75px;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: #fdfefc;
   border-bottom: 1px solid #ffab00;
   position: fixed;
   top: 0;
@@ -14619,7 +14619,7 @@ body,
     opacity: 0.7;
     color: #707070; }
   .home .introduction .disclaimer-hyperlink {
-    font-size: 12px;
+    font-size: 1rem;
     opacity: 0.7;
     vertical-align: bottom;
     margin-right: 0px;
@@ -14634,7 +14634,7 @@ body,
       color: #707070; }
 
 .home .whatis {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 1);
   padding-bottom: 70px; }
   .home .whatis .learn-more-hyperlink {
     font-size: 14px;

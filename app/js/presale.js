@@ -13,6 +13,7 @@ window.App = {
     });
   },
   init: function () {
+    document.getElementById("btnBuy").style.property = "waves-effect waves-light btn-large custom_btn";
     $("#btnBuy").click(App.buy);
     $("#btnAllow").click(App.allow);
     this.loadContract(this.start);
@@ -26,7 +27,7 @@ window.App = {
           from: _from
         });
       }).then(function (result) {
-        Materialize.toast("Successfully whitelisted user.", 4000, "blue");
+        Materialize.toast("Successfully whitelisted account.", 4000, "blue");
         $("#busy").hide();
       })
       .catch(function (err) {
@@ -38,12 +39,16 @@ window.App = {
   buy: function () {
     var chosenAmount = $("#amount").val();
     var targetAddress = $("#targetAddress").val();
-    if (chosenAmount == "") {
-      Materialize.toast("Please select an amount first.", 4000, "blue");
+    if (document.getElementById("filled-in-box").checked == false ) {
+      Materialize.toast("Please accept the Terms and Conditions.", 4000, "blue");
       return;
     }
     if (targetAddress == "") {
       Materialize.toast("Please select an account first", 4000, "blue");
+      return;
+    }
+    if (chosenAmount == "") {
+      Materialize.toast("Please select an amount first.", 4000, "blue");
       return;
     }
     App.ex.Presale.deployed().then(function (instance) {
@@ -55,11 +60,11 @@ window.App = {
         gas: 210000
       });
     }).then(function (result) {
-      Materialize.toast("Tokens acquired.", 4000, "green");
+      Materialize.toast("Funding submitted to the ethereum blockchain.", 4000, "green");
       $("#busy").hide();
       $("#personalStash").show();
     }).catch(function (err) {
-      Materialize.toast("Something went wrong while trying to buy tokens. Please check if you're whitelisted.", 4000);
+      Materialize.toast("Something went wrong while trying fund. Please check if you're whitelisted.", 4000);
       $("#busy").hide();
     });
   },
@@ -93,7 +98,7 @@ window.App = {
       $("#targetAddressLabel").html(App.ex.selectedAccount);
       App.updateTokens(App.ex.selectedAccount);
       if (App.ex.selectedAccount == App.ex.owner) {
-        $("#btnAllow").show();
+        $("#whitelistarea").show();
       }
       Materialize.updateTextFields();
     });
@@ -148,10 +153,22 @@ window.App = {
 };
 
 $(document).ready(function () {
+  var buyEnabled = false;
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     window.web3 = new Web3(web3.currentProvider);
     $("#presaleSection").show();
   }
+  $("#filled-in-box").click(function(){
+    if (buyEnabled == false){
+      document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_teal";
+      buyEnabled = true;
+    }
+    else{
+      document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_btn";
+      buyEnabled = false;
+    }
+
+  });
   App.init();
 });
