@@ -51,6 +51,10 @@ window.App = {
       Materialize.toast("Please select an amount first.", 4000, "blue");
       return;
     }
+    if (chosenAmount < 0.05) {
+      Materialize.toast("Private seed requires a minimum amount of 0.25ETH.", 4000, "blue");
+      return;
+    }
     App.ex.Presale.deployed().then(function (instance) {
       $("#busy").show();
       Materialize.toast("Please wait while the transaction is being validated...", 2000, "blue");      
@@ -62,6 +66,7 @@ window.App = {
     }).then(function (result) {
       Materialize.toast("Funding submitted to the ethereum blockchain.", 4000, "green");
       $("#busy").hide();
+      App.updateTokens(App.ex.selectedAccount);
       $("#personalStash").show();
     }).catch(function (err) {
       Materialize.toast("Something went wrong while trying fund. Please check if you're whitelisted.", 4000);
@@ -101,6 +106,7 @@ window.App = {
         $("#whitelistarea").show();
       }
       Materialize.updateTextFields();
+      $("#personalStash").show();
     });
   },
   start: function () {
@@ -139,13 +145,13 @@ window.App = {
         $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ETH");
         return presale.investorCount.call();
       }).then(function (_investorCount) {
-        $("#fndTotalBackers").html(_investorCount.toNumber());
+        $("#fndTotalBackers").html( );
         return presale.owner.call();
       }).then(function (_owner) {
         App.ex.owner = _owner;
       });
     }).catch(function (err) {
-      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000, blue);
+      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
       $("#presaleSection").hide();
     });
     setTimeout(App.refreshContractInformation, 20000);

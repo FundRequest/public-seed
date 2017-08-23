@@ -37,6 +37,11 @@
 
     .custom_teal {
       background-color: #00a79b !important;
+      opacity: 0.7;
+    }
+
+    .custom-font{
+      font-family: 'Montserrat', serif;
     }
 
     .font-large{
@@ -45,7 +50,7 @@
 
     .custom_btn {
       background-color: #829299 !important;
-       opacity: 0.4;
+       opacity: 0.2;
     }
 
     .custom_dropdown {
@@ -71,6 +76,10 @@
       margin: 0;
       padding: 0 40px 40px;
     }
+    .txtLarge{
+      font-weight: bold;
+      color: #00bab5;
+    }
 
     #toast-container {
       top: 80px;
@@ -83,7 +92,7 @@
 
 <body>
   <div id="app">
-    <div class="main-container">
+    <div class="main-container custom-font">
       <div class="header">
         <div class="gr-container">
           <div class="row">
@@ -112,11 +121,12 @@
                   <h1>Private Seed</h1>
                   <h3>In order to partake in our private seed your address must be whitelisted.</h3>
                   <h3>To get whitelisted <a href="https://slack.fundrequest.io" target="_blanc">join</a> us on Slack and contact @karel or @Gerbert</h3>
+                  <br><br>
                   <div id="personalStash" style="display: none;">
-                    Account <span id="targetAddressLabel">0x0</span> currently has <span id="fndYourTokens">0</span> FND
+                    Account <span id="targetAddressLabel">0x0</a></span> is entitled to <span class="txtLarge" id="fndYourTokens">0</span> FND
                     Tokens.
                   </div>
-                  <br><br>
+                  <br>
                 </div>
               </div>
 
@@ -186,11 +196,14 @@
                 <a id="btnBuy" class="waves-effect waves-light btn-large custom_btn">Fund </a>
                  &nbsp;&nbsp;&nbsp;<input type="checkbox" class="filled-in custom_teal" id="filled-in-box"/>
                  <label for="filled-in-box"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Private+Seed+Disclaimer" target="_blanc" class="disclaimer-hyperlink">Terms and Conditions</a> for the private seed.</label>
-                
-                
+                 <br><br>
               </div>
 
-
+              <div class="row">
+                <div id="busy" class="progress" style="display: none;">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
               <div class="row" id="whitelistarea" style="display:none">
                 <div class="gr-12 center">
                   <br>
@@ -202,13 +215,6 @@
                 </div>
               </div>
 
-
-
-              <div class="row">
-                <div id="busy" class="progress" style="display: none;">
-                  <div class="indeterminate"></div>
-                </div>
-              </div>
               <div class="row">
                 <div class="gr-12 center"><br><br>
                   <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel? </span></span><a href="https://slack.fundrequest.io" target="_blanc" class="sign-in-hyperlink"><span>Get invited</span></a></div>
