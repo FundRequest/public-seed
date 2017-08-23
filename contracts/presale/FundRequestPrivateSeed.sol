@@ -38,6 +38,7 @@ contract FundRequestPrivateSeed is Pausable {
   function buyTokens(address beneficiary) payable whenNotPaused {
     require(validBeneficiary(beneficiary));
     require(validPurchase());
+    require(validPurchaseSize());
     bool existing = deposits[beneficiary] > 0;
     uint weiAmount = msg.value;
     uint updatedWeiRaised = weiRaised.plus(weiAmount);
@@ -64,6 +65,10 @@ contract FundRequestPrivateSeed is Pausable {
   // @return true if the transaction can buy tokens
   function validPurchase() internal constant returns (bool) {
     return msg.value != 0;
+  }
+  // @return true if the amount is higher then 25ETH
+  function validPurchaseSize() internal constant returns (bool) {
+    return msg.value >=25000000000000000000;
   }
   function balanceOf(address _owner) constant returns (uint balance) {
     return balances[_owner];
