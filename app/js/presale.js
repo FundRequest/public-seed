@@ -64,7 +64,9 @@ window.App = {
         gas: 210000
       });
     }).then(function (result) {
-      Materialize.toast("Funding submitted to the ethereum blockchain.", 4000, "green");
+      var txHash = result.tx; 
+      var $toastContent = $('<span>Funding submitted to the ethereum blockchain..</span>').add($('<a href="https://etherscan.io/tx/'+ txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
+      Materialize.toast($toastContent, 4000, "green");
       $("#busy").hide();
       App.updateTokens(App.ex.selectedAccount);
       $("#personalStash").show();
