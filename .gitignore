@@ -6,3 +6,6 @@ config/kovan/mnemonic
 config/rinkeby/mnemonic
 config/local/mnemonic
 config/secrets/
+build/
+*.iml
+.idea/
