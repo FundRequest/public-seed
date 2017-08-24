@@ -20,26 +20,25 @@ window.App = {
   },
   allow: function () {
     App.ex.Presale.deployed().then(function (instance) {
-        var _target = $("#targetAddress").val();
-        var _from = App.ex.selectedAccount;
-        $("#busy").show();
-        return instance.allow(_target, {
-          from: _from
-        });
-      }).then(function (result) {
-        Materialize.toast("Successfully whitelisted account.", 4000, "blue");
-        $("#busy").hide();
-      })
+      var _target = $("#targetAddress").val();
+      var _from = App.ex.selectedAccount;
+      $("#busy").show();
+      return instance.allow(_target, {
+        from: _from
+      });
+    }).then(function (result) {
+      Materialize.toast("Successfully whitelisted account.", 4000, "blue");
+      $("#busy").hide();
+    })
       .catch(function (err) {
         Materialize.toast("Whitelisting failed.", 4000);
         console.log(err);
         $("#busy").hide();
       });
-  },
-  buy: function () {
+  }, buy: function () {
     var chosenAmount = $("#amount").val();
     var targetAddress = $("#targetAddress").val();
-    if (document.getElementById("filled-in-box").checked == false ) {
+    if (document.getElementById("filled-in-box").checked == false) {
       Materialize.toast("Please accept the Terms and Conditions.", 4000, "blue");
       return;
     }
@@ -56,23 +55,39 @@ window.App = {
       return;
     }
     App.ex.Presale.deployed().then(function (instance) {
-      $("#busy").show();
-      Materialize.toast("Please wait while the transaction is being validated...", 2000, "blue");      
-      return instance.buyTokens(targetAddress, {
-        from: App.ex.selectedAccount,
-        value: web3.toWei(chosenAmount),
-        gas: 210000
-      });
-    }).then(function (result) {
-      var txHash = result.tx; 
-      var $toastContent = $('<span>Funding submitted to the ethereum blockchain..</span>').add($('<a href="https://etherscan.io/tx/'+ txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
-      Materialize.toast($toastContent, 4000, "green");
-      $("#busy").hide();
-      App.updateTokens(App.ex.selectedAccount);
-      $("#personalStash").show();
-    }).catch(function (err) {
-      Materialize.toast("Something went wrong while trying fund. Please check if you're whitelisted.", 4000);
-      $("#busy").hide();
+      instance.allowed.call(App.ex.selectedAccount)
+        .then(function (result) {
+          if (result === true) {
+            return true;
+          } else {
+            throw new Error("Unable to buy tokens from this address because it is not whitelisted.");
+          }
+        })
+        .then(function () {
+          App.ex.Presale.deployed().then(function (instance) {
+            $("#busy").show();
+            Materialize.toast("Please wait while the transaction is being validated...", 2000, "blue");
+            return instance.buyTokens(targetAddress, {
+              from: App.ex.selectedAccount,
+              value: web3.toWei(chosenAmount),
+              gas: 210000
+            });
+          }).then(function (result) {
+            var txHash = result.tx;
+            var $toastContent = $('<span>Funding submitted to the ethereum blockchain..</span>').add($('<a href="https://etherscan.io/tx/' + txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
+            Materialize.toast($toastContent, 4000, "green");
+            $("#busy").hide();
+            App.updateTokens(App.ex.selectedAccount);
+            $("#personalStash").show();
+          }).catch(function (err) {
+            Materialize.toast("Something went wrong while trying fund. Please check if you're whitelisted.", 4000);
+            $("#busy").hide();
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+          Materialize.toast(error.message, 2000, "blue");
+        });
     });
   },
   accountsAreInvalid: function (err, accs) {
@@ -147,7 +162,7 @@ window.App = {
         $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ETH");
         return presale.investorCount.call();
       }).then(function (_investorCount) {
-        $("#fndTotalBackers").html( );
+        $("#fndTotalBackers").html();
         return presale.owner.call();
       }).then(function (_owner) {
         App.ex.owner = _owner;
@@ -167,12 +182,12 @@ $(document).ready(function () {
     window.web3 = new Web3(web3.currentProvider);
     $("#presaleSection").show();
   }
-  $("#filled-in-box").click(function(){
-    if (buyEnabled == false){
+  $("#filled-in-box").click(function () {
+    if (buyEnabled == false) {
       document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_teal";
       buyEnabled = true;
     }
-    else{
+    else {
       document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_btn";
       buyEnabled = false;
     }
