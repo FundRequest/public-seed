@@ -381,10 +381,10 @@
         }
       },
       "links": {
-        "SafeMathLib": "0x233aa76df2d305fc38e346e4a5ae683c2761f5dd"
+        "SafeMathLib": "0x133ef0754f47ad2779093fcbe5bbc5aaf900d2a7"
       },
-      "address": "0x92e6ac7a5d7ae406cb9d98b515eb75b4ae781997",
-      "updated_at": 1503514604269
+      "address": "0x8839eefa708ee4cd818c945764f8a7ff7e048ec0",
+      "updated_at": 1503561764897
     },
     "500": {
       "events": {
@@ -625,8 +625,56 @@
       },
       "address": "0x63e8662bcce615e391267c6d4aa3397b7c35360d",
       "updated_at": 1503434795004
+    },
+    "1503515396763": {
+      "events": {
+        "0x623b3804fa71d67900d064613da8f94b9617215ee90799290593e1745087ad18": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "purchaser",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "TokenPurchase",
+          "type": "event"
+        },
+        "0x6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff625": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "Pause",
+          "type": "event"
+        },
+        "0x7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b33": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "Unpause",
+          "type": "event"
+        }
+      },
+      "links": {
+        "SafeMathLib": "0xef0b14332cc034d9b64f64f35424094f5e476a55"
+      },
+      "address": "0x0c510c7542f158980c46b864cce01d5d83d9a01c",
+      "updated_at": 1503558294774
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1503514604269
+  "updated_at": 1503561764897
 }
