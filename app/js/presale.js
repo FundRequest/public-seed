@@ -27,7 +27,7 @@ window.App = {
         from: _from
       });
     }).then(function (result) {
-      Materialize.toast("Successfully whitelisted account.", 4000, "blue");
+      Materialize.toast("Account submitted to the whitelist", 4000, "blue");
       $("#busy").hide();
     })
       .catch(function (err) {
@@ -50,8 +50,8 @@ window.App = {
       Materialize.toast("Please select an amount first.", 4000, "blue");
       return;
     }
-    if (chosenAmount < 0.05) {
-      Materialize.toast("Private seed requires a minimum amount of 0.25ETH.", 4000, "blue");
+    if (chosenAmount < 0.25) {
+      Materialize.toast("Private seed requires a minimum amount of 25 ETH", 4000, "blue");
       return;
     }
     App.ex.Presale.deployed().then(function (instance) {
@@ -60,7 +60,7 @@ window.App = {
           if (result === true) {
             return true;
           } else {
-            throw new Error("Unable to buy tokens from this address because it is not whitelisted.");
+            throw new Error("Unable to fund from this address because it is not whitelisted.");
           }
         })
         .then(function () {
@@ -74,8 +74,8 @@ window.App = {
             });
           }).then(function (result) {
             var txHash = result.tx;
-            var $toastContent = $('<span>Funding submitted to the ethereum blockchain..</span>').add($('<a href="https://etherscan.io/tx/' + txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
-            Materialize.toast($toastContent, 4000, "green");
+            var $toastContent = $('<span>Funding submitted to the Ethereum blockchain</span>').add($('<a href="https://etherscan.io/tx/' + txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
+            Materialize.toast($toastContent, 8000, "green");
             $("#busy").hide();
             App.updateTokens(App.ex.selectedAccount);
             $("#personalStash").show();
