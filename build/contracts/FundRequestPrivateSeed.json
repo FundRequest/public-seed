@@ -373,8 +373,8 @@
       "links": {
         "SafeMathLib": "0xbc6444c385989d4e438f48dd34e507f754c4c76b"
       },
-      "address": "0x2399e17cd018f52eafeadcd462caf531a2402423",
-      "updated_at": 1503775802039
+      "address": "0xc33f53fdbfc0f02f250eba78d8ede97f0a64288b",
+      "updated_at": 1503783542423
     },
     "1503753582610": {
       "events": {
@@ -424,5 +424,5 @@
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1503783022833
+  "updated_at": 1503783542423
 }
