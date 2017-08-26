@@ -162,7 +162,7 @@ window.App = {
         $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ETH");
         return presale.investorCount.call();
       }).then(function (_investorCount) {
-        $("#fndTotalBackers").html();
+        $("#fndTotalBackers").html(_investorCount.toNumber());
         return presale.owner.call();
       }).then(function (_owner) {
         App.ex.owner = _owner;
