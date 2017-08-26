@@ -1,10 +1,10 @@
 pragma solidity ^0.4.15;
 
-import '../math/SafeMathLib.sol';
+import '../math/SafeMath.sol';
 import '../zeppelin/Pausable.sol';
 
 contract FundRequestPrivateSeed is Pausable {
-  using SafeMathLib for uint;
+  using SafeMath for uint;
   
   // address where funds are collected
   address public wallet;
@@ -27,7 +27,7 @@ contract FundRequestPrivateSeed is Pausable {
    */ 
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
   
-  function FundRequestPrivateSeed(uint _rate, address _wallet) {
+  function FundRequestPrivateSeed(uint _rate, address _wallet) payable {
     require(_rate > 0);
     require(_wallet != 0x0);
 
@@ -41,12 +41,12 @@ contract FundRequestPrivateSeed is Pausable {
     require(validPurchaseSize());
     bool existing = deposits[beneficiary] > 0;
     uint weiAmount = msg.value;
-    uint updatedWeiRaised = weiRaised.plus(weiAmount);
+    uint updatedWeiRaised = weiRaised.add(weiAmount);
     // calculate token amount to be created
-    uint tokens = weiAmount.times(rate);
+    uint tokens = weiAmount.mul(rate);
     weiRaised = updatedWeiRaised;
-    deposits[beneficiary] = deposits[beneficiary].plus(msg.value);
-    balances[beneficiary] = balances[beneficiary].plus(tokens);
+    deposits[beneficiary] = deposits[beneficiary].add(msg.value);
+    balances[beneficiary] = balances[beneficiary].add(tokens);
     if(!existing) {
       investors.push(beneficiary);
       investorCount++;
