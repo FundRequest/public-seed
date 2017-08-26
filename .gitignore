@@ -5,7 +5,7 @@ config/ropsten/mnemonic
 config/kovan/mnemonic
 config/rinkeby/mnemonic
 config/local/mnemonic
-config/secrets/
+config/secrets/infura-token.js
 build/
 *.iml
 .idea/
