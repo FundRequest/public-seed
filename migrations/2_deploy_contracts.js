@@ -1,5 +1,5 @@
 var FundRequestPrivateSeed = artifacts.require("./presale/FundRequestPrivateSeed.sol");
-var SafeMathLib = artifacts.require("./math/SafeMathLib.sol");
+var SafeMathLib = artifacts.require("./math/SafeMath.sol");
 
 module.exports = function(deployer, network, accounts) {
   deployer.deploy(SafeMathLib);
