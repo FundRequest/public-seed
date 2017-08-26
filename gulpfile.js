@@ -8,10 +8,10 @@ var paths = {
     fonts: ['app/**/*.eot', 'app/**/*.svg', 'app/**/*.woff', 'app/**/*.woff2', 'app/**/*.ttf', 'app/**/*.otf'],
     css: ['app/css/reset.css', 'app/css/font-awesome.min.css', 'app/css/general.css', 'app/css/app.css'],
     pages: ['app/**/**.html'],
-    contracts: ["build/contracts/*.json"]
+    contracts: ["app/contracts/*.json"]
 };
 
-var destination = 'dist';
+var destination = 'build';
 
 // Not all tasks need to use streams
 // A gulpfile is just another node program and you can use any package available on npm
