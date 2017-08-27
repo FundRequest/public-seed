@@ -10,6 +10,9 @@
             $buy: $('#btnBuy'),
             $allow: $('#btnAllow')
         },
+        checkboxes: {
+            $confirmTerms: $('#filled-in-box')
+        },
         $accountSelect: $('#accountSelect'),
         $amount: $('#amount'),
         $busy: $('#busy'),
@@ -89,7 +92,7 @@
             var targetAddress = elements.$targetAddress.val();
             var errorMessage = '';
 
-            if (document.getElementById('filled-in-box').checked === false) {
+            if (!elements.checkboxes.$confirmTerms.is(':checked')) {
                 errorMessage = 'Please accept the Terms and Conditions.';
             } else if (typeof targetAddress === 'undefined' || targetAddress === '') {
                 errorMessage = 'Please select an account first.';
@@ -179,6 +182,8 @@
                 }
                 Materialize.updateTextFields();
                 elements.$personalStash.show();
+
+                updateButtons();
             });
         }
 
@@ -211,6 +216,18 @@
             setTimeout(refreshContractInformation, 20000);
         };
 
+        function updateButtons() {
+            var isConfirmTermsChecked = elements.checkboxes.$confirmTerms.is(':checked');
+            var isAddressSelected = elements.$accountSelect.val() !== null;
+            var isAmountNotNull = elements.$amount.val() > 0;
+
+            if (isConfirmTermsChecked && isAddressSelected && isAmountNotNull) {
+                enableButton(elements.buttons.$buy);
+            } else {
+                disableButton(elements.buttons.$buy);
+            }
+        }
+
         var start = function() {
             web3.eth.getAccounts(function(err, accounts) {
                 if (accountsAreInvalid(err, accounts)) {
@@ -226,7 +243,10 @@
             disableButton(elements.buttons.$buy);
             elements.buttons.$buy.on('click', buy);
             elements.buttons.$allow.on('click', allow);
+            elements.checkboxes.$confirmTerms.on('click', updateButtons);
+            elements.$amount.on('change', updateButtons);
 
+            updateButtons();
             loadContract(start);
         };
 
@@ -236,24 +256,11 @@
     })();
 
     $(function() {
-        var buyEnabled = false;
-
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
         if (typeof web3 !== 'undefined') {
             window.web3 = new Web3(web3.currentProvider);
             showPresaleSection();
         }
-
-        $document.on('click', '#filled-in-box', function() {
-            if (buyEnabled === false) {
-                enableButton(elements.buttons.$buy);
-                buyEnabled = true;
-            }
-            else {
-                disableButton(elements.buttons.$buy);
-                buyEnabled = false;
-            }
-        });
 
         presale.init();
     });
