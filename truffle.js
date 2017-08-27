@@ -8,6 +8,7 @@ var getMnemonic = function (env) {
     //console.log("using predefined mnemonic for network " + env + ", value :" + mnemonic);
     return "dead fish racket soul plunger dirty boats cracker mammal nicholas cage";
   } catch (exception) {
+    console.log('Error getting mnemonic');
     return "diplr"
   }
 }
