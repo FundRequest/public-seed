@@ -1,197 +1,271 @@
-window.App = {
-  ex: {
-    accounts: [],
-    Presale: null,
-    selectedAccount: null,
-    owner: null
-  },
-  loadContract: function (_callback) {
-    $.getJSON("./contracts/FundRequestPrivateSeed.json", function (Presale_json) {
-      App.ex.Presale = TruffleContract(Presale_json);
-      App.ex.Presale.setProvider(window.web3.currentProvider);
-      _callback();
-    });
-  },
-  init: function () {
-    document.getElementById("btnBuy").style.property = "waves-effect waves-light btn-large custom_btn";
-    $("#btnBuy").click(App.buy);
-    $("#btnAllow").click(App.allow);
-    this.loadContract(this.start);
-  },
-  allow: function () {
-    App.ex.Presale.deployed().then(function (instance) {
-      var _target = $("#targetAddress").val();
-      var _from = App.ex.selectedAccount;
-      $("#busy").show();
-      return instance.allow(_target, {
-        from: _from
-      });
-    }).then(function (result) {
-      Materialize.toast("Account submitted to the whitelist", 4000, "blue");
-      $("#busy").hide();
-    })
-      .catch(function (err) {
-        Materialize.toast("Whitelisting failed.", 4000);
-        console.log(err);
-        $("#busy").hide();
-      });
-  }, buy: function () {
-    var chosenAmount = $("#amount").val();
-    var targetAddress = $("#targetAddress").val();
-    if (document.getElementById("filled-in-box").checked == false) {
-      Materialize.toast("Please accept the Terms and Conditions.", 4000, "blue");
-      return;
+/* global jQuery, Materialize */
+
+(function($) {
+    'use strict';
+
+    var $document = $(document);
+
+    var elements = {
+        buttons: {
+            $buy: $('#btnBuy'),
+            $allow: $('#btnAllow')
+        },
+        $accountSelect: $('#accountSelect'),
+        $amount: $('#amount'),
+        $busy: $('#busy'),
+        $personalStash: $('#personalStash'),
+        $presaleSection: $('#presaleSection'),
+        $fndCurrentRate: $('#fndCurrentRate'),
+        $fndYourTokens: $('#fndYourTokens'),
+        $fndTotalBackers: $('#fndTotalBackers'),
+        $fndTotalRaised: $('#fndTotalRaised'),
+        $targetAddress: $('#targetAddress'),
+        $targetAddressLabel: $('#targetAddressLabel'),
+        $whiteListArea: $('#whitelistarea')
+    };
+
+    function showLoader() {
+        elements.$busy.show();
     }
-    if (targetAddress == "") {
-      Materialize.toast("Please select an account first", 4000, "blue");
-      return;
+
+    function hideLoader() {
+        elements.$busy.hide();
     }
-    if (chosenAmount == "") {
-      Materialize.toast("Please select an amount first.", 4000, "blue");
-      return;
+
+    function showPresaleSection() {
+        elements.$presaleSection.show();
     }
-    if (chosenAmount < 0.25) {
-      Materialize.toast("Private seed requires a minimum amount of 25 ETH", 4000, "blue");
-      return;
+
+    function hidePresaleSection() {
+        elements.$presaleSection.show();
     }
-    App.ex.Presale.deployed().then(function (instance) {
-      instance.allowed.call(App.ex.selectedAccount)
-        .then(function (result) {
-          if (result === true) {
-            return true;
-          } else {
-            throw new Error("Unable to fund from this address because it is not whitelisted.");
-          }
-        })
-        .then(function () {
-          App.ex.Presale.deployed().then(function (instance) {
-            $("#busy").show();
-            Materialize.toast("Please wait while the transaction is being validated...", 2000, "blue");
-            return instance.buyTokens(targetAddress, {
-              from: App.ex.selectedAccount,
-              value: web3.toWei(chosenAmount),
-              gas: 210000
+
+    var presale = (function() {
+        var presaleContract = {};
+
+        var colors = {
+            GREEN: 'green',
+            BLUE: 'blue'
+        };
+
+        var ex = {
+            accounts: [],
+            selectedAccount: null,
+            owner: null
+        };
+
+        function loadContract(_callback) {
+            $.getJSON('./contracts/FundRequestPrivateSeed.json', function(Presale_json) {
+                var presaleTruffleContract = TruffleContract(Presale_json);
+                presaleTruffleContract.setProvider(window.web3.currentProvider);
+
+                presaleTruffleContract.deployed().then(function(instance) {
+                    presaleContract = instance;
+                    _callback();
+                });
             });
-          }).then(function (result) {
-            var txHash = result.tx;
-            var $toastContent = $('<span>Funding submitted to the Ethereum blockchain</span>').add($('<a href="https://etherscan.io/tx/' + txHash + '" target="_blanc" class="yellow-text toast-action ">View on EtherScan&nbsp;&nbsp;&nbsp;</a>'));
-            Materialize.toast($toastContent, 8000, "green");
-            $("#busy").hide();
-            App.updateTokens(App.ex.selectedAccount);
-            $("#personalStash").show();
-          }).catch(function (err) {
-            Materialize.toast("Something went wrong while trying fund. Please check if you're whitelisted.", 4000);
-            $("#busy").hide();
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-          Materialize.toast(error.message, 2000, "blue");
+        }
+
+        function allow() {
+            showLoader();
+
+            var _target = elements.$targetAddress.val();
+            var _from = ex.selectedAccount;
+
+            presaleContract.allow(
+                _target, {from: _from}
+            ).then(function() {
+                Materialize.toast('Account submitted to the whitelist', 4000, colors.BLUE);
+                hideLoader();
+            }).catch(function(err) {
+                Materialize.toast('Whitelisting failed.', 4000);
+                console.log(err);
+                hideLoader();
+            });
+        }
+
+        function buy() {
+            var chosenAmount = elements.$amount.val();
+            var targetAddress = elements.$targetAddress.val();
+            var errorMessage = '';
+
+            if (document.getElementById('filled-in-box').checked === false) {
+                errorMessage = 'Please accept the Terms and Conditions.';
+            } else if (typeof targetAddress === 'undefined' || targetAddress === '') {
+                errorMessage = 'Please select an account first.';
+            } else if (typeof chosenAmount === 'undefined' || chosenAmount === '') {
+                errorMessage = 'Please select an amount first.';
+            } else if (typeof chosenAmount === 'undefined' || chosenAmount < 25) {
+                errorMessage = 'Private seed requires a minimum amount of 25 ETH.';
+            }
+
+            if (errorMessage !== '') {
+                Materialize.toast(errorMessage, 4000, colors.BLUE);
+                return;
+            }
+
+            presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
+                if (result === true) {
+                    showLoader();
+                    Materialize.toast('Please wait while the transaction is being validated...', 2000, colors.BLUE);
+
+                    return presaleContract.buyTokens(targetAddress, {
+                        from: ex.selectedAccount,
+                        value: web3.toWei(chosenAmount),
+                        gas: 210000
+                    });
+                } else {
+                    throw new Error('Unable to fund from this address because it is not whitelisted.');
+                }
+            }).then(function(result) {
+                var txHash = result.tx;
+                var $link = $(document.createElement('a'))
+                    .attr('href', 'https://etherscan.io/tx/' + txHash)
+                    .attr('taget', '_blank')
+                    .attr('class', 'yellow-text toast-action')
+                    .html('View on EtherScan&nbsp;&nbsp;&nbsp;');
+                var $toastContent = $(document.createElement('span'))
+                    .text('Funding submitted to the Ethereum blockchain')
+                    .add($link);
+
+                Materialize.toast($toastContent, 8000, colors.GREEN);
+                updateTokens(ex.selectedAccount);
+                elements.$personalStash.show();
+
+                hideLoader();
+            }).catch(function(err) {
+                console.log('Error during BUY: ', err);
+                Materialize.toast('Something went wrong while trying fund. Please check if you\'re whitelisted.', 4000);
+
+                hideLoader();
+            });
+        }
+
+        function accountsAreInvalid(err, accounts) {
+            if (err !== null) {
+                Materialize.toast('There was an error fetching your accounts.', 4000);
+                return true;
+            }
+            if (accounts.length === 0) {
+                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 4000, colors.BLUE);
+                return true;
+            }
+            return false;
+        }
+
+        function fillAccounts(accounts) {
+            ex.accounts = accounts;
+
+            $.each(ex.accounts, function(i, item) {
+                var option = document.createElement('option');
+                option.text = item;
+                option.className = 'dropdown-content';
+
+                elements.$accountSelect.append(option);
+            });
+
+            updateTokens(ex.accounts[0]);
+
+            elements.$accountSelect.material_select();
+            elements.$accountSelect.on('change', function() {
+                ex.selectedAccount = $('option:selected', elements.$accountSelect).first().text();
+                elements.$targetAddress.val(ex.selectedAccount);
+                elements.$targetAddressLabel.html(ex.selectedAccount);
+
+                updateTokens(ex.selectedAccount);
+
+                if (ex.selectedAccount === ex.owner) {
+                    elements.$whiteListArea.show();
+                }
+                Materialize.updateTextFields();
+                elements.$personalStash.show();
+            });
+        }
+
+        function updateTokens(address) {
+            presaleContract.balanceOf.call(address).then(function(_tokens) {
+                elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
+            }).catch(function() {
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                hidePresaleSection();
+            });
+        }
+
+        var refreshContractInformation = function() {
+            presaleContract.rate.call().then(function(_rate) {
+                elements.$fndCurrentRate.html(_rate.toNumber());
+                return presaleContract.weiRaised.call();
+            }).then(function(_wei) {
+                elements.$fndTotalRaised.html(web3.fromWei(_wei.toNumber()) + ' ETH');
+                return presaleContract.investorCount.call();
+            }).then(function(_investorCount) {
+                elements.$fndTotalBackers.html(_investorCount.toNumber());
+                return presaleContract.owner.call();
+            }).then(function(_owner) {
+                ex.owner = _owner;
+            }).catch(function() {
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                hidePresaleSection();
+            });
+
+            setTimeout(refreshContractInformation, 20000);
+        };
+
+        var start = function() {
+            web3.eth.getAccounts(function(err, accounts) {
+                if (accountsAreInvalid(err, accounts)) {
+                    return;
+                }
+
+                fillAccounts(accounts);
+                refreshContractInformation();
+            });
+        };
+
+        var init = function() {
+            disableButton(elements.buttons.$buy);
+            elements.buttons.$buy.on('click', buy);
+            elements.buttons.$allow.on('click', allow);
+
+            loadContract(start);
+        };
+
+        return {
+            init: init
+        };
+    })();
+
+    $(function() {
+        var buyEnabled = false;
+
+        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+            window.web3 = new Web3(web3.currentProvider);
+            showPresaleSection();
+        }
+
+        $document.on('click', '#filled-in-box', function() {
+            if (buyEnabled === false) {
+                enableButton(elements.buttons.$buy);
+                buyEnabled = true;
+            }
+            else {
+                disableButton(elements.buttons.$buy);
+                buyEnabled = false;
+            }
         });
-    });
-  },
-  accountsAreInvalid: function (err, accs) {
-    if (err != null) {
-      Materialize.toast("There was an error fetching your accounts.", 4000)
-      return true;
-    }
-    if (accs.length == 0) {
-      Materialize.toast("Couldn't get any accounts! Please check our your Ethereum client.", 4000, "blue")
-      return true;
-    }
-    return false;
-  },
-  fillAccounts: function (accs) {
-    var x = document.getElementById("accountSelect");
-    App.ex.accounts = accs;
 
-    var l = App.ex.accounts.length;
-    for (i = 0; i < l; i++) {
-      var option = document.createElement("option");
-      option.text = App.ex.accounts[i];
-      option.className = "dropdown-content";
-      x.add(option);
-    }
-    App.updateTokens(App.ex.accounts[0]);
-    $('#accountSelect').material_select();
-    $("#accountSelect").change(function (e) {
-      App.ex.selectedAccount = ($("#accountSelect option:selected").first().text());
-      $("#targetAddress").val(App.ex.selectedAccount);
-      $("#targetAddressLabel").html(App.ex.selectedAccount);
-      App.updateTokens(App.ex.selectedAccount);
-      if (App.ex.selectedAccount == App.ex.owner) {
-        $("#whitelistarea").show();
-      }
-      Materialize.updateTextFields();
-      $("#personalStash").show();
+        presale.init();
     });
-  },
-  start: function () {
-    var self = this;
-    web3.eth.getAccounts(function (err, accs) {
-      if (App.accountsAreInvalid(err, accs)) {
-        return;
-      }
 
-      App.fillAccounts(accs);
-      App.refreshContractInformation();
-    });
-  },
-  updateTokens: function (address) {
-    var self = this;
-    var presale;
-    App.ex.Presale.deployed().then(function (instance) {
-      presale = instance;
-      return presale.balanceOf.call(address).then(function (_tokens) {
-        $("#fndYourTokens").html(web3.fromWei(_tokens.toNumber()));
-      });
-    }).catch(function (err) {
-      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
-      $("#presaleSection").hide();
-    });
-  },
-  refreshContractInformation: function () {
-    var self = this;
-    var presale;
-    App.ex.Presale.deployed().then(function (instance) {
-      presale = instance;
-      return presale.rate.call().then(function (_rate) {
-        $("#fndCurrentRate").html(_rate.toNumber());
-        return presale.weiRaised.call();
-      }).then(function (_wei) {
-        $("#fndTotalRaised").html(web3.fromWei(_wei.toNumber()) + " ETH");
-        return presale.investorCount.call();
-      }).then(function (_investorCount) {
-        $("#fndTotalBackers").html(_investorCount.toNumber());
-        return presale.owner.call();
-      }).then(function (_owner) {
-        App.ex.owner = _owner;
-      });
-    }).catch(function (err) {
-      Materialize.toast("Please check your settings. The presale is not deployed on your current network.", 4000);
-      $("#presaleSection").hide();
-    });
-    setTimeout(App.refreshContractInformation, 20000);
-  }
-};
-
-$(document).ready(function () {
-  var buyEnabled = false;
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    window.web3 = new Web3(web3.currentProvider);
-    $("#presaleSection").show();
-  }
-  $("#filled-in-box").click(function () {
-    if (buyEnabled == false) {
-      document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_teal";
-      buyEnabled = true;
-    }
-    else {
-      document.getElementById("btnBuy").className = "waves-effect waves-light btn-large  custom_btn";
-      buyEnabled = false;
+    function enableButton($button) {
+        $button.removeClass('custom_btn').addClass('custom_teal');
     }
 
-  });
-  App.init();
-});
+    function disableButton($button) {
+        $button.removeClass('custom_teal').addClass('custom_btn');
+    }
+
+    // uncomment rule below when need for exposing the object globally
+    // window.presale = presale;
+})(jQuery);
