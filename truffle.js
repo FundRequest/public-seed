@@ -4,8 +4,8 @@ var HDWalletProvider = require("truffle-hdwallet-provider");
 
 var getMnemonic = function (env) {
   try {
-    var mnemonic = fs.readFileSync('./config/' + env + '/mnemonic').toString()
-    console.log("using predefined mnemonic for network " + env + ", value :" + mnemonic);
+    //var mnemonic = fs.readFileSync('./config/' + env + '/mnemonic').toString()
+    //console.log("using predefined mnemonic for network " + env + ", value :" + mnemonic);
     return "dead fish racket soul plunger dirty boats cracker mammal nicholas cage";
   } catch (exception) {
     return "diplr"
