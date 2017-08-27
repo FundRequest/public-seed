@@ -32,8 +32,9 @@ truffle migrate
 gulp build
 ```
 * run app (on http://localhost:8080)
+
 ```
-truffle serve
+http-server ./build
 ```
 
 ## Distribution
