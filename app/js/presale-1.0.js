@@ -5,6 +5,11 @@
 
     var $document = $(document);
 
+    var messageTimes = {
+        medium: 6000,
+        longer: 8000
+    };
+    
     var elements = {
         buttons: {
             $buy: $('#btnBuy'),
@@ -79,10 +84,10 @@
             presaleContract.allow(
                 _target, {from: _from}
             ).then(function() {
-                Materialize.toast('Account submitted to the whitelist', 6000, colors.BLUE);
+                Materialize.toast('Account submitted to the whitelist', messageTimes.medium, colors.BLUE);
                 hideLoader();
             }).catch(function(err) {
-                Materialize.toast('Whitelisting failed.', 6000);
+                Materialize.toast('Whitelisting failed.', messageTimes.medium);
                 console.log(err);
                 hideLoader();
             });
@@ -104,14 +109,14 @@
             }
 
             if (errorMessage !== '') {
-                Materialize.toast(errorMessage, 6000, colors.BLUE);
+                Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
                 return;
             }
 
             presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
                 if (result === true) {
                     showLoader();
-                    Materialize.toast('Please wait while the transaction is being validated...', 6000, colors.BLUE);
+                    Materialize.toast('Please wait while the transaction is being validated...', messageTimes.medium, colors.BLUE);
 
                     return presaleContract.buyTokens(targetAddress, {
                         from: ex.selectedAccount,
@@ -132,7 +137,7 @@
                     .text('Funding submitted to the Ethereum blockchain')
                     .add($link);
 
-                Materialize.toast($toastContent, 8000, colors.GREEN);
+                Materialize.toast($toastContent, messageTimes.longer, colors.GREEN);
                 updateTokens(ex.selectedAccount);
                 elements.$personalStash.show();
 
@@ -148,18 +153,18 @@
                     .text('Something went wrong. Please check if you\'re whitelisted.')
                     .add($link);
 
-                Materialize.toast($toastContent, 8000);
+                Materialize.toast($toastContent, messageTimes.longer);
                 hideLoader();
             });
         }
 
         function accountsAreInvalid(err, accounts) {
             if (err !== null) {
-                Materialize.toast('There was an error fetching your accounts.', 6000);
+                Materialize.toast('There was an error fetching your accounts.', messageTimes.medium);
                 return true;
             }
             if (accounts.length === 0) {
-                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 6000, colors.BLUE);
+                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', messageTimes.medium, colors.BLUE);
                 return true;
             }
             return false;
@@ -200,7 +205,7 @@
             presaleContract.balanceOf.call(address).then(function(_tokens) {
                 elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', messageTimes.medium);
                 hidePresaleSection();
             });
         }
@@ -217,16 +222,8 @@
                 return presaleContract.owner.call();
             }).then(function(_owner) {
                 ex.owner = _owner;
-                var $link = $(document.createElement('a'))
-                    .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
-                    .attr('target', '_blank')
-                    .html(presaleContract.address);
-                var $contractAddressLabelContent = $(document.createElement('span'))
-                    .text('The private seed contract is located at ')
-                    .add($link);
-                elements.$contractAddressLabel.html($contractAddressLabelContent);
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', messageTimes.medium);
                 hidePresaleSection();
             });
 
@@ -245,12 +242,21 @@
             }
         }
 
+        function fillContractAddress() {
+            var $link = $(document.createElement('a'))
+                .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
+                .attr('target', '_blank')
+                .html(presaleContract.address);
+            elements.$contractAddressLabel.html('The private seed contract is located at ' + $link);
+        }
+
         var start = function() {
             web3.eth.getAccounts(function(err, accounts) {
                 if (accountsAreInvalid(err, accounts)) {
                     return;
                 }
 
+                fillContractAddress();
                 fillAccounts(accounts);
                 refreshContractInformation();
             });
