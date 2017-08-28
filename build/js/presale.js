@@ -75,10 +75,10 @@
             presaleContract.allow(
                 _target, {from: _from}
             ).then(function() {
-                Materialize.toast('Account submitted to the whitelist', 4000, colors.BLUE);
+                Materialize.toast('Account submitted to the whitelist', 6000, colors.BLUE);
                 hideLoader();
             }).catch(function(err) {
-                Materialize.toast('Whitelisting failed.', 4000);
+                Materialize.toast('Whitelisting failed.', 6000);
                 console.log(err);
                 hideLoader();
             });
@@ -100,14 +100,14 @@
             }
 
             if (errorMessage !== '') {
-                Materialize.toast(errorMessage, 4000, colors.BLUE);
+                Materialize.toast(errorMessage, 6000, colors.BLUE);
                 return;
             }
 
             presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
                 if (result === true) {
                     showLoader();
-                    Materialize.toast('Please wait while the transaction is being validated...', 2000, colors.BLUE);
+                    Materialize.toast('Please wait while the transaction is being validated...', 6000, colors.BLUE);
 
                     return presaleContract.buyTokens(targetAddress, {
                         from: ex.selectedAccount,
@@ -121,7 +121,7 @@
                 var txHash = result.tx;
                 var $link = $(document.createElement('a'))
                     .attr('href', 'https://etherscan.io/tx/' + txHash)
-                    .attr('taget', '_blank')
+                    .attr('target', '_blank')
                     .attr('class', 'yellow-text toast-action')
                     .html('View on EtherScan&nbsp;&nbsp;&nbsp;');
                 var $toastContent = $(document.createElement('span'))
@@ -135,19 +135,28 @@
                 hideLoader();
             }).catch(function(err) {
                 console.log('Error during BUY: ', err);
-                Materialize.toast('Something went wrong while trying fund. Please check if you\'re whitelisted.', 4000);
+                var contractAddress = presaleContract.address;
+                var $link = $(document.createElement('a'))
+                    .attr('href', 'https://rinkeby.etherscan.io/address/' + contractAddress + '#readContract')
+                    .attr('target', '_blank')
+                    .attr('class', 'yellow-text toast-action')
+                    .html('Inspect on EtherScan&nbsp;&nbsp;&nbsp;');
+                var $toastContent = $(document.createElement('span'))
+                    .text('Something went wrong. Please check if you\'re whitelisted.')
+                    .add($link);
 
+                Materialize.toast($toastContent, 8000);
                 hideLoader();
             });
         }
 
         function accountsAreInvalid(err, accounts) {
             if (err !== null) {
-                Materialize.toast('There was an error fetching your accounts.', 4000);
+                Materialize.toast('There was an error fetching your accounts.', 6000);
                 return true;
             }
             if (accounts.length === 0) {
-                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 4000, colors.BLUE);
+                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 6000, colors.BLUE);
                 return true;
             }
             return false;
@@ -186,7 +195,7 @@
             presaleContract.balanceOf.call(address).then(function(_tokens) {
                 elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
                 hidePresaleSection();
             });
         }
@@ -204,11 +213,11 @@
             }).then(function(_owner) {
                 ex.owner = _owner;
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
                 hidePresaleSection();
             });
 
-            setTimeout(refreshContractInformation, 20000);
+            setTimeout(refreshContractInformation, 10000);
         };
 
         var start = function() {
