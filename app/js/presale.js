@@ -107,7 +107,7 @@
             presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
                 if (result === true) {
                     showLoader();
-                    Materialize.toast('Please wait while the transaction is being validated...', 2000, colors.BLUE);
+                    Materialize.toast('Please wait while the transaction is being validated...', 6000, colors.BLUE);
 
                     return presaleContract.buyTokens(targetAddress, {
                         from: ex.selectedAccount,
@@ -208,7 +208,7 @@
                 hidePresaleSection();
             });
 
-            setTimeout(refreshContractInformation, 20000);
+            setTimeout(refreshContractInformation, 10000);
         };
 
         var start = function() {
