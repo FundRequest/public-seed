@@ -75,10 +75,10 @@
             presaleContract.allow(
                 _target, {from: _from}
             ).then(function() {
-                Materialize.toast('Account submitted to the whitelist', 4000, colors.BLUE);
+                Materialize.toast('Account submitted to the whitelist', 6000, colors.BLUE);
                 hideLoader();
             }).catch(function(err) {
-                Materialize.toast('Whitelisting failed.', 4000);
+                Materialize.toast('Whitelisting failed.', 6000);
                 console.log(err);
                 hideLoader();
             });
@@ -100,7 +100,7 @@
             }
 
             if (errorMessage !== '') {
-                Materialize.toast(errorMessage, 4000, colors.BLUE);
+                Materialize.toast(errorMessage, 6000, colors.BLUE);
                 return;
             }
 
@@ -135,7 +135,7 @@
                 hideLoader();
             }).catch(function(err) {
                 console.log('Error during BUY: ', err);
-                Materialize.toast('Something went wrong while trying fund. Please check if you\'re whitelisted.', 4000);
+                Materialize.toast('Something went wrong while trying fund. Please check if you\'re whitelisted.', 6000);
 
                 hideLoader();
             });
@@ -143,11 +143,11 @@
 
         function accountsAreInvalid(err, accounts) {
             if (err !== null) {
-                Materialize.toast('There was an error fetching your accounts.', 4000);
+                Materialize.toast('There was an error fetching your accounts.', 6000);
                 return true;
             }
             if (accounts.length === 0) {
-                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 4000, colors.BLUE);
+                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', 6000, colors.BLUE);
                 return true;
             }
             return false;
@@ -186,7 +186,7 @@
             presaleContract.balanceOf.call(address).then(function(_tokens) {
                 elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
                 hidePresaleSection();
             });
         }
@@ -204,7 +204,7 @@
             }).then(function(_owner) {
                 ex.owner = _owner;
             }).catch(function() {
-                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 4000);
+                Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
                 hidePresaleSection();
             });
 
