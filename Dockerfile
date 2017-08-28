@@ -12,7 +12,7 @@ RUN npm init -y && \
 
 RUN mkdir /src/
 
-COPY dist /src/
+COPY build /src/
 
 WORKDIR /src/
 EXPOSE 8080
