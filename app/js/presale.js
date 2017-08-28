@@ -121,7 +121,7 @@
                 var txHash = result.tx;
                 var $link = $(document.createElement('a'))
                     .attr('href', 'https://etherscan.io/tx/' + txHash)
-                    .attr('taget', '_blank')
+                    .attr('target', '_blank')
                     .attr('class', 'yellow-text toast-action')
                     .html('View on EtherScan&nbsp;&nbsp;&nbsp;');
                 var $toastContent = $(document.createElement('span'))
@@ -135,8 +135,17 @@
                 hideLoader();
             }).catch(function(err) {
                 console.log('Error during BUY: ', err);
-                Materialize.toast('Something went wrong while trying fund. Please check if you\'re whitelisted.', 6000);
+                var contractAddress = presaleContract.address;
+                var $link = $(document.createElement('a'))
+                    .attr('href', 'https://rinkeby.etherscan.io/address/' + contractAddress + '#readContract')
+                    .attr('target', '_blank')
+                    .attr('class', 'yellow-text toast-action')
+                    .html('Inspect on EtherScan&nbsp;&nbsp;&nbsp;');
+                var $toastContent = $(document.createElement('span'))
+                    .text('Something went wrong. Please check if you\'re whitelisted.')
+                    .add($link);
 
+                Materialize.toast($toastContent, 8000);
                 hideLoader();
             });
         }
