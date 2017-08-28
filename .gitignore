@@ -1,3 +1,9 @@
+build/css/
+build/favicons/
+build/fonts/
+build/images/
+build/index.html
+build/js/
 node_modules/
 dist/
 package-lock.json
