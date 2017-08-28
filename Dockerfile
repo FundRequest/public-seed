@@ -8,6 +8,7 @@ RUN apt-get update && \
     apt-get install -y nodejs 
 
 RUN npm init -y && \
+    npm install && \
     npm install --save http-server -g
 
 RUN mkdir /src/
