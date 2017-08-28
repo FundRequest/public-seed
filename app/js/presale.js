@@ -24,6 +24,7 @@
         $fndTotalRaised: $('#fndTotalRaised'),
         $targetAddress: $('#targetAddress'),
         $targetAddressLabel: $('#targetAddressLabel'),
+        $contractAddressLabel: $('#contractAddressLabel'),
         $whiteListArea: $('#whitelistarea')
     };
 
@@ -138,9 +139,8 @@
                 hideLoader();
             }).catch(function(err) {
                 console.log('Error during BUY: ', err);
-                var contractAddress = presaleContract.address;
                 var $link = $(document.createElement('a'))
-                    .attr('href', 'https://rinkeby.etherscan.io/address/' + contractAddress + '#readContract')
+                    .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
                     .attr('target', '_blank')
                     .attr('class', 'yellow-text toast-action')
                     .html('Inspect on EtherScan&nbsp;&nbsp;&nbsp;');
@@ -217,6 +217,14 @@
                 return presaleContract.owner.call();
             }).then(function(_owner) {
                 ex.owner = _owner;
+                var $link = $(document.createElement('a'))
+                    .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
+                    .attr('target', '_blank')
+                    .html(presaleContract.address);
+                var $contractAddressLabelContent = $(document.createElement('span'))
+                    .text('The private seed contract is located at ')
+                    .add($link);
+                elements.$contractAddressLabel.html($contractAddressLabelContent);
             }).catch(function() {
                 Materialize.toast('Please check your settings. The presale is not deployed on your current network.', 6000);
                 hidePresaleSection();
