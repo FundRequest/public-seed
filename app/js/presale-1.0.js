@@ -199,7 +199,8 @@
 
                 presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
                     if (result === false) {
-                        throw new Error('Unable to fund from this address because it is not whitelisted.');
+                        var errorMessage='Unable to fund from this address because it is not whitelisted.';
+                        Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
                     } 
                 });
 
