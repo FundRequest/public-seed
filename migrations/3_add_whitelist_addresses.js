@@ -87,17 +87,14 @@ var whitelistedAddresses = [
 module.exports = function (deployer, network, accounts) {
   deployer.then(function () {
     FundRequestPrivateSeed.deployed().then(function (instance) {
-      whitelistedAddresses.forEach(function (a) {
-        instance.allow(
-          a, {from: accounts[0]}
-        ).then(function () {
-          console.log('Account submitted to the whitelist: ' + a);
-        }).catch(function (err) {
-          console.error('Whitelisting failed for: ' + a);
-        });
+      instance.allowAll(
+        whitelistedAddresses, {from: accounts[0]}
+      ).then(function () {
+        console.log('Whitelisted accounts');
+      }).catch(function (err) {
+        console.error('Whitelisting failed');
+        console.error(err);
       });
-
-
     });
   });
 };

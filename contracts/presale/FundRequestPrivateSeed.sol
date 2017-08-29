@@ -5,14 +5,14 @@ import '../zeppelin/Pausable.sol';
 
 contract FundRequestPrivateSeed is Pausable {
   using SafeMath for uint;
-  
+
   // address where funds are collected
   address public wallet;
   // how many token units a buyer gets per wei
   uint public rate;
   // amount of raised money in wei
   uint public weiRaised;
-  
+
   mapping(address => uint) public deposits;
   mapping(address => uint) public balances;
   address[] public investors;
@@ -24,9 +24,9 @@ contract FundRequestPrivateSeed is Pausable {
    * @param beneficiary who got the tokens
    * @param value weis paid for purchase
    * @param amount amount of tokens purchased
-   */ 
+   */
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
-  
+
   function FundRequestPrivateSeed(uint _rate, address _wallet) {
     require(_rate > 0);
     require(_wallet != 0x0);
@@ -79,6 +79,11 @@ contract FundRequestPrivateSeed is Pausable {
   function allow(address beneficiary) onlyOwner {
     allowed[beneficiary] = true;
   }
+  function allowAll(address[] beneficiaries) onlyOwner {
+    for (uint i = 0; i < beneficiaries.length; i++) {
+      allow(beneficiaries[i]);
+    }
+  }
   function updateRate(uint _rate) onlyOwner whenPaused {
     rate = _rate;
   }
@@ -87,7 +92,7 @@ contract FundRequestPrivateSeed is Pausable {
     require(_wallet != 0x0);
     wallet = _wallet;
   }
-  
+
   // fallback function can be used to buy tokens
   function () payable {
     buyTokens(msg.sender);
