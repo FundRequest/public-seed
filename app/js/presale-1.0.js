@@ -197,6 +197,12 @@
                 Materialize.updateTextFields();
                 document.getElementById("personalStash").style.opacity=1;
 
+                presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
+                    if (result === false) {
+                        throw new Error('Unable to fund from this address because it is not whitelisted.');
+                    } 
+                });
+
                 updateButtons();
             });
         }
