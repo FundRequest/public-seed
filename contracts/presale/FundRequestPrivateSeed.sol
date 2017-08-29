@@ -79,11 +79,6 @@ contract FundRequestPrivateSeed is Pausable {
   function allow(address beneficiary) onlyOwner {
     allowed[beneficiary] = true;
   }
-  function allowAll(address[] beneficiaries) onlyOwner {
-    for (uint i = 0; i < beneficiaries.length; i++) {
-      allow(beneficiaries[i]);
-    }
-  }
   function updateRate(uint _rate) onlyOwner whenPaused {
     rate = _rate;
   }
