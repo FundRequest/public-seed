@@ -80,6 +80,10 @@
       color: #00bab5;
     }
 
+    .smallPrint{
+      margin-bottom: 0px;
+    }
+
     #toast-container {
       top: 80px;
       right: 1%;
@@ -115,26 +119,19 @@
               <div class="row">
                 <div class="gr-12 center">
                   <h1>Funding and rewarding open source development</h1>
-
                   <h3>FundRequest makes it easy to fund open issues on any project, in any language</h3>
                   <br>
-
                   <h1>Private Seed</h1>
-
-                  <h3>In order to partake in our private seed your address must be whitelisted</h3>
-
-                  <h3>For questions or support, <a href="https://slack.fundrequest.io" target="_blank">join</a> us on Slack and contact @karel, @gerbert or @timdierckxsens</h3>
-
-                  <h3><span id="contractAddressLabel"></span></h3>
-
+                  <h3 class="smallPrint"><span id="contractAddressLabel"></span></h3>
                   <span style='font-size:10px; color:grey'>* By transferring ETH to the FundRequest private seed contract address you explicitely agree to the terms and conditions</span>
+                  <br><br>
+                  <h2>Starts on Friday, 1 September 10:00 AM CEST and ends on Tuesday, 5 September 23:59 PM CEST</h2>
+                  <h3>For questions or support, <a href="https://slack.fundrequest.io" target="_blank">join</a> us on Slack and contact @karel, @gerbert or @timdierckxsens</h3>
+                  <h3>New to crypto funding and you love some help, then have a look at our <a href="https://docs.fundrequest.io/display/DEV/Private-Seed+User+Guide" target="_blank">user guides</a></h3>
                   <br>
-                  <br>
-
-                  <div id="personalStash" style="display: none;">
-                    <h3> Account <span id="targetAddressLabel">0x0</a></span> is entitled to <span class="txtLarge" id="fndYourTokens">0</span> FND Tokens </h3>
+                  <div id="personalStash" style="opacity: 0">
+                    <h3> Account <span id="targetAddressLabel">0x0</a></span> is currently entitled to <span class="txtLarge" id="fndYourTokens">0</span> FND Tokens </h3>
                   </div>
-                  <br>
                 </div>
               </div>
 
@@ -178,7 +175,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row smallPrint">
                 <div class="gr-12 center">
                   <div class="input-field col s7  offset-s1">
                     <select id="accountSelect">
@@ -192,6 +189,14 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="gr-1"></div>
+                <div class="gr-11">
+                  <span style='font-size:10px; color:grey'>* In order to partake in our private seed your address must be whitelisted</span>
+                </div>
+              </div>
+
+
               <div class="gr-12 center">
                 <a id="btnBuy" class="waves-effect waves-light btn-large custom_btn">Fund </a>
                  &nbsp;&nbsp;&nbsp;<input type="checkbox" class="filled-in custom_teal" id="filled-in-box"/>

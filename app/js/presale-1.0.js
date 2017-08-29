@@ -139,7 +139,7 @@
 
                 Materialize.toast($toastContent, messageTimes.longer, colors.GREEN);
                 updateTokens(ex.selectedAccount);
-                elements.$personalStash.show();
+                document.getElementById("personalStash").style.opacity=1;
 
                 hideLoader();
             }).catch(function(err) {
@@ -195,7 +195,7 @@
                     elements.$whiteListArea.show();
                 }
                 Materialize.updateTextFields();
-                elements.$personalStash.show();
+                document.getElementById("personalStash").style.opacity=1;
 
                 updateButtons();
             });
@@ -247,7 +247,11 @@
                 .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
                 .attr('target', '_blank')
                 .html(presaleContract.address);
-            elements.$contractAddressLabel.html('The private seed contract is located at ' + $link);
+            var $contractAddressLabelContent = $(document.createElement('span'))
+                 .text('The private seed contract is located at ')
+                 .add($link);
+
+            elements.$contractAddressLabel.html($contractAddressLabelContent);
         }
 
         var start = function() {
