@@ -49,7 +49,7 @@ module.exports = {
       host: "https://rinkeby.infura.io/" + getSecret(),
       provider: new HDWalletProvider(getMnemonic('rinkeby'), "https://rinkeby.infura.io/" + getSecret())
     },
-    rinkeby-local: {
+    rinkeby_local: {
       network_id: '4',
       host: "localhost",
       port: 8545,
