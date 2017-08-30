@@ -3,6 +3,12 @@
   "abi": [],
   "unlinked_binary": "0x60606040523415600e57600080fd5b5b603680601c6000396000f30060606040525b600080fd00a165627a7a723058202eff78959f501221a035107e3cdb9b5b156c133a6b6e5b5d07df0d66c17707420029",
   "networks": {
+    "1": {
+      "events": {},
+      "links": {},
+      "address": "0x0f004fd2703f9e27a8bfa68bb33c756c68799af1",
+      "updated_at": 1504128814682
+    },
     "4": {
       "events": {},
       "links": {},
@@ -11,5 +17,5 @@
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1504078478389
+  "updated_at": 1504128814682
 }
