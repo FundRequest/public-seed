@@ -1,5 +1,4 @@
 $(function() {
-    console.log('countdown');
 
     Vue.filter('two_digits', function(value) {
         if (value.toString().length <= 1) {
