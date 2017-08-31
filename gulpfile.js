@@ -6,7 +6,7 @@ var paths = {
     images: ['app/**/*.png', 'app/**/*.jpg', 'app/**/*.ico'],
     scripts: ['app/js/**/**.js', 'node_modules/truffle-contract/build/truffle-contract.js', 'node_modules/web3/build/web3.js'],
     fonts: ['app/**/*.eot', 'app/**/*.svg', 'app/**/*.woff', 'app/**/*.woff2', 'app/**/*.ttf', 'app/**/*.otf'],
-    css: ['app/css/reset.css', 'app/css/font-awesome.min.css', 'app/css/general.css', 'app/css/app.css'],
+    css: ['app/css/reset.css', 'app/css/font-awesome.min.css', 'app/css/general.css', 'app/css/countdown.css', 'app/css/app.css'],
     pages: ['app/**/**.html'],
     contracts: ["app/contracts/*.json"]
 };
