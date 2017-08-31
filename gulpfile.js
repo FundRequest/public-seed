@@ -34,7 +34,7 @@ gulp.task('fonts', function() {
 
 gulp.task('css', function() {
     return gulp.src(paths.css)
-        .pipe(concat('main-1.0.css'))
+        .pipe(concat('main-1.1.css'))
         // Pass in options to the task
         .pipe(gulp.dest(destination + '/css'));
 });
