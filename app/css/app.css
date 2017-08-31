@@ -45,6 +45,10 @@ html {
     }
 }
 
+.hide {
+    display: none;
+}
+
 body,
 #app,
 .main-container {
