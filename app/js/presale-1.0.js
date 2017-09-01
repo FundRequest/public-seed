@@ -9,7 +9,7 @@
         medium: 6000,
         longer: 8000
     };
-    
+
     var elements = {
         buttons: {
             $buy: $('#btnBuy'),
@@ -201,7 +201,7 @@
                     if (result === false) {
                         var errorMessage='Unable to fund from this address because it is not whitelisted.';
                         Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
-                    } 
+                    }
                 });
 
                 updateButtons();
@@ -222,7 +222,7 @@
                 elements.$fndCurrentRate.html(_rate.toNumber());
                 return presaleContract.weiRaised.call();
             }).then(function(_wei) {
-                elements.$fndTotalRaised.html(web3.fromWei(_wei.toNumber()) + ' ETH');
+                elements.$fndTotalRaised.html(_wei.toNumber() / 1000000000000000000 + ' ETH');
                 return presaleContract.investorCount.call();
             }).then(function(_investorCount) {
                 elements.$fndTotalBackers.html(_investorCount.toNumber());
