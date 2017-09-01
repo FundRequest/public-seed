@@ -264,13 +264,10 @@
         var start = function() {
             web3.eth.getAccounts(function(err, accounts) {
               refreshContractInformation();
-                if (accountsAreInvalid(err, accounts)) {
-                    return;
-                }
-
-                fillContractAddress();
+              fillContractAddress();
+              if (!accountsAreInvalid(err, accounts)) {
                 fillAccounts(accounts);
-
+              }
             });
         };
 
