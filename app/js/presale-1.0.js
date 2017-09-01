@@ -222,7 +222,8 @@
                 elements.$fndCurrentRate.html(_rate.toNumber());
                 return presaleContract.weiRaised.call();
             }).then(function(_wei) {
-                elements.$fndTotalRaised.html(_wei.toNumber() / 1000000000000000000 + ' ETH');
+                var number = (_wei.toNumber() / 1000000000000000000);
+                elements.$fndTotalRaised.html((Math.round(number * 100)/100).toFixed(2) + ' ETH');
                 return presaleContract.investorCount.call();
             }).then(function(_investorCount) {
                 elements.$fndTotalBackers.html(_investorCount.toNumber());
