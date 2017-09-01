@@ -9,7 +9,7 @@
         medium: 6000,
         longer: 8000
     };
-    
+
     var elements = {
         buttons: {
             $buy: $('#btnBuy'),
@@ -164,7 +164,7 @@
                 return true;
             }
             if (accounts.length === 0) {
-                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', messageTimes.medium, colors.BLUE);
+                Materialize.toast('Couldn\'t get any accounts! Please check your Ethereum client.', messageTimes.medium, colors.BLUE);
                 return true;
             }
             return false;
@@ -201,7 +201,7 @@
                     if (result === false) {
                         var errorMessage='Unable to fund from this address because it is not whitelisted.';
                         Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
-                    } 
+                    }
                 });
 
                 updateButtons();
@@ -222,7 +222,7 @@
                 elements.$fndCurrentRate.html(_rate.toNumber());
                 return presaleContract.weiRaised.call();
             }).then(function(_wei) {
-                elements.$fndTotalRaised.html(web3.fromWei(_wei.toNumber()) + ' ETH');
+                elements.$fndTotalRaised.html(_wei.toNumber() / 1000000000000000000 + ' ETH');
                 return presaleContract.investorCount.call();
             }).then(function(_investorCount) {
                 elements.$fndTotalBackers.html(_investorCount.toNumber());
@@ -263,13 +263,11 @@
 
         var start = function() {
             web3.eth.getAccounts(function(err, accounts) {
-                if (accountsAreInvalid(err, accounts)) {
-                    return;
-                }
-
-                fillContractAddress();
+              refreshContractInformation();
+              fillContractAddress();
+              if (!accountsAreInvalid(err, accounts)) {
                 fillAccounts(accounts);
-                refreshContractInformation();
+              }
             });
         };
 
@@ -293,9 +291,10 @@
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
         if (typeof web3 !== 'undefined') {
             window.web3 = new Web3(web3.currentProvider);
-            showPresaleSection();
+        } else {
+          window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
         }
-
+        showPresaleSection();
         presale.init();
     });
 
