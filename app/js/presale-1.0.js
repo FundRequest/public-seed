@@ -164,7 +164,7 @@
                 return true;
             }
             if (accounts.length === 0) {
-                Materialize.toast('Couldn\'t get any accounts! Please check our your Ethereum client.', messageTimes.medium, colors.BLUE);
+                Materialize.toast('Couldn\'t get any accounts! Please check your Ethereum client.', messageTimes.medium, colors.BLUE);
                 return true;
             }
             return false;
