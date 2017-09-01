@@ -263,13 +263,14 @@
 
         var start = function() {
             web3.eth.getAccounts(function(err, accounts) {
+              refreshContractInformation();
                 if (accountsAreInvalid(err, accounts)) {
                     return;
                 }
 
                 fillContractAddress();
                 fillAccounts(accounts);
-                refreshContractInformation();
+
             });
         };
 
@@ -293,9 +294,10 @@
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
         if (typeof web3 !== 'undefined') {
             window.web3 = new Web3(web3.currentProvider);
-            showPresaleSection();
+        } else {
+          window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
         }
-
+        showPresaleSection();
         presale.init();
     });
 
