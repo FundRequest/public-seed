@@ -12,7 +12,6 @@ config/kovan/mnemonic
 config/rinkeby/mnemonic
 config/local/mnemonic
 config/secrets/infura-token.js
-contracts/local-tests
-migrations/2_deploy_test_contract.js.old
+contracts/localtests
 *.iml
 .idea/
