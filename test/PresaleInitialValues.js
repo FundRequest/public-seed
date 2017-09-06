@@ -1,11 +1,11 @@
-var Presale = artifacts.require("./presale/FundRequestPrivateSeed.sol");
+var Presale = artifacts.require("FundRequestPrivateSeed");
 
 contract('FundRequestPrivateSeed', function (accounts) {
   it("it should have the correct rate", function () {
     return Presale.deployed().then(function (instance) {
       return instance.rate.call();
     }).then(function (_rate) {
-      assert.equal(_rate.valueOf(), 3575, "Rate was not correct");
+      assert.equal(_rate.valueOf(), 4500, "Rate was not correct");
     });
   });
 
