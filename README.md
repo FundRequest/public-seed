@@ -6,6 +6,7 @@ This repository contains the code for the private presale, where we will guarant
 * Have a Geth client or a TestRPC running, default the contract will be deployed to localhost:8545
 * Truffle version 3.4.9 (solidity 0.4.15) is used 
 * node v6.11.2 (npm version 3.10.10) is used
+* http-server installed (npm install http-server -g)
 * Have an access token for infura (https://infura.io) and put the token in `./config/secrets/infura-token.js`
 
 ## First Time
