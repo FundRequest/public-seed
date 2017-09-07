@@ -1,17 +1,21 @@
-var gulp = require('gulp');
-var del = require('del');
-var concat = require('gulp-concat');
+let gulp = require('gulp');
+let del = require('del');
+let concat = require('gulp-concat');
+let hash_src = require('gulp-hash-src');
+let inject = require('gulp-inject');
 
-var paths = {
+let src = 'app';
+let destination = 'build';
+
+let paths = {
     images: ['app/**/*.png', 'app/**/*.jpg', 'app/**/*.ico'],
-    scripts: ['app/js/**/**.js', 'node_modules/truffle-contract/build/truffle-contract.js', 'node_modules/web3/build/web3.js'],
+    js: ['app/js/**/**.js'],
+    jsLibs: ['node_modules/web3/dist/web3.js', 'node_modules/truffle-contract/dist/truffle-contract.js'],
     fonts: ['app/**/*.eot', 'app/**/*.svg', 'app/**/*.woff', 'app/**/*.woff2', 'app/**/*.ttf', 'app/**/*.otf'],
     css: ['app/css/reset.css', 'app/css/font-awesome.min.css', 'app/css/general.css', 'app/css/countdown.css', 'app/css/app.css'],
     pages: ['app/**/**.html'],
-    contracts: ["app/contracts/*.json"]
+    contracts: ["build/contracts/*.json"]
 };
-
-var destination = 'build';
 
 // Not all tasks need to use streams
 // A gulpfile is just another node program and you can use any package available on npm
@@ -22,47 +26,63 @@ gulp.task('clean', function() {
 
 gulp.task('images', function() {
     return gulp.src(paths.images)
-    // Pass in options to the task
         .pipe(gulp.dest(destination));
 });
 
 gulp.task('fonts', function() {
-    return gulp.src(paths.fonts)
-    // Pass in options to the task
+    gulp.src(paths.fonts)
         .pipe(gulp.dest(destination));
 });
 
 gulp.task('css', function() {
-    return gulp.src(paths.css)
-        .pipe(concat('main-1.0.css'))
-        // Pass in options to the task
+    gulp.src(paths.css)
+        .pipe(concat('main.css'))
         .pipe(gulp.dest(destination + '/css'));
 });
 
 gulp.task('scripts', function() {
-    return gulp.src(paths.scripts)
-    // Pass in options to the task
+    gulp.src(paths.jsLibs)
+        .pipe(gulp.dest(destination + '/jsLibs'));
+
+    gulp.src(paths.js)
         .pipe(gulp.dest(destination + '/js'));
 });
 
 gulp.task('pages', function() {
-    return gulp.src(paths.pages)
-    // Pass in options to the task
-        .pipe(gulp.dest(destination));
+    let srcPaths = ['app/css/main.css'].concat(paths.js);
+
+    let stream = gulp.src(paths.jsLibs)
+        .pipe(gulp.dest(src + '/jsLibs'));
+
+    stream.on('end', function() {
+        gulp.src(paths.pages)
+            //web3 needs to be loaded before truffle-contract
+            .pipe(inject(gulp.src([src + '/jsLibs/web3.js', src + '/jsLibs/truffle-contract.js'], {read: false}), {
+                relative: true,
+                name: 'jsLibs'
+            }))
+            .pipe(inject(gulp.src(srcPaths, {read: false}), {
+                relative: true
+            }))
+            .pipe(hash_src({build_dir: src, src_path: destination}))
+            .pipe(gulp.dest(destination)).on('end', function() {
+                del([src + '/jsLibs']);
+            }
+        );
+    });
 });
 
 gulp.task('contracts', function() {
     return gulp.src(paths.contracts)
-    // Pass in options to the task
         .pipe(gulp.dest(destination + '/contracts'));
 });
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-    gulp.watch(paths.scripts, ['scripts']);
+    gulp.watch(paths.js, ['scripts', 'pages']);
     gulp.watch(paths.pages, ['pages']);
-    gulp.watch(paths.css, ['css']);
-    gulp.watch(paths.images, ['images']);
+    gulp.watch(paths.css, ['css', 'pages']);
+    gulp.watch(paths.images, ['images', 'pages']);
 });
 
 gulp.task('set-dist', function() {
@@ -74,8 +94,8 @@ gulp.task('set-build', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['pages', 'css', 'scripts', 'fonts', 'images', 'contracts', 'watch']);
+gulp.task('default', ['css', 'scripts', 'fonts', 'images', 'pages', 'contracts', 'watch']);
 
-gulp.task('build', ['set-build', 'pages', 'css', 'scripts', 'fonts', 'images', 'contracts']);
+gulp.task('build', ['set-build', 'css', 'scripts', 'fonts', 'images', 'pages', 'contracts']);
 
-gulp.task('dist', ['set-dist', 'pages', 'css', 'scripts', 'fonts', 'images', 'contracts']);
+gulp.task('dist', ['set-dist', 'css', 'scripts', 'fonts', 'images', 'pages', 'contracts']);
