@@ -3,7 +3,7 @@ pragma solidity ^0.4.15;
 import '../math/SafeMath.sol';
 import '../zeppelin/Pausable.sol';
 
-contract FundRequestPrivateSeed is Pausable {
+contract FundRequestPublicSeed is Pausable {
   using SafeMath for uint;
 
   // address where funds are collected
@@ -27,7 +27,7 @@ contract FundRequestPrivateSeed is Pausable {
    */
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
 
-  function FundRequestPrivateSeed(uint _rate, address _wallet) {
+  function FundRequestPublicSeed(uint _rate, address _wallet) {
     require(_rate > 0);
     require(_wallet != 0x0);
 
