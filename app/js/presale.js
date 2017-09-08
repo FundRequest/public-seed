@@ -64,7 +64,7 @@
         };
 
         function loadContract(_callback) {
-            $.getJSON('./contracts/FundRequestPrivateSeed.json', function(Presale_json) {
+            $.getJSON('./contracts/FundRequestPublicSeed.json', function(Presale_json) {
                 var presaleTruffleContract = TruffleContract(Presale_json);
                 presaleTruffleContract.setProvider(window.web3.currentProvider);
 
@@ -223,10 +223,10 @@
                 return presaleContract.weiRaised.call();
             }).then(function(_wei) {
                 var number = (_wei.toNumber() / 1000000000000000000);
-                elements.$fndTotalRaised.html((Math.round(number * 100)/100).toFixed(2) + ' ETH');
+                elements.$fndTotalRaised.html((Math.round((number * 100)/100)+1946.75).toFixed(2) + ' ETH');
                 return presaleContract.investorCount.call();
             }).then(function(_investorCount) {
-                elements.$fndTotalBackers.html(_investorCount.toNumber());
+                elements.$fndTotalBackers.html(_investorCount.toNumber()+11);
                 return presaleContract.owner.call();
             }).then(function(_owner) {
                 ex.owner = _owner;
