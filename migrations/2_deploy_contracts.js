@@ -6,6 +6,7 @@ module.exports = function(deployer, network, accounts) {
   deployer.link(SafeMath, FundRequestPublicSeed);
   deployer.deploy(FundRequestPublicSeed,
     3600,
+    30, //300.000 / 300USD = 1000 ETH
     accounts[0]
   );
 };

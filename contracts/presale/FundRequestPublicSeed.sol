@@ -2,17 +2,20 @@ pragma solidity ^0.4.15;
 
 import '../math/SafeMath.sol';
 import '../zeppelin/Pausable.sol';
+import '../zeppelin/whitelistable.sol';
 
-contract FundRequestPublicSeed is Pausable {
+contract FundRequestPublicSeed is Pausable, Whitelistable {
   using SafeMath for uint;
 
   // address where funds are collected
   address public wallet;
   // how many token units a buyer gets per wei
   uint public rate;
+  // Max amount of ETH that can be raised (in wei)
+  uint public weiMaxCap;
   // amount of raised money in wei
   uint public weiRaised;
-
+  
   mapping(address => uint) public deposits;
   mapping(address => uint) public balances;
   address[] public investors;
@@ -27,18 +30,26 @@ contract FundRequestPublicSeed is Pausable {
    */
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
 
-  function FundRequestPublicSeed(uint _rate, address _wallet) {
+  function FundRequestPublicSeed(uint _rate,uint _maxCap, address _wallet) {
     require(_rate > 0);
+    require(_maxCap > 0);
     require(_wallet != 0x0);
 
     rate = _rate;
+    weiMaxCap = _maxCap * 1000000000000000000;
     wallet = _wallet;
+
   }
   // low level token purchase function
   function buyTokens(address beneficiary) payable whenNotPaused {
-    require(validBeneficiary(beneficiary));
     require(validPurchase());
-    require(validPurchaseSize());
+    require(maxCapNotReached());
+    if(everyoneDisabled){
+      require(validBeneficiary(beneficiary));
+      require(validPurchaseSize());  
+    }
+    
+    
     bool existing = deposits[beneficiary] > 0;
     uint weiAmount = msg.value;
     uint updatedWeiRaised = weiRaised.add(weiAmount);
@@ -60,15 +71,18 @@ contract FundRequestPublicSeed is Pausable {
     wallet.transfer(msg.value);
   }
   function validBeneficiary(address beneficiary) internal constant returns (bool) {
-      return allowed[beneficiary] == true;
+    return allowed[beneficiary] == true;
   }
   // @return true if the transaction can buy tokens
   function validPurchase() internal constant returns (bool) {
     return msg.value != 0;
   }
-  // @return true if the amount is higher then 25ETH
+  // @return true if the amount is lower then 20ETH
   function validPurchaseSize() internal constant returns (bool) {
-    return msg.value >=25000000000000000000;
+    return msg.value <=20000000000000000000;
+  }
+  function maxCapNotReached() internal constant returns (bool) {
+    return (weiRaised + msg.value) <= weiMaxCap;
   }
   function balanceOf(address _owner) constant returns (uint balance) {
     return balances[_owner];
@@ -86,6 +100,11 @@ contract FundRequestPublicSeed is Pausable {
   function updateWallet(address _wallet) onlyOwner whenPaused {
     require(_wallet != 0x0);
     wallet = _wallet;
+  }
+
+  function updateMaxCap(uint _maxCap) onlyOwner whenPaused {
+    require(_maxCap != 0);
+    weiMaxCap = _maxCap * 1000000000000000000;
   }
 
   // fallback function can be used to buy tokens
