@@ -2,7 +2,7 @@ pragma solidity ^0.4.15;
 
 import '../math/SafeMath.sol';
 import '../zeppelin/Pausable.sol';
-import '../zeppelin/whitelistable.sol';
+import '../zeppelin/Whitelistable.sol';
 
 contract FundRequestPublicSeed is Pausable, Whitelistable {
   using SafeMath for uint;
@@ -36,7 +36,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     require(_wallet != 0x0);
 
     rate = _rate;
-    weiMaxCap = _maxCap * 1000000000000000000;
+    weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
     wallet = _wallet;
 
   }
@@ -79,10 +79,10 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   }
   // @return true if the amount is lower then 20ETH
   function validPurchaseSize() internal constant returns (bool) {
-    return msg.value <=20000000000000000000;
+    return msg.value <=20 ether;
   }
   function maxCapNotReached() internal constant returns (bool) {
-    return (weiRaised + msg.value) <= weiMaxCap;
+    return SafeMath.add(weiRaised, msg.value) <= weiMaxCap;
   }
   function balanceOf(address _owner) constant returns (uint balance) {
     return balances[_owner];
@@ -98,13 +98,13 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   }
 
   function updateWallet(address _wallet) onlyOwner whenPaused {
-    require(_wallet != 0x0);
+    require(_wallet != address(0));
     wallet = _wallet;
   }
 
   function updateMaxCap(uint _maxCap) onlyOwner whenPaused {
     require(_maxCap != 0);
-    weiMaxCap = _maxCap * 1000000000000000000;
+    weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
   }
 
   // fallback function can be used to buy tokens
