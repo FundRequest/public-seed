@@ -15,6 +15,8 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   uint public weiMaxCap;
   // amount of raised money in wei
   uint public weiRaised;
+  // max amount of ETH that is allowed to deposit when whitelist is active
+  uint public purchaseSize;
   
   mapping(address => uint) public deposits;
   mapping(address => uint) public balances;
@@ -38,6 +40,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     rate = _rate;
     weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
     wallet = _wallet;
+    purchaseSize = 20 ether;
 
   }
   // low level token purchase function
@@ -79,7 +82,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   }
   // @return true if the amount is lower then 20ETH
   function validPurchaseSize() internal constant returns (bool) {
-    return msg.value <=20 ether;
+    return msg.value <= purchaseSize;
   }
   function maxCapNotReached() internal constant returns (bool) {
     return SafeMath.add(weiRaised, msg.value) <= weiMaxCap;
@@ -105,6 +108,11 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   function updateMaxCap(uint _maxCap) onlyOwner whenPaused {
     require(_maxCap != 0);
     weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
+  }
+
+  function updatePurchaseSize(uint _purchaseSize) onlyOwner whenPaused {
+    require(_purchaseSize != 0);
+    purchaseSize = _purchaseSize;
   }
 
   // fallback function can be used to buy tokens
