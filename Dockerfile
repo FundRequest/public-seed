@@ -17,5 +17,5 @@ COPY build /src/
 WORKDIR /src/
 EXPOSE 8080
 
-ENTRYPOINT ["http-server"]
+ENTRYPOINT ["http-server", "-c", "-1"]
 #CMD ["node","server.js"]
