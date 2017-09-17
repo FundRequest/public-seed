@@ -12,7 +12,6 @@ RUN npm init -y && \
     npm install --save http-server -g
 
 RUN mkdir /src/
-
 COPY build /src/
 
 WORKDIR /src/
