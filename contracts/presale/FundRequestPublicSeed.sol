@@ -12,11 +12,11 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   // how many token units a buyer gets per wei
   uint public rate;
   // Max amount of ETH that can be raised (in wei)
-  uint public weiMaxCap;
+  uint256 public weiMaxCap;
   // amount of raised money in wei
-  uint public weiRaised;
+  uint256 public weiRaised;
   // max amount of ETH that is allowed to deposit when whitelist is active
-  uint public purchaseSize;
+  uint256 public maxPurchaseSize;
   
   mapping(address => uint) public deposits;
   mapping(address => uint) public balances;
@@ -32,7 +32,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
    */
   event TokenPurchase(address indexed purchaser, address indexed beneficiary, uint value, uint amount);
 
-  function FundRequestPublicSeed(uint _rate,uint _maxCap, address _wallet) {
+  function FundRequestPublicSeed(uint _rate, uint256 _maxCap, address _wallet) {
     require(_rate > 0);
     require(_maxCap > 0);
     require(_wallet != 0x0);
@@ -40,20 +40,20 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     rate = _rate;
     weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
     wallet = _wallet;
-    purchaseSize = 20 ether;
-
+    maxPurchaseSize = 20 ether;
   }
+  
   // low level token purchase function
   function buyTokens(address beneficiary) payable whenNotPaused {
     require(validPurchase());
     require(maxCapNotReached());
-    if(everyoneDisabled){
+    if (everyoneDisabled) {
       require(validBeneficiary(beneficiary));
       require(validPurchaseSize());  
     }
     
     
-    bool existing = deposits[beneficiary] > 0;
+    bool existing = deposits[beneficiary] > 0;  
     uint weiAmount = msg.value;
     uint updatedWeiRaised = weiRaised.add(weiAmount);
     // calculate token amount to be created
@@ -82,7 +82,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
   }
   // @return true if the amount is lower then 20ETH
   function validPurchaseSize() internal constant returns (bool) {
-    return msg.value <= purchaseSize;
+    return msg.value <= maxPurchaseSize;
   }
   function maxCapNotReached() internal constant returns (bool) {
     return SafeMath.add(weiRaised, msg.value) <= weiMaxCap;
@@ -112,7 +112,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
 
   function updatePurchaseSize(uint _purchaseSize) onlyOwner whenPaused {
     require(_purchaseSize != 0);
-    purchaseSize = _purchaseSize;
+    maxPurchaseSize = _purchaseSize;
   }
 
   // fallback function can be used to buy tokens
