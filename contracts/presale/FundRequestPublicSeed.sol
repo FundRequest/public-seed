@@ -49,7 +49,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     require(maxCapNotReached());
     if (everyoneDisabled) {
       require(validBeneficiary(beneficiary));
-      require(validPurchaseSize());  
+      require(validPurchaseSize(beneficiary));  
     }
     
     
@@ -81,8 +81,8 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     return msg.value != 0;
   }
   // @return true if the amount is lower then 20ETH
-  function validPurchaseSize() internal constant returns (bool) {
-    return msg.value <= maxPurchaseSize;
+  function validPurchaseSize(address beneficiary) internal constant returns (bool) {
+    return msg.value.add(deposits[beneficiary]) <= maxPurchaseSize;
   }
   function maxCapNotReached() internal constant returns (bool) {
     return SafeMath.add(weiRaised, msg.value) <= weiMaxCap;
