@@ -52,7 +52,6 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
       require(validPurchaseSize(beneficiary));  
     }
     
-    
     bool existing = deposits[beneficiary] > 0;  
     uint weiAmount = msg.value;
     uint updatedWeiRaised = weiRaised.add(weiAmount);
