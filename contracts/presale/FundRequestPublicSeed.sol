@@ -40,7 +40,7 @@ contract FundRequestPublicSeed is Pausable, Whitelistable {
     rate = _rate;
     weiMaxCap = SafeMath.mul(_maxCap, 1 ether);
     wallet = _wallet;
-    maxPurchaseSize = 20 ether;
+    maxPurchaseSize = 25 ether;
   }
   
   // low level token purchase function
