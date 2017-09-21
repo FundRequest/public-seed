@@ -2,16 +2,16 @@ const PUB_SEED = artifacts.require('./presale/FundRequestPublicSeed.sol');
 const expect = require('chai').expect;
 
 
-contract('FundrequestPublicSeed', function (accounts) {
+contract('FundrequestPublicSeed', (accounts) => {
 
     let seed;
     const owner = accounts[0];
 
-    beforeEach(async function () {
+    beforeEach(async() =>  {
         seed = await PUB_SEED.new(3600, 1000, owner);
     });
 
-    it('should be possible to invest for someone else who is whitelisted in a whitelist period', async function () {
+    it('should be possible to invest for someone else who is whitelisted in a whitelist period', async() =>  {
         await seed.allow(accounts[1], {
             from: accounts[0]
         });
@@ -23,7 +23,7 @@ contract('FundrequestPublicSeed', function (accounts) {
         expect(weiRaised.toString()).to.equal(web3.toWei(19));
     });
 
-    it('should be possible to invest as whitelisted person in whitelisting period', async function () {
+    it('should be possible to invest as whitelisted person in whitelisting period', async() =>  {
         await seed.allow(accounts[0], {
             from: accounts[0]
         });
@@ -35,7 +35,7 @@ contract('FundrequestPublicSeed', function (accounts) {
         expect(weiRaised.toString()).to.equal(web3.toWei(19));
     });
 
-    it('should not possible to invest for a non-whitelisted person in whitelisting period', async function () {
+    it('should not possible to invest for a non-whitelisted person in whitelisting period', async() =>  {
         try {
             await seed.buyTokens(accounts[0], {
                 from: accounts[0],
@@ -50,7 +50,7 @@ contract('FundrequestPublicSeed', function (accounts) {
         }
     });
 
-    it('should be possible to invest for someone else in a non-whitelist period', async function () {
+    it('should be possible to invest for someone else in a non-whitelist period', async() =>  {
         await seed.allowEveryone({
             from: accounts[0]
         });
@@ -64,7 +64,7 @@ contract('FundrequestPublicSeed', function (accounts) {
         expect(theDeposit.toString()).to.equal(web3.toWei(19));
     });
 
-    it('should be possible to invest for yourself in a non-whitelist period', async function () {
+    it('should be possible to invest for yourself in a non-whitelist period', async() =>  {
         await seed.allowEveryone({
             from: accounts[0]
         });
