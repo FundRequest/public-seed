@@ -23,7 +23,7 @@ contract('FundrequestPublicSeed', function (accounts) {
 
   it("it should have a max wei cap as defined in eth", async function () {
     let cap = web3.fromWei((await seed.weiMaxCap.call()).toNumber());
-    expect(cap.toString()).to.equal(1000);
+    expect(cap.toString()).to.equal('1000');
   });
 
   it("it should have a rate as defined", async function () {
