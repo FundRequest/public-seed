@@ -120,14 +120,27 @@
         <div class="introduction section">
           <div class="content-middle">
             <div class="gr-container">
+
               <div class="row">
                 <div class="gr-12 center">
                   <br>
                   <h1>FundRequest Public Seed</h1>
                   <br>
-                  <h3 class="smallPrint">The public seed contract is located at <a href="https://etherscan.io/address/0x436aad97c5c4298521a1295f5e55c7bd9ab090c3#code"
-                      target="_blanc" class="contractLocation">??0x436aad97c5c4298521a1295f5e55c7bd9ab090c3???</a></h3>
-                  <span style='font-size:10px; color:grey'>* By transferring ETH to the FundRequest public seed contract address you explicitely agree to the terms and conditions</span>
+                  <section id="immediateBuySection" style="display: none;">
+                    <div class="gr-12 center">
+                      <h3 class="smallPrint">It would appear you're not using a web3-enabled browser. You can still fund by accepting our terms
+                        of agreement and sending your funds to the contract address.</h3>
+                      </br>
+                      <input type="checkbox" class="filled-in custom_teal" id="immediate-buy-agreement" />
+                      <label for="immediate-buy-agreement"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+Disclaimer" target="_blank" class="disclaimer-hyperlink">Terms and Conditions</a> for the public seed</label>
+                      <br><br>
+                    </div>
+                  </section>
+                  <section id="immediateBuyContractInformation" style="display: none;">
+                    <h3 class="smallPrint">The public seed contract is located at <a href="https://etherscan.io/address/0x436aad97c5c4298521a1295f5e55c7bd9ab090c3#code"
+                        target="_blanc" class="contractLocation">??0x436aad97c5c4298521a1295f5e55c7bd9ab090c3???</a></h3>
+                    <span style='font-size:10px; color:grey'>* By transferring ETH to the FundRequest public seed contract address you explicitely agree to the terms and conditions</span>
+                  </section>
                   <br><br><br>
                   <div class="gr-12 center" id="counters">
                     <countdown title="" date="Wed Sep 27 2017 08:00:00 GMT+0200 (CEST)"></countdown>
@@ -291,17 +304,6 @@
                   </div>
                 </div>
               </div>
-
-              <section id="immediateBuySection" style="display: none;">
-                <div class="gr-12 center">
-                  <span style='font-size:10px; color:grey'>It would appear you're not using a web3-enabled browser. You can still fund by accepting our terms of agreement and sending your funds to the contract address.</span>
-                  <input type="checkbox" class="filled-in custom_teal" id="immediate-buy-agreement" />
-                  <label for="immediate-buy-agreement"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+Disclaimer" target="_blank" class="disclaimer-hyperlink">Terms and Conditions</a> for the public seed</label>
-                  <br><br>
-                  <span id="immediateBuyContractInformation" style='display: none;font-size:12px; color:grey'>The contract is located at: <b class="contractLocation"></b></span>
-
-                </div>
-              </section>
 
               <section id="presaleSection" style="display: none;">
                 <div class="row smallPrint">
