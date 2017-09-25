@@ -250,7 +250,9 @@
                 let _rate = await presaleContract.rate.call()
                 elements.$fndCurrentRate.html(_rate.toNumber());
 
-                let _wei = await presaleContract.weiRaised.call();
+                let _weiRaised = await presaleContract.weiRaised.call();
+                let _weiMaxCap = await presaleContract.weiMaxCap.call();
+                let _wei = _weiMaxCap - _weiRaised;
                 let ether = (_wei.toNumber() / Math.pow(10, 18));
                 elements.$fndTotalRaised.html((Math.round((ether * 100) / 100) + 1946.75).toFixed(2) + ' ETH');
 
