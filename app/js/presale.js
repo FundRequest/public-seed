@@ -272,10 +272,11 @@
 
         elements.$fndTotalLeft.html(ether);
         elements.$fndTotalRaised.html(totalRaised);
+        showProgress()
 
         let _investorCount = await presaleContract.investorCount.call();
         elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
-
+        showProgress(_wei, _weiMaxCap);
         ex.owner = await presaleContract.owner.call();
         setTimeout(refreshContractInformation, 10000);
       } catch (error) {
@@ -284,6 +285,13 @@
         hidePresaleSection();
       }
     };
+
+    function showProgress(_raised, _max) {
+      if (_raised && _max) {
+        let remainingInPercentagePublicSeed = _raised / _max * 100;
+        console.log(remainingInPercentagePublicSeed + "% remaining");
+      }
+    }
 
     function updateButtons() {
       const isConfirmTermsChecked = elements.checkboxes.$confirmTerms.is(':checked');
