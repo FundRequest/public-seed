@@ -29,6 +29,7 @@
     $accountSelect: $('#accountSelect'),
     $amount: $('#amount'),
     $busy: $('#busy'),
+    $progressBar: $('#progressBar'),
     $personalStash: $('#personalStash'),
     $presaleSection: $('#presaleSection'),
     $fndCurrentRate: $('#fndCurrentRate'),
@@ -272,7 +273,6 @@
 
         elements.$fndTotalLeft.html(ether);
         elements.$fndTotalRaised.html(totalRaised);
-        showProgress()
 
         let _investorCount = await presaleContract.investorCount.call();
         elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
@@ -289,7 +289,8 @@
     function showProgress(_raised, _max) {
       if (_raised && _max) {
         let remainingInPercentagePublicSeed = _raised / _max * 100;
-        console.log(remainingInPercentagePublicSeed + "% remaining");
+        elements.$progressBar.find('[data-bar]').attr('style', 'width: ' + (100 - remainingInPercentagePublicSeed) + '%');
+        elements.$progressBar.find('[data-bar-value]').text(remainingInPercentagePublicSeed);
       }
     }
 
