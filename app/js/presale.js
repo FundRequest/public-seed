@@ -292,10 +292,7 @@
 
 				const totalRaised = (Math.round(web3.fromWei(constants.PREVIOUSLY_RAISED + _weiRaised) * 100) / 100).toFixed(2);
 
-				console.log(constants.PREVIOUSLY_SOLD_TOKENS);
-				console.log((_weiRaised * constants.PUBLIC_RATE));
 				const tokensSold = constants.PREVIOUSLY_SOLD_TOKENS + ((_weiRaised * constants.PUBLIC_RATE) / Math.pow(10, 18));
-				console.log(tokensSold);
 				elements.$fndTotalTokensSold.html(tokensSold);
 
 				elements.$fndTotalLeft.html(etherLeft);
