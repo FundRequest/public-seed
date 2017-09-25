@@ -11,7 +11,11 @@
     };
 
     const constants = {
-        CONTRACT_LOC : '0x0'
+        CONTRACT_LOC : '0x0',
+        PREVIOUSLY_RAISED: 1946751226270900000000,
+        PRIVATE_RATE: 4500,
+        PUBLIC_RATE: 3600,
+        PREVIOUSLY_SOLD_TOKENS: Math.round(web3.fromWei(1946751226270900000000 * 3600) * 100) / 100
     }
 
     var elements = {
@@ -31,6 +35,8 @@
         $fndYourTokens: $('#fndYourTokens'),
         $fndTotalBackers: $('#fndTotalBackers'),
         $fndTotalRaised: $('#fndTotalRaised'),
+        $fndTotalTokensSold: $('#fndTotalTokensSold'),
+        $fndTotalLeft: $('#fndTotalLeft'),
         $targetAddress: $('#targetAddress'),
         $targetAddressLabel: $('#targetAddressLabel'),
         $contractAddressLabel: $('#contractAddressLabel'),
@@ -254,7 +260,13 @@
                 let _weiMaxCap = (await presaleContract.weiMaxCap.call()).toNumber();
                 let _wei = _weiMaxCap - _weiRaised;
                 let ether = (_wei / Math.pow(10, 18));
-                elements.$fndTotalRaised.html((Math.round((ether * 100) / 100)).toFixed(2) + ' ETH');
+                const totalRaised = (Math.round(web3.fromWei(constants.PREVIOUSLY_RAISED + _weiRaised)  * 100) / 100).toFixed(2);
+
+                const tokensSold = constants.PREVIOUSLY_SOLD_TOKENS + (_weiRaised * constants.PUBLIC_RATE);
+                elements.$fndTotalTokensSold.html(tokensSold); 
+
+                elements.$fndTotalLeft.html(ether);
+                elements.$fndTotalRaised.html(totalRaised);
 
                 let _investorCount = await presaleContract.investorCount.call();
                 elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
