@@ -1,6 +1,6 @@
 /* global jQuery, Materialize */
 
-(function($) {
+(function ($) {
     'use strict';
 
     var $document = $(document);
@@ -49,7 +49,7 @@
         elements.$presaleSection.show();
     }
 
-    var presale = (function() {
+    var presale = (function () {
         var presaleContract = {};
 
         var colors = {
@@ -64,11 +64,11 @@
         };
 
         function loadContract(_callback) {
-            $.getJSON('./contracts/FundRequestPublicSeed.json', function(Presale_json) {
+            $.getJSON('./contracts/FundRequestPublicSeed.json', function (Presale_json) {
                 var presaleTruffleContract = TruffleContract(Presale_json);
                 presaleTruffleContract.setProvider(window.web3.currentProvider);
 
-                presaleTruffleContract.deployed().then(function(instance) {
+                presaleTruffleContract.deployed().then(function (instance) {
                     presaleContract = instance;
                     _callback();
                 });
@@ -82,11 +82,13 @@
             var _from = ex.selectedAccount;
 
             presaleContract.allow(
-                _target, {from: _from}
-            ).then(function() {
+                _target, {
+                    from: _from
+                }
+            ).then(function () {
                 Materialize.toast('Account submitted to the whitelist', messageTimes.medium, colors.BLUE);
                 hideLoader();
-            }).catch(function(err) {
+            }).catch(function (err) {
                 Materialize.toast('Whitelisting failed.', messageTimes.medium);
                 console.log(err);
                 hideLoader();
@@ -113,7 +115,7 @@
                 return;
             }
 
-            presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
+            presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
                 if (result === true) {
                     showLoader();
                     Materialize.toast('Please wait while the transaction is being validated...', messageTimes.medium, colors.BLUE);
@@ -126,7 +128,7 @@
                 } else {
                     throw new Error('Unable to fund from this address because it is not whitelisted.');
                 }
-            }).then(function(result) {
+            }).then(function (result) {
                 var txHash = result.tx;
                 var $link = $(document.createElement('a'))
                     .attr('href', 'https://etherscan.io/tx/' + txHash)
@@ -139,10 +141,10 @@
 
                 Materialize.toast($toastContent, messageTimes.longer, colors.GREEN);
                 updateTokens(ex.selectedAccount);
-                document.getElementById("personalStash").style.opacity=1;
+                document.getElementById("personalStash").style.opacity = 1;
 
                 hideLoader();
-            }).catch(function(err) {
+            }).catch(function (err) {
                 console.log('Error during BUY: ', err);
                 var $link = $(document.createElement('a'))
                     .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
@@ -173,7 +175,7 @@
         function fillAccounts(accounts) {
             ex.accounts = accounts;
 
-            $.each(ex.accounts, function(i, item) {
+            $.each(ex.accounts, function (i, item) {
                 var option = document.createElement('option');
                 option.text = item;
                 option.className = 'dropdown-content';
@@ -184,7 +186,7 @@
             updateTokens(ex.accounts[0]);
 
             elements.$accountSelect.material_select();
-            elements.$accountSelect.on('change', function() {
+            elements.$accountSelect.on('change', function () {
                 ex.selectedAccount = $('option:selected', elements.$accountSelect).first().text();
                 elements.$targetAddress.val(ex.selectedAccount);
                 elements.$targetAddressLabel.html(ex.selectedAccount);
@@ -195,11 +197,11 @@
                     elements.$whiteListArea.show();
                 }
                 Materialize.updateTextFields();
-                document.getElementById("personalStash").style.opacity=1;
+                document.getElementById("personalStash").style.opacity = 1;
 
-                presaleContract.allowed.call(ex.selectedAccount).then(function(result) {
+                presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
                     if (result === false) {
-                        var errorMessage='Unable to fund from this address because it is not whitelisted.';
+                        var errorMessage = 'Unable to fund from this address because it is not whitelisted.';
                         Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
                     }
                 });
@@ -208,34 +210,35 @@
             });
         }
 
-        function updateTokens(address) {
-            presaleContract.balanceOf.call(address).then(function(_tokens) {
+        var updateTokens = async() => {
+            try {
+                let _tokens = await presaleContract.balanceOf.call(address);
                 elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
-            }).catch(function() {
+            } catch (error) {
                 Materialize.toast('Please check your settings. The presale is not deployed on your current network.', messageTimes.medium);
                 hidePresaleSection();
-            });
+            }
         }
 
-        var refreshContractInformation = function() {
-            presaleContract.rate.call().then(function(_rate) {
+        var refreshContractInformation = async function () {
+            try {
+                console.log('refreshing');
+                let _rate = await presaleContract.rate.call()
                 elements.$fndCurrentRate.html(_rate.toNumber());
-                return presaleContract.weiRaised.call();
-            }).then(function(_wei) {
-                var number = (_wei.toNumber() / 1000000000000000000);
-                elements.$fndTotalRaised.html((Math.round((number * 100)/100)+1946.75).toFixed(2) + ' ETH');
-                return presaleContract.investorCount.call();
-            }).then(function(_investorCount) {
-                elements.$fndTotalBackers.html(_investorCount.toNumber()+11);
-                return presaleContract.owner.call();
-            }).then(function(_owner) {
-                ex.owner = _owner;
-            }).catch(function() {
+
+                let _wei = await presaleContract.weiRaised.call();
+                let ether = (_wei.toNumber() / Math.pow(10, 18));
+                elements.$fndTotalRaised.html((Math.round((ether * 100) / 100) + 1946.75).toFixed(2) + ' ETH');
+
+                let _investorCount = await presaleContract.investorCount.call();
+                elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
+
+                ex.owner = await presaleContract.owner.call();
+                setTimeout(refreshContractInformation, 10000);
+            } catch (error) {
                 Materialize.toast('Please check your settings. The presale is not deployed on your current network.', messageTimes.medium);
                 hidePresaleSection();
-            });
-
-            setTimeout(refreshContractInformation, 10000);
+            }
         };
 
         function updateButtons() {
@@ -256,23 +259,23 @@
                 .attr('target', '_blank')
                 .html(presaleContract.address);
             var $contractAddressLabelContent = $(document.createElement('span'))
-                 .text('The private seed contract is located at ')
-                 .add($link);
+                .text('The private seed contract is located at ')
+                .add($link);
 
             elements.$contractAddressLabel.html($contractAddressLabelContent);
         }
 
-        var start = function() {
-            web3.eth.getAccounts(function(err, accounts) {
-              refreshContractInformation();
-              fillContractAddress();
-              if (!accountsAreInvalid(err, accounts)) {
-                fillAccounts(accounts);
-              }
+        var start = function () {
+            web3.eth.getAccounts(function (err, accounts) {
+                refreshContractInformation();
+                fillContractAddress();
+                if (!accountsAreInvalid(err, accounts)) {
+                    fillAccounts(accounts);
+                }
             });
         };
 
-        var init = function() {
+        var init = function () {
             disableButton(elements.buttons.$buy);
             elements.buttons.$buy.on('click', buy);
             elements.buttons.$allow.on('click', allow);
@@ -288,12 +291,13 @@
         };
     })();
 
-    $(function() {
+    $(function () {
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
         if (typeof web3 !== 'undefined') {
+            console.log(web3.currentProvider);
             window.web3 = new Web3(web3.currentProvider);
         } else {
-          window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
+            window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
         }
         showPresaleSection();
         presale.init();
