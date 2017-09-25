@@ -250,11 +250,11 @@
                 let _rate = await presaleContract.rate.call()
                 elements.$fndCurrentRate.html(_rate.toNumber());
 
-                let _weiRaised = await presaleContract.weiRaised.call();
-                let _weiMaxCap = await presaleContract.weiMaxCap.call();
+                let _weiRaised = (await presaleContract.weiRaised.call()).toNumber();
+                let _weiMaxCap = (await presaleContract.weiMaxCap.call()).toNumber();
                 let _wei = _weiMaxCap - _weiRaised;
-                let ether = (_wei.toNumber() / Math.pow(10, 18));
-                elements.$fndTotalRaised.html((Math.round((ether * 100) / 100) + 1946.75).toFixed(2) + ' ETH');
+                let ether = (_wei / Math.pow(10, 18));
+                elements.$fndTotalRaised.html((Math.round((ether * 100) / 100)).toFixed(2) + ' ETH');
 
                 let _investorCount = await presaleContract.investorCount.call();
                 elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
@@ -262,6 +262,7 @@
                 ex.owner = await presaleContract.owner.call();
                 setTimeout(refreshContractInformation, 10000);
             } catch (error) {
+                console.log(error);
                 Materialize.toast('Please check your settings. The presale is not deployed on your current network.', messageTimes.medium);
                 hidePresaleSection();
             }
