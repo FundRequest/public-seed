@@ -138,7 +138,7 @@
 			});
 		}
 
-		function buy() {
+		var  buy = async ()=> {
 			let chosenAmount = elements.$amount.val();
 			let targetAddress = elements.$targetAddress.val();
 			let errorMessage = '';
@@ -156,9 +156,10 @@
 				return;
 			}
 
+			let everyoneDisabled = presaleContract.everyoneDisabled.call();
 			presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
 				console.log("------");
-				if (result === true) {
+				if (result === true || everyoneDisabled == false) {
 					showLoader();
 					Materialize.toast('Please wait while the transaction is being validated...', messageTimes.medium, colors.BLUE);
 
