@@ -185,7 +185,6 @@
 
         hideLoader();
       }).catch(function (err) {
-        console.log('Error during BUY: ', err);
         const $link = $(document.createElement('a'))
           .attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#readContract')
           .attr('target', '_blank')
@@ -214,7 +213,6 @@
 
     function fillAccounts(accounts) {
       ex.accounts = accounts;
-
       $.each(ex.accounts, function (i, item) {
         const option = document.createElement('option');
         option.text = item;
@@ -253,17 +251,26 @@
       });
     }
 
+    var updateRate = async ()=> {
+        let _rate = await presaleContract.rate.call()
+        elements.$fndCurrentRate.html(_rate.toNumber());
+    }
+
+    var updateInvestorCount = async () => {
+        let _investorCount = await presaleContract.investorCount.call();
+        elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
+    }
 
     const refreshContractInformation = async function () {
       try {
-        console.log('refreshing');
-        let _rate = await presaleContract.rate.call()
-        elements.$fndCurrentRate.html(_rate.toNumber());
+        updateRate();
+        updateInvestorCount();
 
         let _weiRaised = (await presaleContract.weiRaised.call()).toNumber();
         let _weiMaxCap = (await presaleContract.weiMaxCap.call()).toNumber();
-        let _wei = _weiMaxCap - _weiRaised;
-        let ether = (_wei / Math.pow(10, 18));
+        let _weiLeft = _weiMaxCap - _weiRaised;
+        let etherLeft = (_weiLeft / Math.pow(10, 18));
+
         const totalRaised = (Math.round(web3.fromWei(constants.PREVIOUSLY_RAISED + _weiRaised) * 100) / 100).toFixed(2);
 
         const tokensSold = constants.PREVIOUSLY_SOLD_TOKENS + (_weiRaised * constants.PUBLIC_RATE);
@@ -272,8 +279,6 @@
         elements.$fndTotalLeft.html(ether);
         elements.$fndTotalRaised.html(totalRaised);
 
-        let _investorCount = await presaleContract.investorCount.call();
-        elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
         showProgress(_wei, _weiMaxCap);
         ex.owner = await presaleContract.owner.call();
         setTimeout(refreshContractInformation, 10000);
