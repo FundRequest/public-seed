@@ -2,6 +2,7 @@ build/css/
 build/favicons/
 build/fonts/
 build/images/
+build/jsLibs
 build/index.html
 build/js/
 node_modules/
