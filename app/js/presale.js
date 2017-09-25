@@ -68,9 +68,8 @@
             elements.$immediateBuyContractInformation.show();
             elements.$contractLocation.text(constants.CONTRACT_LOC);
             elements.$contractLocation.attr('href', 'https://etherscan.io/address/' + constants.CONTRACT_LOC + '#code');
-        } else {
-            elements.$immediateBuyContractInformation.hide();
-        }
+            elements.$immediateBuySection.hide();
+        } 
     }
 
     function showPresaleSection() {
