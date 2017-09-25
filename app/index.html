@@ -181,40 +181,56 @@
 
               <div class="row">
                 <div class="gr-12 center">
-                  <div class="gr-4 center">
-                    <div class="card card_transparent">
-                      <div class="card-content custom_teal white-text">
-                        <span class="card-title">Rate</span>
-                        <p>Tokens per ETH</p>
+                  <div class="row">
+                    <div class="gr-4 center">
+                      <div class="card card_transparent">
+                        <div class="card-content custom_teal white-text">
+                          <span class="card-title">Rate</span>
+                          <p>Tokens per ETH</p>
+                        </div>
+                        <div class="card-action custom_teal_dark">
+                          <b><span id="fndCurrentRate" class="white-text font-large"></span></b><span class="white-text font-large"> FND/ETH</span>
+                        </div>
                       </div>
-                      <div class="card-action custom_teal_dark">
-                        <b><span id="fndCurrentRate" class="white-text font-large"></span></b><span class="white-text font-large"> FND/ETH</span>
+                    </div>
+
+                    <div class="gr-4 center">
+                      <div class="card card_transparent">
+                        <div class="card-content custom_teal white-text">
+                          <span class="card-title custom_teal">Left</span>
+                          <p>ETH left until cap</p>
+                        </div>
+                        <div class="card-action custom_teal_dark">
+                          <span id="fndTotalLeft" class="white-text font-large">Loading...</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="gr-4 center">
+                      <div class="card card_transparent">
+                        <div class="card-content custom_teal white-text">
+                          <span class="card-title">Backers</span>
+                          <p>Total number</p>
+                        </div>
+                        <div class="card-action custom_teal_dark">
+                          <span id="fndTotalBackers" class="white-text font-large">Loading...</span>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div class="gr-4 center">
-                    <div class="card card_transparent">
-                      <div class="card-content custom_teal white-text">
-                        <span class="card-title custom_teal">Left</span>
-                        <p>ETH left until cap</p>
-                      </div>
-                      <div class="card-action custom_teal_dark">
-                        <span id="fndTotalLeft" class="white-text font-large">Loading...</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="gr-4 center">
-                    <div class="card card_transparent">
-                      <div class="card-content custom_teal white-text">
-                        <span class="card-title">Backers</span>
-                        <p>Total number</p>
-                      </div>
-                      <div class="card-action custom_teal_dark">
-                        <span id="fndTotalBackers" class="white-text font-large">Loading...</span>
-                      </div>
-                    </div>
+              <div class="row" id="progressBar">
+                <div class="gr-6 left">
+                  Remaining
+                </div>
+                <div class="gr-6 right">
+                  <span data-bar-value>0</span>%
+                </div>
+                <div class="gr-12">
+                  <div class="progress progress--height">
+                    <div data-bar class="determinate" style="width: 0%"></div>
                   </div>
                 </div>
               </div>
