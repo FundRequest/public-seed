@@ -66,6 +66,7 @@
     if (show) {
       elements.$immediateBuyContractInformation.show();
       elements.$contractLocation.text(constants.CONTRACT_LOC);
+      elements.$contractLocation.attr('href', 'https://etherscan.io/address/' + constants.CONTRACT_LOC + '#code');
     } else {
       elements.$immediateBuyContractInformation.hide();
     }
@@ -109,6 +110,7 @@
 
         presaleTruffleContract.deployed().then(function (instance) {
           presaleContract = instance;
+          constants.CONTRACT_LOC = presaleContract.address;
           _callback();
         });
       });
@@ -310,6 +312,7 @@
     const start = function () {
 
       elements.$contractLocation.text(presaleContract.address);
+      elements.$contractLocation.attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#code');
 
       web3.eth.getAccounts(function (err, accounts) {
         refreshContractInformation();
