@@ -138,7 +138,7 @@
 			});
 		}
 
-		var  buy = async ()=> {
+		var buy = async() => {
 			let chosenAmount = elements.$amount.val();
 			let targetAddress = elements.$targetAddress.val();
 			let errorMessage = '';
