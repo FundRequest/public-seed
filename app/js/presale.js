@@ -158,7 +158,6 @@
 
 			let everyoneDisabled = presaleContract.everyoneDisabled.call();
 			presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
-				console.log("------");
 				if (result === true || everyoneDisabled == false) {
 					showLoader();
 					Materialize.toast('Please wait while the transaction is being validated...', messageTimes.medium, colors.BLUE);
@@ -200,24 +199,6 @@
 				Materialize.toast($toastContent, messageTimes.longer);
 				hideLoader();
 			});
-		}
-
-		function toFixed(x) {
-			if (Math.abs(x) < 1.0) {
-				var e = parseInt(x.toString().split('e-')[1]);
-				if (e) {
-					x *= Math.pow(10, e - 1);
-					x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
-				}
-			} else {
-				var e = parseInt(x.toString().split('+')[1]);
-				if (e > 20) {
-					e -= 20;
-					x /= Math.pow(10, e);
-					x += (new Array(e + 1)).join('0');
-				}
-			}
-			return x;
 		}
 
 		function accountsAreInvalid(err, accounts) {
@@ -360,6 +341,13 @@
 			elements.buttons.$buy.on('click', buy);
 			elements.buttons.$allow.on('click', allow);
 			elements.checkboxes.$confirmTerms.on('click', updateButtons);
+			elements.checkboxes.$confirmTerms.on('change', function () {
+				if (this.checked) {
+					elements.$immediateBuyContractInformation.show();
+					elements.$contractLocation.text(presaleContract.address);
+					elements.$contractLocation.attr('href', 'https://etherscan.io/address/' + presaleContract.address + '#code');
+				}
+			});
 			elements.$amount.on('change', updateButtons);
 
 			updateButtons();
