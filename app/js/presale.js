@@ -294,7 +294,7 @@
 
 				console.log(constants.PREVIOUSLY_SOLD_TOKENS);
 				console.log((_weiRaised * constants.PUBLIC_RATE));
-				const tokensSold = toFixed(constants.PREVIOUSLY_SOLD_TOKENS + web3.fromWei(_weiRaised * constants.PUBLIC_RATE));
+				const tokensSold = constants.PREVIOUSLY_SOLD_TOKENS + ((_weiRaised * constants.PUBLIC_RATE) / Math.pow(10, 18));
 				console.log(tokensSold);
 				elements.$fndTotalTokensSold.html(tokensSold);
 
