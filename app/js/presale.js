@@ -10,6 +10,10 @@
         longer: 8000
     };
 
+    const constants = {
+        CONTRACT_LOC : '0x0'
+    }
+
     var elements = {
         buttons: {
             $buy: $('#btnBuy'),
@@ -31,9 +35,10 @@
         $targetAddressLabel: $('#targetAddressLabel'),
         $contractAddressLabel: $('#contractAddressLabel'),
         $whiteListArea: $('#whitelistarea'),
-        $contractLocation: $('#contractLocation'),
+        $contractLocation: $('.contractLocation'),
         $immediateBuySection: $('#immediateBuySection'),
-        $immediateBuyAgreement: $('#immediate-buy-agreement')
+        $immediateBuyAgreement: $('#immediate-buy-agreement'),
+        $immediateBuyContractInformation: $('#immediateBuyContractInformation')
     };
 
     function showLoader() {
@@ -46,9 +51,18 @@
 
     function showImmediateBuySection() {
         elements.$immediateBuySection.show();
-        elements.$immediateBuyAgreement.change(function (changed) {
-            console.log(changed);
-        });
+        elements.$immediateBuyAgreement.on('change', function () {
+            showImmediateBuyContractInformation(this.checked);
+        })
+    }
+
+    function showImmediateBuyContractInformation(show) {
+        if(show) {
+            elements.$immediateBuyContractInformation.show();
+            elements.$contractLocation.text(constants.CONTRACT_LOC);
+        } else {
+            elements.$immediateBuyContractInformation.hide();        
+        }
     }
 
     function showPresaleSection() {
