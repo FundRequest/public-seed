@@ -277,6 +277,12 @@
         let _investorCount = await presaleContract.investorCount.call();
         elements.$fndTotalBackers.html(_investorCount.toNumber() + 11);
         showProgress(_wei, _weiMaxCap);
+
+        let _isEveryoneDisabled = await presaleContract.everyoneDisabled.call();
+        let _isPaused = await presaleContract.paused.call();
+
+        updateTimeline(_isEveryoneDisabled, _isPaused);
+
         ex.owner = await presaleContract.owner.call();
         setTimeout(refreshContractInformation, 10000);
       } catch (error) {
@@ -292,6 +298,21 @@
         elements.$progressBar.find('[data-bar]').attr('style', 'width: ' + (100 - remainingInPercentagePublicSeed) + '%');
         elements.$progressBar.find('[data-bar-value]').text(remainingInPercentagePublicSeed);
       }
+    }
+
+    function updateTimeline(everyoneDisabled, paused) {
+        let activeTimelineStep = 'waiting';
+
+        if (!paused && everyoneDisabled) {
+            activeTimelineStep = 'priority'
+        } else if (!paused && !everyoneDisabled) {
+            activeTimelineStep = 'public';
+        } else if (paused && !everyoneDisabled) {
+            activeTimelineStep = 'closed';
+        }
+
+        $('.timeline-step[data-timeline-step]').removeClass('active');
+        $('.timeline-step[data-timeline-step="'+activeTimelineStep+'"]').addClass('active');
     }
 
     function updateButtons() {
