@@ -30,7 +30,10 @@
         $targetAddress: $('#targetAddress'),
         $targetAddressLabel: $('#targetAddressLabel'),
         $contractAddressLabel: $('#contractAddressLabel'),
-        $whiteListArea: $('#whitelistarea')
+        $whiteListArea: $('#whitelistarea'),
+        $contractLocation: $('#contractLocation'),
+        $immediateBuySection: $('#immediateBuySection'),
+        $immediateBuyAgreement: $('#immediate-buy-agreement')
     };
 
     function showLoader() {
@@ -39,6 +42,13 @@
 
     function hideLoader() {
         elements.$busy.hide();
+    }
+
+    function showImmediateBuySection() {
+        elements.$immediateBuySection.show();
+        elements.$immediateBuyAgreement.change(function (changed) {
+            console.log(changed);
+        });
     }
 
     function showPresaleSection() {
@@ -210,7 +220,7 @@
             });
         }
 
-        var updateTokens = async() => {
+        var updateTokens = async function (address) {
             try {
                 let _tokens = await presaleContract.balanceOf.call(address);
                 elements.$fndYourTokens.html(web3.fromWei(_tokens.toNumber()));
@@ -267,7 +277,7 @@
 
         var start = function () {
 
-            $('#contractLocation').text(presaleContract.address);
+            elements.$contractLocation.text(presaleContract.address);
 
             web3.eth.getAccounts(function (err, accounts) {
                 refreshContractInformation();
@@ -299,11 +309,12 @@
         if (typeof web3 !== 'undefined') {
             console.log(web3.currentProvider);
             window.web3 = new Web3(web3.currentProvider);
+            showPresaleSection();
+            presale.init();
         } else {
             window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
+            showImmediateBuySection();
         }
-        showPresaleSection();
-        presale.init();
     });
 
     function enableButton($button) {

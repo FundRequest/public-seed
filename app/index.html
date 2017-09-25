@@ -42,17 +42,17 @@
       opacity: 0.7;
     }
 
-    .custom-font{
+    .custom-font {
       font-family: 'Montserrat', serif;
     }
 
-    .font-large{
+    .font-large {
       font-size: 16px;
     }
 
     .custom_btn {
       background-color: #829299 !important;
-       opacity: 0.2;
+      opacity: 0.2;
     }
 
     .custom_dropdown {
@@ -78,12 +78,13 @@
       margin: 0;
       padding: 0 40px 40px;
     }
-    .txtLarge{
+
+    .txtLarge {
       font-weight: bold;
       color: #00bab5;
     }
 
-    .smallPrint{
+    .smallPrint {
       margin-bottom: 0px;
     }
 
@@ -91,7 +92,7 @@
       top: 80px;
       right: 1%;
       bottom: auto !important;
-      left:auto !important;
+      left: auto !important;
     }
   </style>
 </head>
@@ -124,24 +125,26 @@
                   <br>
                   <h1>FundRequest Public Seed</h1>
                   <br>
-                  <h3 class="smallPrint">The public seed contract is located at <a href="https://etherscan.io/address/0x436aad97c5c4298521a1295f5e55c7bd9ab090c3#code" target="_blanc" id="contractLocation">??0x436aad97c5c4298521a1295f5e55c7bd9ab090c3???</a></h3>
+                  <h3 class="smallPrint">The public seed contract is located at <a href="https://etherscan.io/address/0x436aad97c5c4298521a1295f5e55c7bd9ab090c3#code"
+                      target="_blanc" id="contractLocation">??0x436aad97c5c4298521a1295f5e55c7bd9ab090c3???</a></h3>
                   <span style='font-size:10px; color:grey'>* By transferring ETH to the FundRequest public seed contract address you explicitely agree to the terms and conditions</span>
                   <br><br><br>
                   <div class="gr-12 center" id="counters">
                     <countdown title="" date="Wed Sep 27 2017 08:00:00 GMT+0200 (CEST)"></countdown>
-                    <countdown title="Public seed closes in"
-                               ended-label="Public seed is closed."
-                               date="Thu Sep 28 2017 23:59:59 GMT+0200 (CEST)"
-                               start="Wed Sep 27 2017 08:00:01 GMT+0200 (CEST)"></countdown>
+                    <countdown title="Public seed closes in" ended-label="Public seed is closed." date="Thu Sep 28 2017 23:59:59 GMT+0200 (CEST)"
+                      start="Wed Sep 27 2017 08:00:01 GMT+0200 (CEST)"></countdown>
                   </div>
                   <h2>Starts Wednesday, 27 September 08:00 AM CEST and ends Thursday, 28 September 23:59 PM CEST</h2>
                   <br>
                   <h3>First 8hrs, priority pass, only whitelisted addresses</h3>
-                  <h3>For questions or support, <a href="https://slack.fundrequest.io" target="_blank">join</a> us on Slack and contact @karel, @gerbert or @timdierckxsens</h3>
-                  <h3>New to crypto funding and you love some help, then have a look at our <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+User+Guide" target="_blank">user guides</a></h3>
+                  <h3>For questions or support, <a href="https://slack.fundrequest.io" target="_blank">join</a> us on Slack and
+                    contact @karel, @gerbert or @timdierckxsens</h3>
+                  <h3>New to crypto funding and you love some help, then have a look at our <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+User+Guide"
+                      target="_blank">user guides</a></h3>
                   <br>
                   <div id="personalStash" style="opacity: 0">
-                    <h3> Account <span id="targetAddressLabel">0x0</a></span> is currently entitled to <span class="txtLarge" id="fndYourTokens">0</span> FND Tokens </h3>
+                    <h3> Account <span id="targetAddressLabel">0x0</a></span> is currently entitled to <span class="txtLarge"
+                        id="fndYourTokens">0</span> FND Tokens </h3>
                   </div>
                 </div>
               </div>
@@ -186,54 +189,65 @@
                 </div>
               </div>
 
-              <div class="row smallPrint">
+              <section id="immediateBuySection" style="display: none;">
                 <div class="gr-12 center">
-                  <div class="input-field col s7  offset-s1">
-                    <select id="accountSelect">
-                          <option value="" disabled selected>Choose your account*</option>
-                        </select>
-                    <label>Select your account</label>
+                  <span style='font-size:10px; color:grey'>It would appear you're not using a web3-enabled browser. You can still fund by accepting our terms of agreement and sending your funds to the contract address.</span>
+                  <input type="checkbox" class="filled-in custom_teal" id="immediate-buy-agreement" />
+                  <label for="immediate-buy-agreement"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+Disclaimer" target="_blank" class="disclaimer-hyperlink">Terms and Conditions</a> for the public seed</label>
+                  <br><br>
+                </div>
+              </section>
+
+              <section id="presaleSection" style="display: none;">
+                <div class="row smallPrint">
+                  <div class="gr-12 center">
+                    <div class="input-field col s7  offset-s1">
+                      <select id="accountSelect">
+                            <option value="" disabled selected>Choose your account*</option>
+                          </select>
+                      <label>Select your account</label>
+                    </div>
+                    <div class="input-field inline col s2 offset-s1">
+                      <input id="amount" placeholder="Amount" type="number">
+                      <label for="amount">Amount</label>
+                    </div>
                   </div>
-                  <div class="input-field inline col s2 offset-s1">
-                    <input id="amount"  placeholder="Amount" type="number">
-                    <label for="amount">Amount</label>
+                </div>
+                <div class="row">
+                  <div class="gr-1"></div>
+                  <div class="gr-11">
+                    <span style='font-size:10px; color:grey'>* In order to partake in the first day of our public seed your address must be whitelisted</span>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="gr-1"></div>
-                <div class="gr-11">
-                  <span style='font-size:10px; color:grey'>* In order to partake in the first day of our public seed your address must be whitelisted</span>
-                </div>
-              </div>
 
-
-              <div class="gr-12 center">
-                <a id="btnBuy" class="waves-effect waves-light btn-large custom_btn">Fund </a>
-                 &nbsp;&nbsp;&nbsp;<input type="checkbox" class="filled-in custom_teal" id="filled-in-box"/>
-                 <label for="filled-in-box"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+Disclaimer" target="_blank" class="disclaimer-hyperlink">Terms and Conditions</a> for the public seed</label>
-                 <br><br>
-              </div>
-
-              <div class="row">
-                <div id="busy" class="progress" style="display: none;">
-                  <div class="indeterminate"></div>
-                </div>
-              </div>
-              <div class="row" id="whitelistarea" style="display:none">
                 <div class="gr-12 center">
-                  <br>
-                  <div class="input-field inline col s12 offset-s1">
-                    <input id="targetAddress" placeholder="Address to whitelist" type="text" class="validate">
-                    <label for="targetAddress">Address to whitelist </label>
-                  </div>
-                  <a id="btnAllow" style="display: block;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                  <a id="btnBuy" class="waves-effect waves-light btn-large custom_btn">Fund </a> &nbsp;&nbsp;&nbsp;
+                  <input type="checkbox" class="filled-in custom_teal" id="filled-in-box" />
+                  <label for="filled-in-box"> I confirm to accept the <a href="https://docs.fundrequest.io/display/PUB/Public+Seed+Disclaimer" target="_blank" class="disclaimer-hyperlink">Terms and Conditions</a> for the public seed</label>
+                  <br><br>
                 </div>
-              </div>
+
+                <div class="row">
+                  <div id="busy" class="progress" style="display: none;">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+                <div class="row" id="whitelistarea" style="display:none">
+                  <div class="gr-12 center">
+                    <br>
+                    <div class="input-field inline col s12 offset-s1">
+                      <input id="targetAddress" placeholder="Address to whitelist" type="text" class="validate">
+                      <label for="targetAddress">Address to whitelist </label>
+                    </div>
+                    <a id="btnAllow" style="display: block;" class="waves-effect waves-light btn-large orange darken-1">Allow</a>
+                  </div>
+                </div>
+              </section>
 
               <div class="row">
                 <div class="gr-12 center"><br><br>
-                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel? </span></span><a href="https://slack.fundrequest.io" target="_blank" class="sign-in-hyperlink"><span>Get invited</span></a></div>
+                  <div><span class="already-joined"><span>Already joined Fundrequest Slack Channel? </span></span><a href="https://slack.fundrequest.io"
+                      target="_blank" class="sign-in-hyperlink"><span>Get invited</span></a></div>
                 </div>
               </div>
             </div>
@@ -304,13 +318,13 @@
     </div>
   </div>
 
-<!-- jsLibs:js -->
-<!-- endinject -->
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
-<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-<!-- inject:js -->
-<!-- endinject -->
+  <!-- jsLibs:js -->
+  <!-- endinject -->
+  <script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+  <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <!-- inject:js -->
+  <!-- endinject -->
 </body>
 
 </html>
