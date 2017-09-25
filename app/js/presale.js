@@ -266,6 +266,9 @@
         }
 
         var start = function () {
+
+            $('#contractLocation').text(presaleContract.address);
+
             web3.eth.getAccounts(function (err, accounts) {
                 refreshContractInformation();
                 fillContractAddress();
