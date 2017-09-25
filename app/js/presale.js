@@ -229,13 +229,16 @@
                 Materialize.updateTextFields();
                 document.getElementById("personalStash").style.opacity = 1;
 
-                presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
-                    if (result === false) {
-                        var errorMessage = 'Unable to fund from this address because it is not whitelisted.';
-                        Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
+                presaleContract.everyoneDisabled.call().then(function(everyoneDisabled){
+                    if(everyoneDisabled == true) {
+                        presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
+                            if (result === false) {
+                                var errorMessage = 'Unable to fund from this address because it is not whitelisted.';
+                                Materialize.toast(errorMessage, messageTimes.medium, colors.BLUE);
+                            }
+                        });
                     }
                 });
-
                 updateButtons();
             });
         }
