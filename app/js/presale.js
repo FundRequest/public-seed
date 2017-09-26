@@ -300,10 +300,15 @@
 
     function showProgress(_raised, _max) {
       if (_raised && _max) {
-        let remainingInPercentagePublicSeed = _raised / _max * 100;
+        let remainingInPercentagePublicSeed = round(_raised / _max * 100, 2);
         elements.$progressBar.find('[data-bar]').attr('style', 'width: ' + (100 - remainingInPercentagePublicSeed) + '%');
         elements.$progressBar.find('[data-bar-value]').text(remainingInPercentagePublicSeed);
       }
+    }
+
+    function round(value, precision) {
+      let multiplier = Math.pow(10, precision || 0);
+      return Math.round(value * multiplier) / multiplier;
     }
 
     function updateTimeline(everyoneDisabled, paused) {
