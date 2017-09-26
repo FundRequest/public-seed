@@ -650,12 +650,12 @@ body,
 
 .timeline-step.active .timeline-icon-outer {
     display: inline-block;
-    font-size: 250%;
-    color: rgb(19, 122, 190);
+    font-size: 200%;
+    color: #137abe;
 }
 
 .timeline-step.active .timeline-icon-inner {
-    color: rgb(239, 239, 239);
+    color: #137abe;
 }
 
 .timeline-step.active .timeline-icon-inner {
