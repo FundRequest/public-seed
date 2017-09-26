@@ -569,8 +569,8 @@ body,
 /* progress */
 .progress--height {
     height: 10px;
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
 }
 
 /* */
@@ -632,17 +632,31 @@ body,
     transform: translate(-50%, -50%);
 }
 
-
+.timeline-step .title {
+    font-size: 90%;
+}
+.timeline-step .subtitle {
+    font-size: 90%;
+}
 
 .timeline-step.active .title {
     font-weight: bold;
+    font-size: 125%;
+}
+
+.timeline-step.active .subtitle {
+    font-size: 110%;
 }
 
 .timeline-step.active .timeline-icon-outer {
     display: inline-block;
-    font-size: 160%;
+    font-size: 250%;
+    color: rgb(19, 122, 190);
 }
 
+.timeline-step.active .timeline-icon-inner {
+    color: rgb(239, 239, 239);
+}
 
 .timeline-step.active .timeline-icon-inner {
     font-size: 80%;
