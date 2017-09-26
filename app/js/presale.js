@@ -155,10 +155,10 @@
         return;
       }
 
-      let everyoneDisabled = presaleContract.everyoneDisabled.call();
+      let everyoneDisabled = await presaleContract.everyoneDisabled.call();
       presaleContract.allowed.call(ex.selectedAccount).then(function (result) {
         if (result === true || everyoneDisabled == false) {
-          if (result === true && chosenAmount > 25) {
+          if (result === true && everyoneDisabled == true && chosenAmount > 25) {
             throw new Error("During priority pass period, you can only fund up to 25 ether!");
           }
           showLoader();
