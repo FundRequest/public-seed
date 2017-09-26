@@ -11,7 +11,7 @@
   };
 
   const constants = {
-    CONTRACT_LOC: '0x0',
+    CONTRACT_LOC: '0x65c8eb2ece64a686f7e990ce2e1cadf498156388',
     PREVIOUSLY_RAISED: 1946751226270900000000,
     PRIVATE_RATE: 4500,
     PUBLIC_RATE: 3600,
@@ -394,7 +394,7 @@
       window.web3 = new Web3(web3.currentProvider);
       showPresaleSection();
     } else {
-      window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+      window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/mew'));
       showImmediateBuySection();
     }
     presale.init();
