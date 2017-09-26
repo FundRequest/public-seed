@@ -75,6 +75,7 @@
 
   function showPresaleSection() {
     elements.$presaleSection.show();
+    showImmediateBuyContractInformation(true);
   }
 
   function hidePresaleSection() {
