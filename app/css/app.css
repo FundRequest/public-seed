@@ -586,6 +586,7 @@ body,
     display: inline-block;
     margin: 0;
     vertical-align: top;
+    flex-grow: 1;
 }
 
 .timeline-step .dashed-line {
